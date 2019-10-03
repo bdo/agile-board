@@ -1,6 +1,7 @@
-const TICKETS = [{ id: 1, state: 'todo' }, { id: 2, state: 'in-progress' }, { id: 3, state: 'to-review' }, { id: 4, state: 'to-test' }, { id: 5, state: 'done' }]
+// To be replaced with real API calls
+const TICKETS = [{ id: 1, state: 'to-do' }, { id: 2, state: 'in-progress' }, { id: 3, state: 'to-review' }, { id: 4, state: 'to-test' }, { id: 5, state: 'done' }]
 const TICKETS_DETAIL = {
-    1: { id: 1, state: 'todo', type: 'story', summary: 'Do something', sp: 5, assignees: [1, 2] },
+    1: { id: 1, state: 'to-do', type: 'story', summary: 'Do something', sp: 5, assignees: [1, 2] },
     2: {
         id: 2,
         state: 'in-progress',
