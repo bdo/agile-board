@@ -1,0 +1,6 @@
+node_modules
+
+build
+public/locales
+
+src/**/*.css
