@@ -3,11 +3,16 @@ import './Home.css'
 import React from 'react'
 
 import TicketService from '../../../services/TicketService'
+import Ticket from '../../components/ticket/Ticket'
 
 const Column = ({ id, label, tickets }) => (
     <div id={id} className="column">
         <h1>{label}</h1>
-        <div className="tickets"></div>
+        <div className="tickets">
+            {tickets.map(({ id }) => (
+                <Ticket key={id} id={id} />
+            ))}
+        </div>
     </div>
 )
 
