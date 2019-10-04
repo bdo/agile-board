@@ -11,7 +11,7 @@ const TICKETS_DETAIL = {
     1: { id: 1, state: 'to-do', type: 'story', summary: 'Do something', sp: 5, assignees: [1, 2] },
     2: { id: 2, state: 'to-do', type: 'bug', summary: 'Fix something', sp: 0, assignees: [1] },
     3: {
-        id: 2,
+        id: 3,
         state: 'in-progress',
         type: 'task',
         summary:
@@ -19,9 +19,9 @@ const TICKETS_DETAIL = {
         sp: 2,
         assignees: [3]
     },
-    4: { id: 3, state: 'to-review', type: 'bug', summary: 'Fix something', sp: 0, assignees: [4] },
-    5: { id: 4, state: 'to-test', type: 'task', summary: 'Do something', sp: 2, assignees: [3] },
-    6: { id: 5, state: 'done', type: 'bug', summary: 'Fix something', sp: 0, assignees: [2] }
+    4: { id: 4, state: 'to-review', type: 'bug', summary: 'Fix something', sp: 0, assignees: [4] },
+    5: { id: 5, state: 'to-test', type: 'task', summary: 'Do something', sp: 2, assignees: [3] },
+    6: { id: 6, state: 'done', type: 'bug', summary: 'Fix something', sp: 0, assignees: [2] }
 }
 
 class TicketService {

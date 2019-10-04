@@ -1,10 +1,8 @@
 @import '../../styles/colors';
 @import '../../styles/mixin';
 
-.ticket {
-    box-shadow: $box_shadow, $box_shadow;
-    display: flex;
-    flex-direction: column;
+.ticket-placeholder {
+    background-color: $black_alpha_15;
     width: 200px;
     height: 150px;
     margin-right: 10px;
@@ -19,54 +17,98 @@
         width: 200px;
     }
 
-    &.story {
-        background-color: $ticket_yellow;
-    }
-
-    &.task {
-        background-color: $ticket_blue;
-    }
-
-    &.bug {
-        background-color: $ticket_red;
-    }
-
-    .ticket-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 10px;
+    .ticket-backdrop {
         background-color: $black_alpha_15;
-        font-weight: bold;
+        height: 100%;
+        cursor: pointer;
 
-        .assignees {
+        &.editing {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            height: unset;
 
-            img {
-                display: block;
+            .ticket {
+                width: calc(100% - 40px);
+                height: calc(100% - 40px);
+                font-size: 2rem;
+                cursor: auto;
+                position: relative;
+
+                @include medium() {
+                    width: 600px;
+                    height: 400px;
+                }
+
+                @include large() {
+                    width: 800px;
+                    height: 600px;
+                }
             }
         }
-    }
 
-    .ticket-bottom {
-        overflow: auto;
-        padding: 5px 10px;
-        flex: 1;
-    }
+        .ticket {
+            box-shadow: $box_shadow, $box_shadow;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            cursor: pointer;
 
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
+            &.story {
+                background-color: $ticket_yellow;
+            }
 
-    ::-webkit-scrollbar-track {
-        background: $black_alpha_15;
-    }
+            &.task {
+                background-color: $ticket_blue;
+            }
 
-    ::-webkit-scrollbar-thumb {
-        background: $black_alpha_15;
-    }
+            &.bug {
+                background-color: $ticket_red;
+            }
 
-    ::-webkit-scrollbar-thumb:hover {
-        background: $black_alpha_25;
+            .ticket-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 5px 10px;
+                background-color: $black_alpha_15;
+                font-weight: bold;
+
+                .assignees {
+                    display: flex;
+
+                    img {
+                        display: block;
+                    }
+                }
+            }
+
+            .ticket-bottom {
+                overflow: auto;
+                flex: 1;
+                padding: 5px 10px;
+            }
+
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: $black_alpha_15;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: $black_alpha_15;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: $black_alpha_25;
+            }
+        }
     }
 }
