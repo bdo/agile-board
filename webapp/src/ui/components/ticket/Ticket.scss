@@ -1,0 +1,72 @@
+@import '../../styles/colors';
+@import '../../styles/mixin';
+
+.ticket {
+    box-shadow: $box_shadow, $box_shadow;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    @include medium() {
+        margin-right: unset;
+        width: 100%;
+    }
+
+    @include large() {
+        width: 200px;
+    }
+
+    &.story {
+        background-color: $ticket_yellow;
+    }
+
+    &.task {
+        background-color: $ticket_blue;
+    }
+
+    &.bug {
+        background-color: $ticket_red;
+    }
+
+    .ticket-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 10px;
+        background-color: $black_alpha_15;
+        font-weight: bold;
+
+        .assignees {
+            display: flex;
+
+            img {
+                display: block;
+            }
+        }
+    }
+
+    .ticket-bottom {
+        overflow: auto;
+        padding: 5px 10px;
+        flex: 1;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: $black_alpha_15;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: $black_alpha_15;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: $black_alpha_25;
+    }
+}

@@ -7,20 +7,15 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "watch": "node ./tools/watch.js"
+        "watch": "sass --watch src:src",
+        "build-css": "sass --style=compressed --no-source-map src:src"
     },
     "dependencies": {
         "classnames": "^2.2.6",
-        "clean-css": "^4.2.1",
-        "fs-extra": "^8.1.0",
-        "less": "^3.10.3",
         "react": "^16.10.1",
         "react-dom": "^16.10.1",
-        "react-scripts": "^3.2.0"
-    },
-    "devDependencies": {
-        "chokidar": "^3.2.1",
-        "recursive-readdir": "^2.2.2"
+        "react-scripts": "^3.2.0",
+        "sass": "^1.23.0"
     },
     "eslintConfig": {
         "extends": "react-app"
