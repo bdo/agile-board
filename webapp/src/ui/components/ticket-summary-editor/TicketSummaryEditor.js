@@ -1,3 +1,5 @@
+import './TicketSummaryEditor.css'
+
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 

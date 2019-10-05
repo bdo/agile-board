@@ -1,0 +1,16 @@
+@import '../../styles/colors';
+
+.points-editor {
+    border: none;
+    border-left: 3px solid $black_alpha_10;
+    resize: none;
+    background: none;
+    padding: 5px 10px;
+    margin: 10px;
+    font-size: 1.5rem;
+
+    &:focus {
+        box-shadow: inset $box_shadow;
+        outline: none;
+    }
+}

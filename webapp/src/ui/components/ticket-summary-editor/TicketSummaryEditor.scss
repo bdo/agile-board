@@ -1,0 +1,17 @@
+@import '../../styles/colors';
+
+.summary-editor {
+    border: none;
+    border-left: 3px solid $black_alpha_10;
+    resize: none;
+    background: none;
+    padding: 5px 10px;
+    margin: 10px;
+    font-size: 2rem;
+    flex: 1;
+
+    &:focus {
+        box-shadow: inset $box_shadow;
+        outline: none;
+    }
+}
