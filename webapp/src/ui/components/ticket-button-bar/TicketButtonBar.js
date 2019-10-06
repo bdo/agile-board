@@ -9,7 +9,7 @@ const TicketButtonBar = ({ onSave, onDelete }) => (
             <div className="icon-checkmark" />
         </button>
         <button className="delete" onClick={onDelete}>
-            <div className="icon-bin" />
+            <div className="icon-cross" />
         </button>
     </div>
 )

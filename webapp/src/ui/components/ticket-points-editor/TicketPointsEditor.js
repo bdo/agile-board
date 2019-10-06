@@ -1,10 +1,11 @@
 import './TicketPointsEditor.css'
 
-import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
+import PropTypes from 'prop-types'
+
 const TicketPointsEditor = ({ points, onChange }) => (
-    <select class="points-editor" value={points} onChange={onChange}>
+    <select className="points-editor" value={points} onChange={onChange}>
         <option value="0.5">0.5</option>
         <option value="1">1</option>
         <option value="2">2</option>
