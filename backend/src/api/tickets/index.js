@@ -49,7 +49,7 @@ router.post('/', ctx => {
 
 router.put('/:id', ctx => {
     const { id } = ctx.params
-    const ticket = ctx.body
+    const { ticket } = ctx.request.body
     TICKETS_DETAIL[+id] = ticket
     ctx.status = HttpStatus.NO_CONTENT
 })
