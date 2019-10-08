@@ -1,0 +1,21 @@
+{
+    "name": "agile-board.backend",
+    "version": "1.0.0",
+    "license": "MIT",
+    "scripts": {
+        "start": "node src/app.js",
+        "dev": "nodemon src/app.js"
+    },
+    "devDependencies": {
+        "nodemon": "^1.19.3"
+    },
+    "dependencies": {
+        "@koa/cors": "^3.0.0",
+        "http-status": "^1.3.2",
+        "koa": "^2.8.2",
+        "koa-body": "^4.1.1",
+        "koa-helmet": "^5.2.0",
+        "koa-logger": "^3.2.1",
+        "koa-router": "^7.4.0"
+    }
+}
