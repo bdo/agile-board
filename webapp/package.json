@@ -11,6 +11,7 @@
         "build-css": "sass --style=compressed --no-source-map src:src"
     },
     "dependencies": {
+        "axios": "^0.19.0",
         "classnames": "^2.2.6",
         "react": "^16.10.1",
         "react-dom": "^16.10.1",
