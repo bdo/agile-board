@@ -14,7 +14,6 @@
         color: $white;
         cursor: pointer;
         margin: 0 5px;
-        box-shadow: $box_shadow;
         border-radius: 5px;
 
         &.save {
@@ -23,10 +22,6 @@
 
         &.delete {
             background-color: $error;
-        }
-
-        &:hover {
-            box-shadow: $box_shadow, $box_shadow;
         }
     }
 }

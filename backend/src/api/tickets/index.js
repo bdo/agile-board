@@ -4,29 +4,21 @@ const HttpStatus = require('http-status')
 
 // To be replaced with real database
 const TICKETS = [
-    { id: 1, state: 'to-do' },
-    { id: 2, state: 'to-do' },
-    { id: 3, state: 'in-progress' },
-    { id: 4, state: 'to-review' },
-    { id: 5, state: 'to-test' },
-    { id: 6, state: 'done' }
-]
-const TICKETS_DETAIL = {
-    1: { id: 1, state: 'to-do', type: 'story', summary: 'Do something', sp: 5, assignees: [1, 2] },
-    2: { id: 2, state: 'to-do', type: 'bug', summary: 'Fix something', sp: 0, assignees: [1] },
-    3: {
+    { id: 1, state: 'to-do', type: 'story', summary: 'Do something', points: 5, assignees: [1, 2] },
+    { id: 2, state: 'to-do', type: 'bug', summary: 'Fix something', points: 0, assignees: [1] },
+    {
         id: 3,
         state: 'in-progress',
         type: 'task',
         summary:
-            "It's a very long task summary, because our PO loves to talk and talk and talk again, it's very annoying. I don't like it at all. Fortunately there are scrollbars, weehoo!",
-        sp: 2,
+            'It is a very long task summary, because our PO loves to talk and talk and talk again, it is very annoying. I do not like it at all. Fortunately there are scrollbars, weehoo!',
+        points: 2,
         assignees: [3]
     },
-    4: { id: 4, state: 'to-review', type: 'bug', summary: 'Fix something', sp: 0, assignees: [4] },
-    5: { id: 5, state: 'to-test', type: 'task', summary: 'Do something', sp: 2, assignees: [3] },
-    6: { id: 6, state: 'done', type: 'bug', summary: 'Fix something', sp: 0, assignees: [2] }
-}
+    { id: 4, state: 'to-review', type: 'bug', summary: 'Fix something', points: 0, assignees: [4] },
+    { id: 5, state: 'to-test', type: 'task', summary: 'Do something', points: 2, assignees: [3] },
+    { id: 6, state: 'done', type: 'bug', summary: 'Fix something', points: 0, assignees: [2] }
+]
 
 router.get('/', ctx => {
     ctx.status = HttpStatus.OK
@@ -36,13 +28,13 @@ router.get('/', ctx => {
 router.get('/:id', ctx => {
     const { id } = ctx.params
     ctx.status = HttpStatus.OK
-    ctx.body = TICKETS_DETAIL[+id]
+    ctx.body = TICKETS.find(ticket => ticket.id === +id)
 })
 
 router.post('/', ctx => {
-    const ticket = ctx.body
-    ticket.id = TICKETS.length
-    TICKETS_DETAIL[ticket.id] = ticket
+    const { ticket } = ctx.request.body
+    ticket.id = TICKETS.length + 1
+    TICKETS.push(ticket)
     ctx.status = HttpStatus.CREATED
     ctx.body = ticket.id
 })
@@ -50,14 +42,15 @@ router.post('/', ctx => {
 router.put('/:id', ctx => {
     const { id } = ctx.params
     const { ticket } = ctx.request.body
-    TICKETS_DETAIL[+id] = ticket
+    const index = TICKETS.findIndex(ticket => ticket.id === +id)
+    TICKETS[index] = { id, ...ticket }
     ctx.status = HttpStatus.NO_CONTENT
 })
 
 router.delete('/:id', ctx => {
     const { id } = ctx.params
-    TICKETS.splice(TICKETS.findIndex(ticket => ticket.id === +id), 1)
-    delete TICKETS_DETAIL[id]
+    const index = TICKETS.findIndex(ticket => ticket.id === +id)
+    TICKETS.splice(index, 1)
     ctx.status = HttpStatus.NO_CONTENT
 })
 

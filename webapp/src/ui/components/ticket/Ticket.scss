@@ -1,115 +1,96 @@
 @import '../../styles/colors';
 @import '../../styles/mixin';
 
-.ticket-placeholder {
+.ticket-backdrop {
     background-color: $black_alpha_15;
-    width: 200px;
-    height: 150px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    height: 100%;
 
-    @include medium() {
-        margin-right: unset;
-        width: 100%;
+    &.editing {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: unset;
+
+        .ticket {
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            font-size: 2rem;
+            cursor: auto;
+            position: relative;
+
+            @include medium() {
+                width: 600px;
+                height: 400px;
+            }
+
+            @include large() {
+                width: 800px;
+                height: 600px;
+            }
+        }
     }
 
-    @include large() {
-        width: 200px;
-    }
-
-    .ticket-backdrop {
-        background-color: $black_alpha_15;
+    .ticket {
+        display: flex;
+        flex-direction: column;
         height: 100%;
         cursor: pointer;
 
-        &.editing {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
+        &.story {
+            background-color: $ticket_yellow;
+        }
+
+        &.task {
+            background-color: $ticket_blue;
+        }
+
+        &.bug {
+            background-color: $ticket_red;
+        }
+
+        .ticket-top {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: unset;
+            padding: 5px 10px;
+            background-color: $black_alpha_15;
+            font-weight: bold;
 
-            .ticket {
-                width: calc(100% - 40px);
-                height: calc(100% - 40px);
-                font-size: 2rem;
-                cursor: auto;
-                position: relative;
+            .assignees {
+                display: flex;
 
-                @include medium() {
-                    width: 600px;
-                    height: 400px;
-                }
-
-                @include large() {
-                    width: 800px;
-                    height: 600px;
+                img {
+                    margin-right: 4px;
                 }
             }
         }
 
-        .ticket {
-            box-shadow: $box_shadow, $box_shadow;
+        .ticket-bottom {
+            overflow: auto;
+            flex: 1;
+            padding: 5px 10px;
             display: flex;
-            flex-direction: column;
-            height: 100%;
-            cursor: pointer;
+        }
 
-            &.story {
-                background-color: $ticket_yellow;
-            }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
-            &.task {
-                background-color: $ticket_blue;
-            }
+        ::-webkit-scrollbar-track {
+            background: $black_alpha_15;
+        }
 
-            &.bug {
-                background-color: $ticket_red;
-            }
+        ::-webkit-scrollbar-thumb {
+            background: $black_alpha_15;
+        }
 
-            .ticket-top {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 5px 10px;
-                background-color: $black_alpha_15;
-                font-weight: bold;
-
-                .assignees {
-                    display: flex;
-
-                    img {
-                        margin-right: 4px;
-                    }
-                }
-            }
-
-            .ticket-bottom {
-                overflow: auto;
-                flex: 1;
-                padding: 5px 10px;
-                display: flex;
-            }
-
-            ::-webkit-scrollbar {
-                width: 10px;
-            }
-
-            ::-webkit-scrollbar-track {
-                background: $black_alpha_15;
-            }
-
-            ::-webkit-scrollbar-thumb {
-                background: $black_alpha_15;
-            }
-
-            ::-webkit-scrollbar-thumb:hover {
-                background: $black_alpha_25;
-            }
+        ::-webkit-scrollbar-thumb:hover {
+            background: $black_alpha_25;
         }
     }
 }

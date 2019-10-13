@@ -1,32 +1,14 @@
 import './Home.css'
 
-import PropTypes from 'prop-types'
 import React from 'react'
 
 import TicketService from '../../../services/TicketService'
-import Ticket from '../../components/ticket/Ticket'
-
-const Column = ({ id, label, tickets, onDelete }) => (
-    <div id={id} className="column">
-        <h1>{label}</h1>
-        <div className="tickets">
-            {tickets.map(({ id }) => (
-                <Ticket key={id} id={id} onDelete={onDelete} />
-            ))}
-        </div>
-    </div>
-)
-Column.propTypes = {
-    id: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    tickets: PropTypes.array.isRequired,
-    onDelete: PropTypes.func.isRequired
-}
+import Column from '../../components/column/Column'
 
 class Home extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { tickets: [] }
+        this.state = { tickets: [], openTicketEditor: false }
         this.columns = [
             { id: 'to-do', label: 'To do' },
             { id: 'in-progress', label: 'In progress' },
@@ -41,9 +23,19 @@ class Home extends React.Component {
         this.setState({ tickets })
     }
 
+    async onSaveTicket(ticket) {
+        await TicketService.save(ticket)
+        this.fetchTickets()
+    }
+
     async onDeleteTicket(id) {
         await TicketService.delete(id)
         this.fetchTickets()
+    }
+
+    onAddTicket() {
+        const { tickets } = this.state
+        this.setState({ tickets: [...tickets, { id: null, state: 'to-do' }] })
     }
 
     componentDidMount() {
@@ -55,7 +47,15 @@ class Home extends React.Component {
         return (
             <section id="home">
                 {this.columns.map(({ id, label }) => (
-                    <Column id={id} key={id} label={label} tickets={tickets.filter(ticket => ticket.state === id)} onDelete={this.onDeleteTicket.bind(this)} />
+                    <Column
+                        id={id}
+                        key={id}
+                        label={label}
+                        tickets={tickets.filter(ticket => ticket.state === id)}
+                        onSaveTicket={this.onSaveTicket.bind(this)}
+                        onDeleteTicket={this.onDeleteTicket.bind(this)}
+                        onAdd={this.onAddTicket.bind(this)}
+                    />
                 ))}
             </section>
         )
