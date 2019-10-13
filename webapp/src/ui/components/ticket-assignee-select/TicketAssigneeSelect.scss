@@ -1,0 +1,33 @@
+@import '../../styles/colors';
+
+.add-assignee {
+    position: relative;
+
+    .add-assignee-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $black_alpha_10;
+        height: 48px;
+        width: 48px;
+        border-radius: 24px;
+        cursor: pointer;
+        color: $white;
+
+        &.open {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    .add-assignee-tooltip {
+        position: absolute;
+        background-color: $black_alpha_10;
+        border-radius: 0 0 24px 24px;
+
+        img {
+            display: block;
+            cursor: block;
+        }
+    }
+}

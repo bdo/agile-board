@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import TicketAssigneeEditor from '../ticket-assignee-editor/TicketAssigneeEditor'
+import TicketAssigneeSelect from '../ticket-assignee-select/TicketAssigneeSelect'
 import TicketButtonBar from '../ticket-button-bar/TicketButtonBar'
 import TicketPlaceholder from '../ticket-placeholder/TicketPlaceholder'
 import TicketPointsEditor from '../ticket-points-editor/TicketPointsEditor'
@@ -57,6 +58,11 @@ class Ticket extends React.Component {
         this.setState({ summary: e.target.value })
     }
 
+    addAssignee(id) {
+        const { assignees } = this.state
+        this.setState({ assignees: [...assignees, id] })
+    }
+
     deleteAssignee(id) {
         const { assignees } = this.state
         const index = assignees.findIndex(assigneeId => assigneeId === id)
@@ -86,7 +92,10 @@ class Ticket extends React.Component {
                 <div className={classnames('ticket-backdrop', { editing })} onClick={this.cancelEditing.bind(this)}>
                     <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)}>
                         <div className="ticket-top">
-                            <div className="assignees">{assignees.map(id => this.renderAvatar(editing, id))}</div>
+                            <div className="assignees">
+                                {assignees.map(id => this.renderAvatar(editing, id))}
+                                {editing && <TicketAssigneeSelect onAddAssignee={this.addAssignee.bind(this)} />}
+                            </div>
                             {this.renderPoints(editing, points)}
                         </div>
                         <div className="ticket-bottom">{this.renderSummary(editing, summary)}</div>

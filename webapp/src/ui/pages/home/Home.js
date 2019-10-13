@@ -23,12 +23,12 @@ class Home extends React.Component {
         this.setState({ tickets })
     }
 
-    async onSaveTicket(ticket) {
+    async saveTicket(ticket) {
         await TicketService.save(ticket)
         this.fetchTickets()
     }
 
-    async onDeleteTicket(id) {
+    async deleteTicket(id) {
         await TicketService.delete(id)
         this.fetchTickets()
     }
@@ -47,8 +47,8 @@ class Home extends React.Component {
                         key={id}
                         label={label}
                         tickets={tickets.filter(ticket => ticket.state === id)}
-                        onSaveTicket={this.onSaveTicket.bind(this)}
-                        onDeleteTicket={this.onDeleteTicket.bind(this)}
+                        onSaveTicket={this.saveTicket.bind(this)}
+                        onDeleteTicket={this.deleteTicket.bind(this)}
                     />
                 ))}
             </section>
