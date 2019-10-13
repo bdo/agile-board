@@ -8,7 +8,7 @@ import Column from '../../components/column/Column'
 class Home extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { tickets: [], openTicketEditor: false }
+        this.state = { tickets: [] }
         this.columns = [
             { id: 'to-do', label: 'To do' },
             { id: 'in-progress', label: 'In progress' },
@@ -33,11 +33,6 @@ class Home extends React.Component {
         this.fetchTickets()
     }
 
-    onAddTicket() {
-        const { tickets } = this.state
-        this.setState({ tickets: [...tickets, { id: null, state: 'to-do' }] })
-    }
-
     componentDidMount() {
         this.fetchTickets()
     }
@@ -54,7 +49,6 @@ class Home extends React.Component {
                         tickets={tickets.filter(ticket => ticket.state === id)}
                         onSaveTicket={this.onSaveTicket.bind(this)}
                         onDeleteTicket={this.onDeleteTicket.bind(this)}
-                        onAdd={this.onAddTicket.bind(this)}
                     />
                 ))}
             </section>

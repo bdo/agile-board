@@ -37,6 +37,12 @@ class Ticket extends React.Component {
         this.setState({ editing: true })
     }
 
+    cancelEditing() {
+        const { onCancel } = this.props
+        onCancel && onCancel()
+        this.endEditing()
+    }
+
     endEditing() {
         if (!this.state.editing) return
         this.setState({ editing: false })
@@ -76,7 +82,7 @@ class Ticket extends React.Component {
         const { editing, type, assignees, points, summary } = this.state
         return (
             <TicketPlaceholder>
-                <div className={classnames('ticket-backdrop', { editing })} onClick={this.endEditing.bind(this)}>
+                <div className={classnames('ticket-backdrop', { editing })} onClick={this.cancelEditing.bind(this)}>
                     <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)}>
                         <div className="ticket-top">
                             <div className="assignees">{assignees.map(id => this.renderAvatar(editing, id))}</div>

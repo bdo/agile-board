@@ -1,8 +1,7 @@
 import './TicketAssigneeEditor.css'
 
-import React, { memo } from 'react'
-
 import PropTypes from 'prop-types'
+import React, { memo } from 'react'
 
 const TicketAssigneeEditor = ({ assigneeId, onDelete }) => (
     <div className="assignees-editor">
