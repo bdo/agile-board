@@ -18,9 +18,10 @@ class Ticket extends React.Component {
     }
 
     save() {
-        const { onSave } = this.props
+        const { onSave, onStopEdition } = this.props
         const { id, state, type, points, assignees, summary } = this.state
         onSave({ id, state, type, points, assignees, summary })
+        onStopEdition && onStopEdition()
         this.endEditing()
     }
 
@@ -38,8 +39,8 @@ class Ticket extends React.Component {
     }
 
     cancelEditing() {
-        const { onCancel } = this.props
-        onCancel && onCancel()
+        const { onStopEdition } = this.props
+        onStopEdition && onStopEdition()
         this.endEditing()
     }
 

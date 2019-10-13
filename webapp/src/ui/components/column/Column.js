@@ -15,7 +15,7 @@ const Column = ({ id, label, tickets, onSaveTicket, onDeleteTicket }) => {
                 {tickets.map(ticket => (
                     <Ticket key={ticket.id} ticket={ticket} onSave={onSaveTicket} onDelete={onDeleteTicket} />
                 ))}
-                {ticket && <Ticket ticket={ticket} onCancel={setTicket.bind(this, null)} />}
+                {ticket && <Ticket ticket={ticket} onStopEdition={setTicket.bind(this, null)} onSave={onSaveTicket} />}
                 {id === 'to-do' && (
                     <TicketPlaceholder className="add-ticket" onClick={setTicket.bind(this, { id: null, state: 'to-do' })}>
                         +
