@@ -1,0 +1,20 @@
+@import '../../styles/colors';
+@import '../../styles/mixin';
+
+.ticket-placeholder {
+    background-color: $black_alpha_15;
+    width: 200px;
+    height: 150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    @include medium() {
+        margin-right: unset;
+        width: 100%;
+    }
+
+    @include large() {
+        width: 200px;
+    }
+}

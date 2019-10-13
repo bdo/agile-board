@@ -17,11 +17,6 @@
         right: -4px;
         color: $white;
         cursor: pointer;
-        box-shadow: $box_shadow;
-
-        &:hover {
-            box-shadow: $box_shadow, $box_shadow;
-        }
     }
 
     img {
