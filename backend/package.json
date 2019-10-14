@@ -16,6 +16,8 @@
         "koa-body": "^4.1.1",
         "koa-helmet": "^5.2.0",
         "koa-logger": "^3.2.1",
-        "koa-router": "^7.4.0"
+        "koa-router": "^7.4.0",
+        "mysql2": "^1.7.0",
+        "sequelize": "^5.19.6"
     }
 }

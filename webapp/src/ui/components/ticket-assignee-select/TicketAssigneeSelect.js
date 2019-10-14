@@ -5,11 +5,12 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import UserService from '../../../services/UserService'
+import Avatar from '../avatar/Avatar'
 
 class TicketAssigneeSelect extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { open: false, assignees: [] }
+        this.state = { open: false, users: [] }
     }
 
     setOpen(open) {
@@ -23,12 +24,15 @@ class TicketAssigneeSelect extends React.Component {
     }
 
     async componentDidMount() {
-        const assignees = await UserService.list()
-        this.setState({ assignees })
+        const users = await UserService.list()
+        this.setState({ users })
     }
 
     render() {
-        const { open, assignees } = this.state
+        const { assignees } = this.props
+        const { open, users } = this.state
+        const _users = users.filter(user => !assignees.some(assignee => assignee.id === user.id))
+        if (!_users.length) return null
         return (
             <div className="add-assignee">
                 <div className={classnames('add-assignee-button', { open })} onClick={this.setOpen.bind(this, !open)}>
@@ -36,8 +40,8 @@ class TicketAssigneeSelect extends React.Component {
                 </div>
                 {open && (
                     <div className="add-assignee-tooltip">
-                        {assignees.map(({ id, name }) => (
-                            <img key={id} src={`/images/avatar/${id}.png`} alt="" width={48} title={name} onClick={this.addAssignee.bind(this, id)} />
+                        {_users.map(user => (
+                            <Avatar key={user.id} user={user} size={48} onClick={this.addAssignee.bind(this, user.id)} />
                         ))}
                     </div>
                 )}
@@ -46,6 +50,7 @@ class TicketAssigneeSelect extends React.Component {
     }
 }
 TicketAssigneeSelect.propTypes = {
+    assignees: PropTypes.array.isRequired,
     onAddAssignee: PropTypes.func.isRequired
 }
 

@@ -1,5 +1,6 @@
-import Configuration from '../config'
 import axios from 'axios'
+
+import Configuration from '../config'
 
 class TicketService {
     static async list() {
@@ -26,8 +27,8 @@ class TicketService {
 
     static async save({ id, ...ticket }) {
         try {
-            if (id) await axios.put(`${Configuration.API_URL}/tickets/${id}`, { ticket })
-            else await axios.post(`${Configuration.API_URL}/tickets`, { ticket })
+            if (id) await axios.put(`${Configuration.API_URL}/tickets/${id}`, ticket)
+            else await axios.post(`${Configuration.API_URL}/tickets`, ticket)
         } catch (error) {
             console.error(error)
         }

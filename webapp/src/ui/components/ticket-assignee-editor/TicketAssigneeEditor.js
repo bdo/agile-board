@@ -3,15 +3,17 @@ import './TicketAssigneeEditor.css'
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
-const TicketAssigneeEditor = ({ assigneeId, onDelete }) => (
+import Avatar from '../avatar/Avatar'
+
+const TicketAssigneeEditor = ({ assignee, onDelete }) => (
     <div className="assignees-editor">
         <span className="delete-assignee icon-cross" onClick={onDelete} />
-        <img key={assigneeId} src={`/images/avatar/${assigneeId}.png`} alt={assigneeId} width={48} />
+        <Avatar user={assignee} size={48} />
     </div>
 )
 
 TicketAssigneeEditor.propTypes = {
-    assigneeId: PropTypes.number.isRequired,
+    assignee: PropTypes.object.isRequired,
     onDelete: PropTypes.func.isRequired
 }
 

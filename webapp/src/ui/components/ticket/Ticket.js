@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import Avatar from '../avatar/Avatar'
 import TicketAssigneeEditor from '../ticket-assignee-editor/TicketAssigneeEditor'
 import TicketAssigneeSelect from '../ticket-assignee-select/TicketAssigneeSelect'
 import TicketButtonBar from '../ticket-button-bar/TicketButtonBar'
@@ -14,8 +15,13 @@ import TicketSummaryEditor from '../ticket-summary-editor/TicketSummaryEditor'
 class Ticket extends React.Component {
     constructor(props) {
         super(props)
-        const { id, state = 'to-do', type = 'story', points = 0, assignees = [], summary = '' } = props.ticket
+        const { id, state = 'to-do', type = 'story', points = 0, assignees = [], summary = '' } = this.props.ticket
         this.state = { editing: id === null, id, state, type, points, assignees, summary }
+    }
+
+    resetState() {
+        const { id, state, type, points, assignees, summary } = this.props.ticket
+        this.setState({ id, state, type, points, assignees, summary })
     }
 
     save() {
@@ -42,6 +48,7 @@ class Ticket extends React.Component {
     cancelEditing() {
         const { onStopEdition } = this.props
         onStopEdition && onStopEdition()
+        this.resetState()
         this.endEditing()
     }
 
@@ -60,7 +67,7 @@ class Ticket extends React.Component {
 
     addAssignee(id) {
         const { assignees } = this.state
-        this.setState({ assignees: [...assignees, id] })
+        this.setState({ assignees: [...assignees, { id }] })
     }
 
     deleteAssignee(id) {
@@ -70,9 +77,9 @@ class Ticket extends React.Component {
         this.setState({ assignees })
     }
 
-    renderAvatar(editing, id) {
-        if (!editing) return <img key={id} src={`/images/avatar/${id}.png`} alt={id} width={24} />
-        return <TicketAssigneeEditor key={id} assigneeId={id} onDelete={this.deleteAssignee.bind(this)} />
+    renderAvatar(editing, assignee) {
+        if (!editing) return <Avatar key={assignee.id} user={assignee} size={24} />
+        return <TicketAssigneeEditor key={assignee.id} assignee={assignee} onDelete={this.deleteAssignee.bind(this)} />
     }
 
     renderPoints(editing, points) {
@@ -93,8 +100,8 @@ class Ticket extends React.Component {
                     <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)}>
                         <div className="ticket-top">
                             <div className="assignees">
-                                {assignees.map(id => this.renderAvatar(editing, id))}
-                                {editing && <TicketAssigneeSelect onAddAssignee={this.addAssignee.bind(this)} />}
+                                {assignees.map(assignee => this.renderAvatar(editing, assignee))}
+                                {editing && <TicketAssigneeSelect assignees={assignees} onAddAssignee={this.addAssignee.bind(this)} />}
                             </div>
                             {this.renderPoints(editing, points)}
                         </div>
