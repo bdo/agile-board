@@ -1,0 +1,16 @@
+@import '../../styles/mixin';
+
+#board {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .columns {
+        display: flex;
+        flex-direction: column;
+
+        @include medium() {
+            flex-direction: row;
+        }
+    }
+}

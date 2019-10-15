@@ -92,22 +92,33 @@ class Ticket extends React.Component {
         return <TicketSummaryEditor summary={summary} onChange={this.changeSummary.bind(this)} />
     }
 
-    render() {
+    renderTicketContent() {
         const { editing, type, assignees, points, summary } = this.state
+        return (
+            <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)}>
+                <div className="ticket-top">
+                    <div className="assignees">
+                        {assignees.map(assignee => this.renderAvatar(editing, assignee))}
+                        {editing && <TicketAssigneeSelect assignees={assignees} onAddAssignee={this.addAssignee.bind(this)} />}
+                    </div>
+                    {this.renderPoints(editing, points)}
+                </div>
+                <div className="ticket-bottom">{this.renderSummary(editing, summary)}</div>
+                {editing && <TicketButtonBar onDelete={this.delete.bind(this)} />}
+            </div>
+        )
+    }
+
+    renderForm() {
+        return <form onSubmit={this.save.bind(this)}>{this.renderTicketContent()}</form>
+    }
+
+    render() {
+        const { editing } = this.state
         return (
             <TicketPlaceholder>
                 <div className={classnames('ticket-backdrop', { editing })} onClick={this.cancelEditing.bind(this)}>
-                    <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)}>
-                        <div className="ticket-top">
-                            <div className="assignees">
-                                {assignees.map(assignee => this.renderAvatar(editing, assignee))}
-                                {editing && <TicketAssigneeSelect assignees={assignees} onAddAssignee={this.addAssignee.bind(this)} />}
-                            </div>
-                            {this.renderPoints(editing, points)}
-                        </div>
-                        <div className="ticket-bottom">{this.renderSummary(editing, summary)}</div>
-                        {editing && <TicketButtonBar onSave={this.save.bind(this)} onDelete={this.delete.bind(this)} />}
-                    </div>
+                    {editing ? this.renderForm() : this.renderTicketContent()}
                 </div>
             </TicketPlaceholder>
         )

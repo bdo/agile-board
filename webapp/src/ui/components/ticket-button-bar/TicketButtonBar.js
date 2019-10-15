@@ -3,19 +3,18 @@ import './TicketButtonBar.css'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const TicketButtonBar = ({ onSave, onDelete }) => (
+const TicketButtonBar = ({ onDelete }) => (
     <div className="button-bar">
-        <button className="save" onClick={onSave}>
+        <button type="submit" className="save">
             <div className="icon-checkmark" />
         </button>
-        <button className="delete" onClick={onDelete}>
+        <button type="button" className="delete" onClick={onDelete}>
             <div className="icon-cross" />
         </button>
     </div>
 )
 
 TicketButtonBar.propTypes = {
-    onSave: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired
 }
 

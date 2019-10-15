@@ -30,14 +30,24 @@ const Ticket = connection.define(
     { tableName: 'ticket' }
 )
 
+const Project = connection.define(
+    'project',
+    {
+        id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+        name: { type: Sequelize.STRING },
+        description: { type: Sequelize.STRING }
+    },
+    { tableName: 'project' }
+)
+
 const TicketAssignee = connection.define(
     'ticket_assignee',
     {
-        user_id: {
+        userId: {
             type: Sequelize.INTEGER,
             primaryKey: true
         },
-        ticket_id: {
+        ticketId: {
             type: Sequelize.INTEGER,
             primaryKey: true
         }
@@ -47,7 +57,9 @@ const TicketAssignee = connection.define(
     }
 )
 
-User.belongsToMany(Ticket, { as: 'tickets', through: TicketAssignee, foreignKey: 'user_id' })
-Ticket.belongsToMany(User, { as: 'assignees', through: TicketAssignee, foreignKey: 'ticket_id' })
+Ticket.belongsTo(Project, { foreignKey: 'projectId' })
 
-module.exports = { User, Ticket }
+User.belongsToMany(Ticket, { as: 'tickets', through: TicketAssignee, foreignKey: 'userId' })
+Ticket.belongsToMany(User, { as: 'assignees', through: TicketAssignee, foreignKey: 'ticketId' })
+
+module.exports = { User, Ticket, Project }

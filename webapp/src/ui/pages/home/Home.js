@@ -1,57 +1,31 @@
-import './Home.css'
-
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-import TicketService from '../../../services/TicketService'
-import Column from '../../components/column/Column'
+import ProjectService from '../../../services/ProjectService'
 
 class Home extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { tickets: [] }
-        this.columns = [
-            { id: 'to-do', label: 'To do' },
-            { id: 'in-progress', label: 'In progress' },
-            { id: 'to-review', label: 'To review' },
-            { id: 'to-test', label: 'To test' },
-            { id: 'done', label: 'Done' }
-        ]
+        this.state = { projects: [] }
     }
 
-    async fetchTickets() {
-        const tickets = await TicketService.list()
-        this.setState({ tickets })
-    }
-
-    async saveTicket(ticket) {
-        await TicketService.save(ticket)
-        this.fetchTickets()
-    }
-
-    async deleteTicket(id) {
-        await TicketService.delete(id)
-        this.fetchTickets()
-    }
-
-    componentDidMount() {
-        this.fetchTickets()
+    async componentDidMount() {
+        const projects = await ProjectService.list()
+        this.setState({ projects })
     }
 
     render() {
-        const { tickets } = this.state
+        const { projects } = this.state
         return (
-            <section id="home">
-                {this.columns.map(({ id, label }) => (
-                    <Column
-                        id={id}
-                        key={id}
-                        label={label}
-                        tickets={tickets.filter(ticket => ticket.state === id)}
-                        onSaveTicket={this.saveTicket.bind(this)}
-                        onDeleteTicket={this.deleteTicket.bind(this)}
-                    />
+            <ul>
+                {projects.map(project => (
+                    <li>
+                        <NavLink to={`/${project.id}`}>
+                            <b>{project.name}</b> {project.description}
+                        </NavLink>
+                    </li>
                 ))}
-            </section>
+            </ul>
         )
     }
 }

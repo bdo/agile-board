@@ -7,8 +7,9 @@ const { Op } = require('sequelize')
 const { Ticket, User } = require('../db')
 
 router.get('/', async ctx => {
+    const { projectId } = ctx.query
     ctx.status = HttpStatus.OK
-    ctx.body = await Ticket.findAll({ include: [{ model: User, as: 'assignees' }] })
+    ctx.body = await Ticket.findAll({ ...(projectId && { where: { projectId } }), include: [{ model: User, as: 'assignees' }] })
 })
 
 router.get('/:id', async ctx => {
@@ -18,8 +19,8 @@ router.get('/:id', async ctx => {
 })
 
 router.post('/', async ctx => {
-    const { points, type, state, summary, description, assignees } = ctx.request.body
-    const ticket = await Ticket.create({ points, type, state, summary, description })
+    const { points, type, state, summary, description, assignees, projectId } = ctx.request.body
+    const ticket = await Ticket.create({ points, type, state, summary, description, projectId })
     const _assignees = await User.findAll({ where: { id: { [Op.in]: assignees.map(({ id }) => id) } } })
     await ticket.setAssignees(_assignees)
     ctx.status = HttpStatus.CREATED

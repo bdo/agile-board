@@ -3,10 +3,10 @@ import axios from 'axios'
 import Configuration from '../config'
 
 class TicketService {
-    static async list() {
+    static async list(params) {
         let response
         try {
-            response = await axios.get(`${Configuration.API_URL}/tickets`)
+            response = await axios.get(`${Configuration.API_URL}/tickets`, { params })
         } catch (error) {
             console.error(error)
             response = { data: [] }
