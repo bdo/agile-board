@@ -75,6 +75,7 @@
             flex: 1;
             padding: 5px 10px;
             display: flex;
+            flex-direction: column;
         }
 
         ::-webkit-scrollbar {

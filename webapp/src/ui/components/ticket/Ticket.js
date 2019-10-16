@@ -8,6 +8,7 @@ import Avatar from '../avatar/Avatar'
 import TicketAssigneeEditor from '../ticket-assignee-editor/TicketAssigneeEditor'
 import TicketAssigneeSelect from '../ticket-assignee-select/TicketAssigneeSelect'
 import TicketButtonBar from '../ticket-button-bar/TicketButtonBar'
+import TicketDescriptionEditor from '../ticket-description-editor/TicketDescriptionEditor'
 import TicketPlaceholder from '../ticket-placeholder/TicketPlaceholder'
 import TicketPointsEditor from '../ticket-points-editor/TicketPointsEditor'
 import TicketSummaryEditor from '../ticket-summary-editor/TicketSummaryEditor'
@@ -15,19 +16,19 @@ import TicketSummaryEditor from '../ticket-summary-editor/TicketSummaryEditor'
 class Ticket extends React.Component {
     constructor(props) {
         super(props)
-        const { id, state = 'to-do', type = 'story', points = 0, assignees = [], summary = '' } = this.props.ticket
+        const { id, state = 'to-do', type = 'story', points = 0, assignees = [], summary = '', description = '' } = this.props.ticket
         this.state = { editing: id === null, id, state, type, points, assignees, summary }
     }
 
     resetState() {
-        const { id, state, type, points, assignees, summary } = this.props.ticket
-        this.setState({ id, state, type, points, assignees, summary })
+        const { id, state, type, points, assignees, summary, description } = this.props.ticket
+        this.setState({ id, state, type, points, assignees, summary, description })
     }
 
     save() {
         const { onSave, onStopEdition } = this.props
-        const { id, state, type, points, assignees, summary } = this.state
-        onSave({ id, state, type, points, assignees, summary })
+        const { id, state, type, points, assignees, summary, description } = this.state
+        onSave({ id, state, type, points, assignees, summary, description })
         onStopEdition && onStopEdition()
         this.endEditing()
     }
@@ -65,6 +66,10 @@ class Ticket extends React.Component {
         this.setState({ summary: e.target.value })
     }
 
+    changeDescription(e) {
+        this.setState({ description: e.target.value })
+    }
+
     addAssignee(id) {
         const { assignees } = this.state
         this.setState({ assignees: [...assignees, { id }] })
@@ -93,9 +98,9 @@ class Ticket extends React.Component {
     }
 
     renderTicketContent() {
-        const { editing, type, assignees, points, summary } = this.state
+        const { editing, type, assignees, points, summary, description } = this.state
         return (
-            <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)}>
+            <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)} title={description}>
                 <div className="ticket-top">
                     <div className="assignees">
                         {assignees.map(assignee => this.renderAvatar(editing, assignee))}
@@ -103,7 +108,10 @@ class Ticket extends React.Component {
                     </div>
                     {this.renderPoints(editing, points)}
                 </div>
-                <div className="ticket-bottom">{this.renderSummary(editing, summary)}</div>
+                <div className="ticket-bottom">
+                    {this.renderSummary(editing, summary)}
+                    {editing && <TicketDescriptionEditor description={description} onChange={this.changeDescription.bind(this)} />}
+                </div>
                 {editing && <TicketButtonBar onDelete={this.delete.bind(this)} />}
             </div>
         )
