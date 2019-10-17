@@ -1,25 +1,34 @@
 @import '../../styles/colors';
 
-.assignees-editor {
-    position: relative;
+.assignees {
+    display: flex;
+    flex: 1;
 
-    .delete-assignee {
-        position: absolute;
-        font-size: 0.5rem;
-        display: flex;
-        width: 18px;
-        height: 18px;
-        background: $error;
-        justify-content: center;
-        align-items: center;
-        border-radius: 100%;
-        top: -4px;
-        right: -4px;
-        color: $white;
-        cursor: pointer;
+    > img {
+        margin-right: 4px;
     }
 
-    img {
-        margin-right: 8px;
+    .assignees-editor {
+        position: relative;
+
+        .delete-assignee {
+            position: absolute;
+            font-size: 0.5rem;
+            display: flex;
+            width: 18px;
+            height: 18px;
+            background: $error;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100%;
+            top: -4px;
+            right: -4px;
+            color: $white;
+            cursor: pointer;
+        }
+
+        img {
+            margin-right: 8px;
+        }
     }
 }

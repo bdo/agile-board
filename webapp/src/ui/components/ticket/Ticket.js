@@ -10,6 +10,7 @@ import TicketDescription from '../ticket-description/TicketDescription'
 import TicketPlaceholder from '../ticket-placeholder/TicketPlaceholder'
 import TicketPoints from '../ticket-points/TicketPoints'
 import TicketSummary from '../ticket-summary/TicketSummary'
+import TicketType from '../ticket-type/TicketType'
 
 class Ticket extends React.Component {
     constructor(props) {
@@ -60,6 +61,10 @@ class Ticket extends React.Component {
         this.setState({ points: +e.target.value })
     }
 
+    changeType(e) {
+        this.setState({ type: e.target.value })
+    }
+
     changeSummary(e) {
         this.setState({ summary: e.target.value })
     }
@@ -86,6 +91,7 @@ class Ticket extends React.Component {
             <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)} title={description}>
                 <div className="ticket-top">
                     <TicketAssignees assignees={assignees} editing={editing} onAdd={this.addAssignee.bind(this)} onDelete={this.deleteAssignee.bind(this)} />
+                    <TicketType type={type} editing={editing} onChange={this.changeType.bind(this)} />
                     <TicketPoints points={points} editing={editing} onChange={this.changePoints.bind(this)} />
                 </div>
                 <div className="ticket-bottom">

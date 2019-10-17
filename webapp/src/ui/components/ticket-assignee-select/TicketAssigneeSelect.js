@@ -49,6 +49,7 @@ class TicketAssigneeSelect extends React.Component {
         )
     }
 }
+
 TicketAssigneeSelect.propTypes = {
     assignees: PropTypes.array.isRequired,
     onAdd: PropTypes.func.isRequired

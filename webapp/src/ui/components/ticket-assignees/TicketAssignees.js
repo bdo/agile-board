@@ -11,7 +11,7 @@ const TicketAssignees = ({ editing, assignees, onAdd, onDelete }) => (
         {assignees.map(assignee => {
             if (!editing) return <Avatar key={assignee.id} user={assignee} size={24} />
             return (
-                <div className="assignees-editor">
+                <div className="assignees-editor" key={assignee.id}>
                     <span className="delete-assignee icon-cross" onClick={onDelete} />
                     <Avatar user={assignee} size={48} />
                 </div>
@@ -23,7 +23,7 @@ const TicketAssignees = ({ editing, assignees, onAdd, onDelete }) => (
 
 TicketAssignees.propTypes = {
     editing: PropTypes.bool.isRequired,
-    assignee: PropTypes.object.isRequired,
+    assignees: PropTypes.array.isRequired,
     onAdd: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired
 }

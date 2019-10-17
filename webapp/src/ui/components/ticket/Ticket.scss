@@ -60,14 +60,6 @@
             padding: 5px 10px;
             background-color: $black_alpha_15;
             font-weight: bold;
-
-            .assignees {
-                display: flex;
-
-                > img {
-                    margin-right: 4px;
-                }
-            }
         }
 
         .ticket-bottom {
