@@ -18,8 +18,8 @@ class TicketAssigneeSelect extends React.Component {
     }
 
     addAssignee(id) {
-        const { onAddAssignee } = this.props
-        onAddAssignee(id)
+        const { onAdd } = this.props
+        onAdd(id)
         this.setOpen(false)
     }
 
@@ -51,7 +51,7 @@ class TicketAssigneeSelect extends React.Component {
 }
 TicketAssigneeSelect.propTypes = {
     assignees: PropTypes.array.isRequired,
-    onAddAssignee: PropTypes.func.isRequired
+    onAdd: PropTypes.func.isRequired
 }
 
 export default TicketAssigneeSelect

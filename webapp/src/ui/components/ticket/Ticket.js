@@ -4,20 +4,18 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Avatar from '../avatar/Avatar'
-import TicketAssigneeEditor from '../ticket-assignee-editor/TicketAssigneeEditor'
-import TicketAssigneeSelect from '../ticket-assignee-select/TicketAssigneeSelect'
+import TicketAssignees from '../ticket-assignees/TicketAssignees'
 import TicketButtonBar from '../ticket-button-bar/TicketButtonBar'
-import TicketDescriptionEditor from '../ticket-description-editor/TicketDescriptionEditor'
+import TicketDescription from '../ticket-description/TicketDescription'
 import TicketPlaceholder from '../ticket-placeholder/TicketPlaceholder'
-import TicketPointsEditor from '../ticket-points-editor/TicketPointsEditor'
-import TicketSummaryEditor from '../ticket-summary-editor/TicketSummaryEditor'
+import TicketPoints from '../ticket-points/TicketPoints'
+import TicketSummary from '../ticket-summary/TicketSummary'
 
 class Ticket extends React.Component {
     constructor(props) {
         super(props)
         const { id, state = 'to-do', type = 'story', points = 0, assignees = [], summary = '', description = '' } = this.props.ticket
-        this.state = { editing: id === null, id, state, type, points, assignees, summary }
+        this.state = { editing: id === null, id, state, type, points, assignees, summary, description }
     }
 
     resetState() {
@@ -82,37 +80,19 @@ class Ticket extends React.Component {
         this.setState({ assignees })
     }
 
-    renderAvatar(editing, assignee) {
-        if (!editing) return <Avatar key={assignee.id} user={assignee} size={24} />
-        return <TicketAssigneeEditor key={assignee.id} assignee={assignee} onDelete={this.deleteAssignee.bind(this)} />
-    }
-
-    renderPoints(editing, points) {
-        if (!editing) return <div className="points">{points}</div>
-        return <TicketPointsEditor points={points} onChange={this.changePoints.bind(this)} />
-    }
-
-    renderSummary(editing, summary) {
-        if (!editing) return <div className="summary">{summary}</div>
-        return <TicketSummaryEditor summary={summary} onChange={this.changeSummary.bind(this)} />
-    }
-
     renderTicketContent() {
         const { editing, type, assignees, points, summary, description } = this.state
         return (
             <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)} title={description}>
                 <div className="ticket-top">
-                    <div className="assignees">
-                        {assignees.map(assignee => this.renderAvatar(editing, assignee))}
-                        {editing && <TicketAssigneeSelect assignees={assignees} onAddAssignee={this.addAssignee.bind(this)} />}
-                    </div>
-                    {this.renderPoints(editing, points)}
+                    <TicketAssignees assignees={assignees} editing={editing} onAdd={this.addAssignee.bind(this)} onDelete={this.deleteAssignee.bind(this)} />
+                    <TicketPoints points={points} editing={editing} onChange={this.changePoints.bind(this)} />
                 </div>
                 <div className="ticket-bottom">
-                    {this.renderSummary(editing, summary)}
-                    {editing && <TicketDescriptionEditor description={description} onChange={this.changeDescription.bind(this)} />}
+                    <TicketSummary summary={summary} editing={editing} onChange={this.changeSummary.bind(this)} />
+                    <TicketDescription description={description} editing={editing} onChange={this.changeDescription.bind(this)} />
                 </div>
-                {editing && <TicketButtonBar onDelete={this.delete.bind(this)} />}
+                <TicketButtonBar editing={editing} onDelete={this.delete.bind(this)} />
             </div>
         )
     }
