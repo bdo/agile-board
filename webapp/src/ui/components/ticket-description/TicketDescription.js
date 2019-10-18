@@ -10,8 +10,12 @@ const TicketDescription = ({ editing, description, onChange }) => {
 
 TicketDescription.propTypes = {
     editing: PropTypes.bool.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     onChange: PropTypes.func.isRequired
+}
+
+TicketDescription.defaultProps = {
+    description: ''
 }
 
 export default memo(TicketDescription)

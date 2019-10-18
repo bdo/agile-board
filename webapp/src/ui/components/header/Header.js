@@ -2,17 +2,18 @@ import './Header.css'
 
 import PropTypes from 'prop-types'
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 
-const Header = ({ projectName }) => (
+import ProjectSelector from '../project-selector/ProjectSelector'
+
+const Header = ({ projectId, onSelectProject }) => (
     <header>
-        <NavLink to="/">Home</NavLink>
-        <span className="project-name">{projectName}</span>
+        <ProjectSelector value={projectId} onChange={onSelectProject} />
     </header>
 )
 
 Header.propTypes = {
-    projectName: PropTypes.string.isRequired
+    projectId: PropTypes.number,
+    onSelectProject: PropTypes.func.isRequired
 }
 
 export default Header

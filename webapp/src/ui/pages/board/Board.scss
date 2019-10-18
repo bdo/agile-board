@@ -1,16 +1,55 @@
+@import '../../styles/colors';
 @import '../../styles/mixin';
 
-#board {
-    height: 100vh;
+#home {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    height: 100vh;
 
-    .columns {
-        display: flex;
-        flex-direction: column;
+    .board {
+        flex: 1;
+        width: 100%;
+        overflow: auto;
 
-        @include medium() {
-            flex-direction: row;
+        .table {
+            display: table;
+            table-layout: fixed;
+            border-collapse: collapse;
+            min-width: 100%;
+
+            .row {
+                display: table-row;
+
+                &:first-child {
+                    border-bottom: 1px solid $black_alpha_10;
+                }
+
+                .cell {
+                    width: 20%;
+                    display: table-cell;
+                    text-align: center;
+                    border: 1px solid $black_alpha_10;
+                    border-top: none;
+                    border-bottom: none;
+
+                    &:first-child {
+                        border-left: none;
+                    }
+
+                    &:last-child {
+                        border-right: none;
+                    }
+                }
+            }
         }
+    }
+
+    .add-ticket {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 5rem;
+        color: $white;
     }
 }

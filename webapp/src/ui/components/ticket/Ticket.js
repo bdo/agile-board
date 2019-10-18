@@ -24,7 +24,8 @@ class Ticket extends React.Component {
         this.setState({ id, state, type, points, assignees, summary, description })
     }
 
-    save() {
+    save(e) {
+        e.preventDefault()
         const { onSave, onStopEdition } = this.props
         const { id, state, type, points, assignees, summary, description } = this.state
         onSave({ id, state, type, points, assignees, summary, description })
