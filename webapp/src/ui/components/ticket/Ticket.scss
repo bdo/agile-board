@@ -53,6 +53,10 @@
             background-color: $ticket_red;
         }
 
+        &.dragging {
+            opacity: 0.5;
+        }
+
         .ticket-top {
             display: flex;
             justify-content: space-between;

@@ -1,11 +1,38 @@
 import './Board.css'
 
+import classnames from 'classnames'
+import PropTypes from 'prop-types'
 import React from 'react'
+import { DndProvider } from 'react-dnd'
+import { useDrop } from 'react-dnd'
+import MultiBackend from 'react-dnd-multi-backend'
+import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch'
 
 import TicketService from '../../../services/TicketService'
 import Header from '../../components/header/Header'
 import TicketPlaceholder from '../../components/ticket-placeholder/TicketPlaceholder'
 import Ticket from '../../components/ticket/Ticket'
+
+const BoardCell = ({ state, onMoveTicket, children }) => {
+    const [{ isOver }, drop] = useDrop({
+        accept: 'ticket',
+        drop: item => onMoveTicket(item.ticket, state),
+        collect: monitor => ({
+            isOver: !!monitor.isOver()
+        })
+    })
+
+    return (
+        <div ref={drop} className={classnames('cell', { dropping: isOver })}>
+            {children}
+        </div>
+    )
+}
+
+BoardCell.propTypes = {
+    state: PropTypes.string.isRequired,
+    onMoveTicket: PropTypes.func.isRequired
+}
 
 class Board extends React.Component {
     constructor(props) {
@@ -37,6 +64,12 @@ class Board extends React.Component {
         this.fetchTickets(projectId)
     }
 
+    async moveTicket(ticket, state) {
+        const { projectId } = this.state
+        await TicketService.save({ ...ticket, state, projectId })
+        this.fetchTickets(projectId)
+    }
+
     selectProject(projectId) {
         this.setState({ projectId })
         this.fetchTickets(projectId)
@@ -56,38 +89,40 @@ class Board extends React.Component {
             <section id="home">
                 <Header projectId={projectId} onSelectProject={this.selectProject.bind(this)} />
                 <div className="board">
-                    <div className="table">
-                        <div className="row">
-                            {this.columns.map(column => (
-                                <div className="cell" key={column.id}>
-                                    <h1>{column.label}</h1>
-                                </div>
-                            ))}
-                        </div>
-                        {tickets.map(ticket => (
-                            <div className="row" key={ticket.id}>
+                    <DndProvider backend={MultiBackend} options={HTML5toTouch}>
+                        <div className="table">
+                            <div className="row">
                                 {this.columns.map(column => (
                                     <div className="cell" key={column.id}>
-                                        {ticket.state === column.id && <Ticket ticket={ticket} onSave={this.saveTicket.bind(this)} onDelete={this.deleteTicket.bind(this)} />}
+                                        <h1>{column.label}</h1>
                                     </div>
                                 ))}
                             </div>
-                        ))}
-                        <div className="row">
-                            {this.columns.map(column => (
-                                <div className="cell" key={column.id}>
-                                    {column.id === 'to-do' && (
-                                        <React.Fragment>
-                                            {ticket && <Ticket ticket={ticket} onStopEdition={this.closeTicket.bind(this)} onSave={this.saveTicket.bind(this)} />}
-                                            <TicketPlaceholder className="add-ticket" onClick={this.createTicket.bind(this)}>
-                                                +
-                                            </TicketPlaceholder>
-                                        </React.Fragment>
-                                    )}
+                            {tickets.map(ticket => (
+                                <div className="row" key={ticket.id}>
+                                    {this.columns.map(column => (
+                                        <BoardCell key={column.id} state={column.id} onMoveTicket={this.moveTicket.bind(this)}>
+                                            {ticket.state === column.id && <Ticket ticket={ticket} onSave={this.saveTicket.bind(this)} onDelete={this.deleteTicket.bind(this)} />}
+                                        </BoardCell>
+                                    ))}
                                 </div>
                             ))}
+                            <div className="row">
+                                {this.columns.map(column => (
+                                    <div className="cell" key={column.id}>
+                                        {column.id === 'to-do' && (
+                                            <React.Fragment>
+                                                {ticket && <Ticket ticket={ticket} onStopEdition={this.closeTicket.bind(this)} onSave={this.saveTicket.bind(this)} />}
+                                                <TicketPlaceholder className="add-ticket" onClick={this.createTicket.bind(this)}>
+                                                    +
+                                                </TicketPlaceholder>
+                                            </React.Fragment>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    </DndProvider>
                 </div>
             </section>
         )

@@ -15,7 +15,7 @@ router.get('/', async ctx => {
 router.get('/:id', async ctx => {
     const { id } = ctx.params
     ctx.status = HttpStatus.OK
-    ctx.body = await Ticket.findByPk(id, { include: [User] })
+    ctx.body = await Ticket.findByPk(id, { include: [{ model: User, as: 'assignees' }] })
 })
 
 router.post('/', async ctx => {

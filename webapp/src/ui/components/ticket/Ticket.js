@@ -109,9 +109,10 @@ class Ticket extends React.Component {
     }
 
     render() {
+        const { ticket } = this.props
         const { editing } = this.state
         return (
-            <TicketPlaceholder>
+            <TicketPlaceholder ticket={ticket}>
                 <div className={classnames('ticket-backdrop', { editing })} onClick={this.cancelEditing.bind(this)}>
                     {editing ? this.renderForm() : this.renderTicketContent()}
                 </div>

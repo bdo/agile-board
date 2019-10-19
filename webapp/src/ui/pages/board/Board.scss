@@ -27,6 +27,7 @@
 
                 .cell {
                     width: 20%;
+                    min-width: 150px;
                     display: table-cell;
                     text-align: center;
                     border: 1px solid $black_alpha_10;
@@ -39,6 +40,10 @@
 
                     &:last-child {
                         border-right: none;
+                    }
+
+                    &.dropping {
+                        background-color: $black_alpha_10;
                     }
                 }
             }
