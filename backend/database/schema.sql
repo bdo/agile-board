@@ -15,6 +15,7 @@ CREATE TABLE `ticket` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `projectId` int(11) unsigned NOT NULL,
   `points` tinyint(1) unsigned NOT NULL,
+  `priority` tinyint(1) unsigned NOT NULL,
   `type` varchar(10) NOT NULL,
   `state` varchar(15) NOT NULL,
   `summary` varchar(100) COLLATE utf8_bin DEFAULT NULL,

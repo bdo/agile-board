@@ -13,10 +13,10 @@ import Header from '../../components/header/Header'
 import TicketPlaceholder from '../../components/ticket-placeholder/TicketPlaceholder'
 import Ticket from '../../components/ticket/Ticket'
 
-const BoardCell = ({ state, onMoveTicket, children }) => {
+const BoardCell = ({ priority, state, onMoveTicket, children }) => {
     const [{ isOver }, drop] = useDrop({
         accept: 'ticket',
-        drop: item => onMoveTicket(item.ticket, state),
+        drop: item => onMoveTicket(item.ticket, priority, state),
         collect: monitor => ({
             isOver: !!monitor.isOver()
         })
@@ -64,9 +64,9 @@ class Board extends React.Component {
         this.fetchTickets(projectId)
     }
 
-    async moveTicket(ticket, state) {
+    async moveTicket(ticket, priority, state) {
         const { projectId } = this.state
-        await TicketService.save({ ...ticket, state, projectId })
+        await TicketService.save({ ...ticket, priority, state, projectId })
         this.fetchTickets(projectId)
     }
 
@@ -101,7 +101,7 @@ class Board extends React.Component {
                             {tickets.map(ticket => (
                                 <div className="row" key={ticket.id}>
                                     {this.columns.map(column => (
-                                        <BoardCell key={column.id} state={column.id} onMoveTicket={this.moveTicket.bind(this)}>
+                                        <BoardCell key={column.id} priority={ticket.priority} state={column.id} onMoveTicket={this.moveTicket.bind(this)}>
                                             {ticket.state === column.id && <Ticket ticket={ticket} onSave={this.saveTicket.bind(this)} onDelete={this.deleteTicket.bind(this)} />}
                                         </BoardCell>
                                     ))}

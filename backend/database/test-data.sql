@@ -5,13 +5,13 @@ INSERT INTO `agile-board`.`project` (`id`, `name`, `description`) VALUES
 (1, 'My Awesome Project', 'This project is absolutely awesome!'),
 (2, 'My Amazing Project', 'This project is absolutely amazing!');
 
-INSERT INTO `agile-board`.`ticket` (`id`, `projectId`, `points`, `state`, `type`, `summary`, `description`) VALUES 
-(1, 1, 5, 'to-do', 'story', 'Do something', ''),
-(2, 1, 0, 'to-do', 'bug', 'Fix something', ''),
-(3, 1, 2, 'in-progress', 'task', 'Long long long long long task summary', 'It is a very long task description, because our PO loves to talk and talk and talk again, it is very annoying. I do not like t at all. Fortunately there are scrollbars, weehoo!'),
-(4, 1, 0, 'to-review', 'bug', 'Fix something', ''),
-(5, 1, 2, 'to-test', 'task', 'Do something', ''),
-(6, 1, 0, 'done', 'bug', 'Fix something', '');
+INSERT INTO `agile-board`.`ticket` (`id`, `projectId`, `points`, `priority`, `state`, `type`, `summary`, `description`) VALUES 
+(1, 1, 5, 1, 'to-do', 'story', 'Do something', ''),
+(2, 1, 0, 2, 'to-do', 'bug', 'Fix something', ''),
+(3, 1, 2, 3, 'in-progress', 'task', 'Long long long long long task summary', 'It is a very long task description, because our PO loves to talk and talk and talk again, it is very annoying. I do not like t at all. Fortunately there are scrollbars, weehoo!'),
+(4, 1, 0, 4, 'to-review', 'bug', 'Fix something', ''),
+(5, 1, 2, 5, 'to-test', 'task', 'Do something', ''),
+(6, 1, 0, 6, 'done', 'bug', 'Fix something', '');
 
 INSERT INTO `agile-board`.`ticket_assignee` (`userId`, `ticketId`) VALUES
 (1, 1), (1, 2), (2, 1), (2, 6), (3, 3), (3, 5), (4, 4);

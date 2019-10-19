@@ -22,6 +22,7 @@ const Ticket = connection.define(
     {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
         points: { type: Sequelize.TINYINT },
+        priority: { type: Sequelize.TINYINT },
         type: { type: Sequelize.STRING },
         state: { type: Sequelize.STRING },
         summary: { type: Sequelize.STRING },
