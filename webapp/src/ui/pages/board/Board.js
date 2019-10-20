@@ -84,10 +84,10 @@ class Board extends React.Component {
     }
 
     render() {
-        const { projectId, ticket, tickets } = this.state
+        const { ticket, tickets } = this.state
         return (
             <section id="home">
-                <Header projectId={projectId} onSelectProject={this.selectProject.bind(this)} />
+                <Header onSelectProject={this.selectProject.bind(this)} />
                 <div className="board">
                     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
                         <div className="table">

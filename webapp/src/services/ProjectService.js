@@ -24,6 +24,15 @@ class ProjectService {
         }
         return response.data
     }
+
+    static async save({ id, ...project }) {
+        try {
+            if (id) await axios.put(`${Configuration.API_URL}/projects/${id}`, project)
+            else await axios.post(`${Configuration.API_URL}/projects`, project)
+        } catch (error) {
+            console.error(error)
+        }
+    }
 }
 
 export default ProjectService

@@ -5,14 +5,13 @@ import React from 'react'
 
 import ProjectSelector from '../project-selector/ProjectSelector'
 
-const Header = ({ projectId, onSelectProject }) => (
+const Header = ({ onSelectProject }) => (
     <header>
-        <ProjectSelector value={projectId} onChange={onSelectProject} />
+        <ProjectSelector onChange={onSelectProject} />
     </header>
 )
 
 Header.propTypes = {
-    projectId: PropTypes.number,
     onSelectProject: PropTypes.func.isRequired
 }
 
