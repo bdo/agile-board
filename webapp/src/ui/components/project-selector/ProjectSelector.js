@@ -1,3 +1,5 @@
+import './ProjectSelector.css'
+
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -6,32 +8,44 @@ import ProjectService from '../../../services/ProjectService'
 class ProjectSelector extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { projects: [] }
+        this.state = { open: false, project: '', projects: [] }
     }
 
     async componentDidMount() {
-        const { onChange } = this.props
         const projects = await ProjectService.list()
         this.setState({ projects })
-        if (projects.length) onChange(projects[0].id)
+        if (projects.length) this.changeValue(projects[0])
     }
 
-    onChange(e) {
+    changeValue(project) {
         const { onChange } = this.props
-        onChange(parseInt(e.target.value, 10))
+        this.setState({ project, open: false })
+        onChange(project.id)
+    }
+
+    toggle() {
+        const { open } = this.state
+        this.setState({ open: !open })
     }
 
     render() {
-        const { value } = this.props
-        const { projects } = this.state
+        const { open, project, projects } = this.state
         return (
-            <select value={value || ''} onChange={this.onChange.bind(this)}>
-                {projects.map(project => (
-                    <option key={project.id} value={project.id}>
-                        {project.name} | {project.description}
-                    </option>
-                ))}
-            </select>
+            <div className="project-selector">
+                <label>
+                    <input type="checkbox" checked={open} onChange={this.toggle.bind(this)} />
+                    <b>{project.name}</b> | {project.description}
+                </label>
+                {open && (
+                    <ul>
+                        {projects.map(project => (
+                            <li key={project.id} onClick={this.changeValue.bind(this, project)}>
+                                <b>{project.name}</b> | {project.description}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         )
     }
 }

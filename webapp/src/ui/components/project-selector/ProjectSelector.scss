@@ -1,0 +1,39 @@
+@import '../../styles/colors';
+
+.project-selector {
+    width: 250px;
+    margin: auto;
+    position: relative;
+
+    label {
+        cursor: pointer;
+        display: block;
+        border: 1px solid black;
+    }
+
+    input {
+        display: none;
+    }
+
+    ul {
+        position: absolute;
+        background-color: $white;
+        color: $black;
+        border: 1px solid black;
+        border-top: none;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        left: 0;
+        right: 0;
+
+        li {
+            cursor: pointer;
+            border-top: 1px solid $black_alpha_10;
+
+            :first-child {
+                border-top: none;
+            }
+        }
+    }
+}
