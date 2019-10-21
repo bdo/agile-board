@@ -87,20 +87,25 @@ class Ticket extends React.Component {
     }
 
     renderTicketContent() {
+        const { ticket } = this.props
         const { editing, type, assignees, points, summary, description } = this.state
         return (
-            <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)} title={description}>
-                <div className="ticket-top">
-                    <TicketAssignees assignees={assignees} editing={editing} onAdd={this.addAssignee.bind(this)} onDelete={this.deleteAssignee.bind(this)} />
-                    <TicketType type={type} editing={editing} onChange={this.changeType.bind(this)} />
-                    <TicketPoints points={points} editing={editing} onChange={this.changePoints.bind(this)} />
+            <TicketPlaceholder ticket={ticket} editing={editing}>
+                <div className={classnames('ticket-backdrop', { editing })} onClick={this.cancelEditing.bind(this)}>
+                    <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)} title={description}>
+                        <div className="ticket-top">
+                            <TicketAssignees assignees={assignees} editing={editing} onAdd={this.addAssignee.bind(this)} onDelete={this.deleteAssignee.bind(this)} />
+                            <TicketType type={type} editing={editing} onChange={this.changeType.bind(this)} />
+                            <TicketPoints points={points} editing={editing} onChange={this.changePoints.bind(this)} />
+                        </div>
+                        <div className="ticket-bottom">
+                            <TicketSummary summary={summary} editing={editing} onChange={this.changeSummary.bind(this)} />
+                            <TicketDescription description={description} editing={editing} onChange={this.changeDescription.bind(this)} />
+                        </div>
+                        <TicketButtonBar editing={editing} onDelete={this.delete.bind(this)} />
+                    </div>
                 </div>
-                <div className="ticket-bottom">
-                    <TicketSummary summary={summary} editing={editing} onChange={this.changeSummary.bind(this)} />
-                    <TicketDescription description={description} editing={editing} onChange={this.changeDescription.bind(this)} />
-                </div>
-                <TicketButtonBar editing={editing} onDelete={this.delete.bind(this)} />
-            </div>
+            </TicketPlaceholder>
         )
     }
 
@@ -109,15 +114,8 @@ class Ticket extends React.Component {
     }
 
     render() {
-        const { ticket } = this.props
         const { editing } = this.state
-        return (
-            <TicketPlaceholder ticket={ticket}>
-                <div className={classnames('ticket-backdrop', { editing })} onClick={this.cancelEditing.bind(this)}>
-                    {editing ? this.renderForm() : this.renderTicketContent()}
-                </div>
-            </TicketPlaceholder>
-        )
+        return editing ? this.renderForm() : this.renderTicketContent()
     }
 }
 

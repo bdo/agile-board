@@ -60,7 +60,7 @@ const Board = () => {
     return (
         <div id="board">
             <h3>{project.name}</h3>
-            <div className="headers">
+            <div className="board-table">
                 <div className="row">
                     {COLUMNS.map(col => (
                         <div key={col.id} className="cell">
@@ -68,8 +68,6 @@ const Board = () => {
                         </div>
                     ))}
                 </div>
-            </div>
-            <div className="body">
                 <DndProvider backend={MultiBackend} options={HTML5toTouch}>
                     {tickets.map(ticket => (
                         <div key={ticket.id} className="row">

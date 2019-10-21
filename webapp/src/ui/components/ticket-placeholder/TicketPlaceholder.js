@@ -5,10 +5,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useDrag } from 'react-dnd'
 
-const TicketPlaceholder = ({ children, className, onClick, ticket }) => {
+const TicketPlaceholder = ({ children, className, onClick, ticket, editing }) => {
     const [{ isDragging }, drag] = useDrag({
         item: { type: 'ticket', ticket },
-        canDrag: () => !!ticket,
+        canDrag: () => !editing,
         collect: monitor => ({
             isDragging: !!monitor.isDragging()
         })
@@ -24,7 +24,8 @@ const TicketPlaceholder = ({ children, className, onClick, ticket }) => {
 TicketPlaceholder.propTypes = {
     className: PropTypes.string,
     onClick: PropTypes.func,
-    ticket: PropTypes.object
+    ticket: PropTypes.object,
+    editing: PropTypes.bool
 }
 
 export default TicketPlaceholder

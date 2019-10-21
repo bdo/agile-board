@@ -11,31 +11,30 @@
         margin: 0.5rem 0;
     }
 
-    .row {
-        display: flex;
-
-        .cell {
-            flex: 1;
-            min-width: 10rem;
-        }
-    }
-
-    .headers {
-        border-bottom: 1px solid $black_alpha_10;
-        text-transform: uppercase;
-        text-align: center;
-    }
-
-    .body {
-        flex: 1;
+    .board-table {
         overflow: auto;
 
         .row {
+            display: flex;
+
+            &:first-child {
+                background-color: $black_alpha_10;
+                text-transform: uppercase;
+                text-align: center;
+
+                .cell {
+                    border: none;
+                    padding: 0.5rem;
+                }
+            }
+
             &:last-child .cell {
                 padding-bottom: 3rem;
             }
 
             .cell {
+                flex: 1;
+                min-width: 10rem;
                 border-left: 1px solid $black_alpha_10;
 
                 &:first-child {
@@ -43,23 +42,23 @@
                 }
             }
         }
-    }
 
-    .add-ticket {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        .add-ticket {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-        height: 8rem;
-        max-width: 10rem;
-        width: 100%;
-        margin: auto;
+            height: 8rem;
+            max-width: 10rem;
+            width: 100%;
+            margin: auto;
 
-        font-size: 5rem;
-        color: $white;
-        background-color: $black_alpha_10;
-        border: none;
-        outline: none;
-        cursor: pointer;
+            font-size: 5rem;
+            color: $white;
+            background-color: $black_alpha_10;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
     }
 }
