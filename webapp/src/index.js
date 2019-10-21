@@ -7,6 +7,7 @@ import { Route, Router, Switch } from 'react-router'
 
 import Board from './ui/pages/board/Board'
 import Home from './ui/pages/home/Home'
+import Project from './ui/pages/project/Project'
 
 const history = createBrowserHistory()
 
@@ -16,8 +17,11 @@ const router = (
             <Route exact path="/">
                 <Home />
             </Route>
-            <Route exact path="/:projectId">
+            <Route exact path="/board/:projectId">
                 <Board />
+            </Route>
+            <Route exact path="/project/:id?">
+                <Project />
             </Route>
         </Switch>
     </Router>
