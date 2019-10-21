@@ -14,4 +14,12 @@ header {
         font-size: 1.5rem;
         font-weight: bold;
     }
+
+    .project-edit {
+        float: right;
+        border: 1px solid $black;
+        cursor: pointer;
+        background-color: $white;
+        padding: 5px;
+    }
 }

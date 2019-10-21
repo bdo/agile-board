@@ -9,7 +9,7 @@ import MultiBackend from 'react-dnd-multi-backend'
 import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch'
 
 import TicketService from '../../../services/TicketService'
-import Header from '../../components/header/Header'
+import ProjectBar from '../../components/project-bar/ProjectBar'
 import TicketPlaceholder from '../../components/ticket-placeholder/TicketPlaceholder'
 import Ticket from '../../components/ticket/Ticket'
 
@@ -87,7 +87,7 @@ class Board extends React.Component {
         const { ticket, tickets } = this.state
         return (
             <section id="home">
-                <Header onSelectProject={this.selectProject.bind(this)} />
+                <ProjectBar onSelectProject={this.selectProject.bind(this)} />
                 <div className="board">
                     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
                         <div className="table">

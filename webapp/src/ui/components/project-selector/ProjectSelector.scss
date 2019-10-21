@@ -1,82 +1,58 @@
 @import '../../styles/colors';
 
 .project-selector {
-    .project-title {
-        font-weight: bold;
-        text-transform: uppercase;
-    }
+    width: 250px;
+    margin: auto;
+    position: relative;
 
-    .project-subtitle {
-        color: $darkgrey;
-        font-size: 0.8rem;
-    }
-
-    .project-dropdown {
-        width: 250px;
-        margin: auto;
-        position: relative;
-
-        label {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            border: 1px solid black;
-            background-color: $white;
-            padding: 5px;
-
-            div:nth-child(2) {
-                flex: 1;
-            }
-
-            input {
-                display: none;
-            }
+    .project-selector-title {
+        .title {
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
-        ul {
-            position: absolute;
-            color: $black;
-            background-color: $white;
-            border: 1px solid black;
-            border-top: none;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            left: 0;
-            right: 0;
-
-            li {
-                cursor: pointer;
-                border-top: 1px solid $black_alpha_10;
-
-                :first-child {
-                    border-top: none;
-                }
-            }
+        .subtitle {
+            color: $darkgrey;
+            font-size: 0.8rem;
         }
     }
 
-    .project-edit {
-        float: right;
-        border: 1px solid $black;
+    label {
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        border: 1px solid black;
         background-color: $white;
         padding: 5px;
+
+        div:nth-child(2) {
+            flex: 1;
+        }
+
+        input {
+            display: none;
+        }
     }
-    .project-editor {
-        background-color: $black_alpha_10;
+
+    ul {
         position: absolute;
-        top: 0;
+        color: $black;
+        background-color: $white;
+        border: 1px solid black;
+        border-top: none;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
         left: 0;
         right: 0;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
 
-        form {
-            background-color: $white;
-            padding: 10px 15px;
+        li {
+            cursor: pointer;
+            border-top: 1px solid $black_alpha_10;
+
+            :first-child {
+                border-top: none;
+            }
         }
     }
 }
