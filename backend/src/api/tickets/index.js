@@ -33,7 +33,7 @@ router.put('/:id', async ctx => {
     const { id } = ctx.params
     const { points, priority, type, state, summary, description, assignees } = ctx.request.body
     const ticket = await Ticket.findByPk(id)
-    if (ticket.priority !== priority) {
+    if (priority && ticket.priority !== priority) {
         const translate = ticket.priority < priority ? -1 : 1
         const minPriority = Math.min(ticket.priority, priority)
         const maxPriority = Math.max(ticket.priority, priority)

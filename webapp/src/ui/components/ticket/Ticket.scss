@@ -17,20 +17,20 @@
         height: unset;
 
         .ticket {
-            width: calc(100% - 40px);
-            height: calc(100% - 40px);
+            width: calc(100% - 2.5rem);
+            height: calc(100% - 2.5rem);
             font-size: 2rem;
             cursor: auto;
             position: relative;
 
             @include medium() {
-                width: 600px;
-                height: 400px;
+                width: 37.5rem;
+                height: 25rem;
             }
 
             @include large() {
-                width: 800px;
-                height: 600px;
+                width: 50rem;
+                height: 37.5rem;
             }
         }
     }
@@ -61,7 +61,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 5px 10px;
+            padding: 0.3rem 0.6rem;
             background-color: $black_alpha_15;
             font-weight: bold;
         }
@@ -69,13 +69,13 @@
         .ticket-bottom {
             overflow: auto;
             flex: 1;
-            padding: 5px 10px;
+            padding: 0.3rem 0.6rem;
             display: flex;
             flex-direction: column;
         }
 
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 0.6rem;
         }
 
         ::-webkit-scrollbar-track {

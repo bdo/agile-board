@@ -5,7 +5,7 @@
     flex: 1;
 
     > img {
-        margin-right: 4px;
+        margin-right: 0.25rem;
     }
 
     .assignees-editor {
@@ -15,20 +15,20 @@
             position: absolute;
             font-size: 0.5rem;
             display: flex;
-            width: 18px;
-            height: 18px;
+            width: 1rem;
+            height: 1rem;
             background: $error;
             justify-content: center;
             align-items: center;
             border-radius: 100%;
-            top: -4px;
-            right: -4px;
+            top: 0;
+            right: 0;
             color: $white;
             cursor: pointer;
         }
 
         img {
-            margin-right: 8px;
+            margin-right: 0.5rem;
         }
     }
 }
