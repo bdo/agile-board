@@ -47,8 +47,7 @@ router.put('/:id', async ctx => {
 
 router.delete('/:id', async ctx => {
     const { id } = ctx.params
-    const ticket = await Ticket.findByPk(id)
-    await ticket.destroy()
+    await Ticket.destroy({ where: { id } })
     ctx.status = HttpStatus.NO_CONTENT
 })
 

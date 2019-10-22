@@ -8,9 +8,11 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "watch": "sass --watch src:src",
-        "build-css": "sass --style=compressed --no-source-map src:src"
+        "build-css": "sass --style=compressed --no-source-map src:src",
+        "dev": "npm run start & npm run watch"
     },
     "dependencies": {
+        "@blueprintjs/core": "^3.19.1",
         "axios": "^0.19.0",
         "classnames": "^2.2.6",
         "history": "^4.10.1",

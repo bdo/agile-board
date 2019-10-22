@@ -29,4 +29,10 @@ router.put('/:id', async ctx => {
     ctx.status = HttpStatus.NO_CONTENT
 })
 
+router.delete('/:id', async ctx => {
+    const { id } = ctx.params
+    await Project.destroy({ where: { id } })
+    ctx.status = HttpStatus.NO_CONTENT
+})
+
 module.exports = router
