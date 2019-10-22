@@ -1,4 +1,6 @@
-import { Button, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
+import './ProjectForm.css'
+
+import { Button, FormGroup, InputGroup, Intent, TextArea } from '@blueprintjs/core'
 import PropTypes from 'prop-types'
 import React, { useCallback, useState } from 'react'
 
@@ -17,12 +19,21 @@ const ProjectForm = ({ project, onSave }) => {
     )
 
     return (
-        <form onSubmit={onSubmit}>
-            <FormGroup>
-                <InputGroup id="project-name" placeholder="Project name" name="name" value={name} onChange={e => setName(e.target.value)} />
+        <form className="project-form" onSubmit={onSubmit}>
+            <FormGroup label="Project name" labelFor="project-name">
+                <InputGroup id="project-name" name="name" value={name} onChange={e => setName(e.target.value)} placeholder="My marvelous project" />
             </FormGroup>
-            <FormGroup>
-                <InputGroup id="project-description" placeholder="Project description" name="description" value={description} onChange={e => setDescription(e.target.value)} />
+            <FormGroup label="Project description" labelFor="project-description">
+                <TextArea
+                    id="project-description"
+                    name="description"
+                    value={description}
+                    onChange={e => setDescription(e.target.value)}
+                    placeholder="This project is absolutely marvelous!"
+                    rows={5}
+                    fill
+                    growVertically={false}
+                />
             </FormGroup>
             <FormGroup>
                 <Button type="submit" loading={loading} intent={Intent.PRIMARY}>

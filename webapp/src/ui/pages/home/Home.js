@@ -29,7 +29,7 @@ const Home = () => {
     return (
         <div id="home">
             <H1>
-                My projects <Icon icon={IconNames.PLUS} onClick={setProject.bind(this, EMPTY_PROJECT)} className="icon" />
+                My projects <Icon icon={IconNames.PLUS} iconSize={36} onClick={setProject.bind(this, EMPTY_PROJECT)} className="icon" />
             </H1>
             {projects.map(project => (
                 <ProjectTile key={project.id} project={project} onEdit={setProject.bind(this, project)} />
