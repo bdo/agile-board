@@ -33,14 +33,6 @@ class ProjectService {
             console.error(error)
         }
     }
-
-    static async delete(id) {
-        try {
-            await axios.delete(`${Configuration.API_URL}/projects/${id}`)
-        } catch (error) {
-            console.error(error)
-        }
-    }
 }
 
 export default ProjectService
