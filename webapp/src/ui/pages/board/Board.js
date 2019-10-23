@@ -1,100 +1,81 @@
 import './Board.css'
 
+import { Alignment, Button, MenuItem, Navbar } from '@blueprintjs/core'
+import { Select } from '@blueprintjs/select'
 import React, { useCallback, useEffect, useState } from 'react'
-import { DndProvider } from 'react-dnd'
-import MultiBackend from 'react-dnd-multi-backend'
-import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch'
-import { useParams } from 'react-router'
 
 import ProjectService from '../../../services/ProjectService'
 import TicketService from '../../../services/TicketService'
-import BoardCell from '../../components/board-cell/BoardCell'
+import TicketsTable from '../../components/tickets-table/TicketsTable'
 
-const COLUMNS = [
-    { id: 'to-do', label: 'To do' },
-    { id: 'in-progress', label: 'In progress' },
-    { id: 'to-review', label: 'To review' },
-    { id: 'to-test', label: 'To test' },
-    { id: 'done', label: 'Done' }
-]
+const itemRenderer = (project, { handleClick, modifiers }) => {
+    return <MenuItem key={project.id} onClick={handleClick} active={modifiers.active} disabled={modifiers.disabled} text={project.name} />
+}
+
+const itemPredicate = (query, { name = '', description = '' }, _index, exactMatch) => {
+    const normalizedQuery = query.toLowerCase()
+    const normalizedName = name.toLowerCase()
+    const normalizedDescription = description.toLowerCase()
+
+    return (exactMatch && normalizedQuery === normalizedName) || normalizedName.indexOf(query) > -1 || normalizedDescription.indexOf(query) > -1
+}
 
 const Board = () => {
-    const { projectId } = useParams()
-    const [project, setProject] = useState([])
+    const [projects, setProjects] = useState([])
+    const [project, setProject] = useState({})
     const [tickets, setTickets] = useState([])
 
     useEffect(() => {
-        TicketService.list({ projectId }).then(setTickets)
-    }, [projectId])
+        ProjectService.list({ archived: false })
+            .then(projects => {
+                setProject(projects[0])
+                return projects
+            })
+            .then(setProjects)
+    }, [])
+
     useEffect(() => {
-        ProjectService.get(projectId).then(setProject)
-    }, [projectId])
+        if (!project.id) return
+        TicketService.list({ projectId: project.id }).then(setTickets)
+    }, [project])
 
     const moveTicket = useCallback(
         (ticket, priority, state) => {
-            TicketService.save({ ...ticket, priority, state, projectId })
-                .then(TicketService.list.bind(this, { projectId }))
+            TicketService.save({ ...ticket, priority, state, projectId: project.id })
+                .then(TicketService.list.bind(this, { projectId: project.id }))
                 .then(setTickets)
         },
-        [projectId]
+        [project]
     )
 
     const saveTicket = useCallback(
         ticket => {
-            TicketService.save({ ...ticket, projectId })
-                .then(TicketService.list.bind(this, { projectId }))
+            TicketService.save({ ...ticket, projectId: project.id })
+                .then(TicketService.list.bind(this, { projectId: project.id }))
                 .then(setTickets)
         },
-        [projectId]
+        [project]
     )
 
     const deleteTicket = useCallback(
         id => {
             TicketService.delete(id)
-                .then(TicketService.list.bind(this, { projectId }))
+                .then(TicketService.list.bind(this, { projectId: project.id }))
                 .then(setTickets)
         },
-        [projectId]
+        [project]
     )
 
     return (
         <div id="board">
-            <h3>{project.name}</h3>
-            <div className="board-table">
-                <div className="row">
-                    {COLUMNS.map(col => (
-                        <div key={col.id} className="cell">
-                            {col.label}
-                        </div>
-                    ))}
-                </div>
-                <DndProvider backend={MultiBackend} options={HTML5toTouch}>
-                    {tickets.map(ticket => (
-                        <div key={ticket.id} className="row">
-                            {COLUMNS.map(col => (
-                                <BoardCell
-                                    key={col.id}
-                                    priority={ticket.priority}
-                                    state={col.id}
-                                    ticket={ticket}
-                                    moveTicket={moveTicket}
-                                    saveTicket={saveTicket}
-                                    deleteTicket={deleteTicket}
-                                />
-                            ))}
-                        </div>
-                    ))}
-                </DndProvider>
-                <div className="row">
-                    <div className="cell">
-                        <button className="add-ticket">+</button>
-                    </div>
-                    <div className="cell"></div>
-                    <div className="cell"></div>
-                    <div className="cell"></div>
-                    <div className="cell"></div>
-                </div>
-            </div>
+            <Navbar>
+                <Navbar.Group className="board-navbar" align={Alignment.CENTER}>
+                    <Select items={projects} onItemSelect={setProject} itemRenderer={itemRenderer} itemPredicate={itemPredicate}>
+                        <Button rightIcon="double-caret-vertical">{project.name}</Button>
+                    </Select>
+                </Navbar.Group>
+            </Navbar>
+            {tickets.length && <TicketsTable tickets={tickets} onMoveTicket={moveTicket} onSaveTicket={saveTicket} onDeleteTicket={deleteTicket} />}
         </div>
     )
 }

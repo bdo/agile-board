@@ -1,24 +1,22 @@
 import './ProjectTile.css'
 
-import { Card, Elevation, H5, Icon } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
+import { Card, Elevation, H5 } from '@blueprintjs/core'
+import classnames from 'classnames'
 import { PropTypes } from 'prop-types'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const ProjectTile = ({ project, onEdit }) => (
-    <Card elevation={Elevation.TWO} className="project-tile">
-        <Icon icon={IconNames.EDIT} onClick={onEdit} className="icon" />
-        <H5>
-            <NavLink to={`/${project.id}`}>{project.name}</NavLink>{' '}
-        </H5>
-        <p>{project.description}</p>
-    </Card>
+const ProjectTile = ({ project }) => (
+    <NavLink to={`/projects/${project.id}`} className={classnames('project-tile', { archived: project.archived })}>
+        <Card elevation={Elevation.TWO} interactive>
+            <H5>{project.name}</H5>
+            <p>{project.description}</p>
+        </Card>
+    </NavLink>
 )
 
 ProjectTile.propTypes = {
-    project: PropTypes.object.isRequired,
-    onEdit: PropTypes.func.isRequired
+    project: PropTypes.object.isRequired
 }
 
 export default ProjectTile

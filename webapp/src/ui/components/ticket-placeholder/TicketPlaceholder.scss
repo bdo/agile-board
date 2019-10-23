@@ -8,4 +8,8 @@
     height: 10rem;
     margin: 0.8rem auto;
     cursor: pointer;
+
+    &.hidden {
+        visibility: hidden;
+    }
 }

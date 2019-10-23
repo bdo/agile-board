@@ -1,4 +1,5 @@
 import '@blueprintjs/core/lib/css/blueprint.css'
+import '@blueprintjs/select/lib/css/blueprint-select.css'
 
 import './index.css'
 
@@ -9,6 +10,7 @@ import { Route, Router, Switch } from 'react-router'
 
 import Board from './ui/pages/board/Board'
 import Home from './ui/pages/home/Home'
+import Project from './ui/pages/project/Project'
 
 const history = createBrowserHistory()
 
@@ -20,6 +22,9 @@ const router = (
             </Route>
             <Route exact path="/:projectId">
                 <Board />
+            </Route>
+            <Route exact path="/projects/:id">
+                <Project />
             </Route>
         </Switch>
     </Router>

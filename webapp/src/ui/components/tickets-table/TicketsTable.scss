@@ -1,0 +1,20 @@
+@import '../../../../node_modules/@blueprintjs/core/lib/scss/variables.scss';
+
+.tickets-table {
+    min-width: 100%;
+    table-layout: fixed;
+
+    th,
+    td {
+        border: 1px solid transparent;
+        border-left-color: $light-gray2;
+
+        &:first-child {
+            border-left-color: transparent;
+        }
+
+        &.dropping {
+            border-color: $blue5;
+        }
+    }
+}

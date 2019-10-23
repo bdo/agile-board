@@ -7,24 +7,24 @@ import { useDrop } from 'react-dnd'
 
 import Ticket from '../../components/ticket/Ticket'
 
-const BoardCell = ({ priority, state, moveTicket, saveTicket, deleteTicket, ticket }) => {
-    const dropProps = { accept: 'ticket', drop: item => moveTicket(item.ticket, priority, state), collect: monitor => ({ isOver: !!monitor.isOver() }) }
+const BoardCell = ({ priority, state, onMoveTicket, onSaveTicket, onDeleteTicket, ticket }) => {
+    const dropProps = { accept: 'ticket', drop: item => onMoveTicket(item.ticket, priority, state), collect: monitor => ({ isOver: !!monitor.isOver() }) }
     const [{ isOver }, drop] = useDrop(dropProps)
 
     return (
-        <div ref={drop} className={classnames('cell', { dropping: isOver })}>
-            {ticket.state === state && <Ticket ticket={ticket} onSave={saveTicket} onDelete={deleteTicket} />}
-        </div>
+        <React.Fragment ref={drop} className={classnames('drop', { dropping: isOver })}>
+            {ticket.state === state && <Ticket ticket={ticket} onSave={onSaveTicket} onDelete={onDeleteTicket} />}
+        </React.Fragment>
     )
 }
 
 BoardCell.propTypes = {
     priority: PropTypes.number.isRequired,
     state: PropTypes.string.isRequired,
-    moveTicket: PropTypes.func.isRequired,
-    saveTicket: PropTypes.func.isRequired,
-    deleteTicket: PropTypes.func.isRequired,
-    ticket: PropTypes.object.isRequired
+    ticket: PropTypes.object.isRequired,
+    onMoveTicket: PropTypes.func.isRequired,
+    onSaveTicket: PropTypes.func.isRequired,
+    onDeleteTicket: PropTypes.func.isRequired
 }
 
 export default BoardCell

@@ -1,5 +1,10 @@
 @import '../../styles/colors';
 
-.cell.dropping {
-    background-color: $black_alpha_10;
+.drop {
+    width: 100%;
+    height: 100%;
+
+    .dropping {
+        background-color: $black_alpha_10;
+    }
 }

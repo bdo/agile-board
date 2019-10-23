@@ -1,5 +1,12 @@
+@import '../../../../node_modules/@blueprintjs/core/lib/scss/variables.scss';
+
 .project-tile {
+    display: block;
     margin: 2rem 0;
+
+    &.archived {
+        color: $pt-text-color-muted;
+    }
 
     .icon {
         float: right;
