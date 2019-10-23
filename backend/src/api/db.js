@@ -35,6 +35,7 @@ const Project = connection.define(
     'project',
     {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+        archived: { type: Sequelize.BOOLEAN },
         name: { type: Sequelize.STRING },
         description: { type: Sequelize.STRING }
     },

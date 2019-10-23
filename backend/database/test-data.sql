@@ -1,9 +1,9 @@
 INSERT INTO `agile-board`.`user` (`id`, `name`) VALUES 
 (1, 'Judith'), (2, 'Oliver'), (3, 'Jonah'), (4, 'Aliyah'), (5, 'Trevor'), (6, 'Karine');
 
-INSERT INTO `agile-board`.`project` (`id`, `name`, `description`) VALUES 
-(1, 'My Awesome Project', 'This project is absolutely awesome!'),
-(2, 'My Amazing Project', 'This project is absolutely amazing!');
+INSERT INTO `agile-board`.`project` (`id`, `archived`, `name`, `description`) VALUES 
+(1, 0, 'My Awesome Project', 'This project is absolutely awesome!'),
+(2, 0, 'My Amazing Project', 'This project is absolutely amazing!');
 
 INSERT INTO `agile-board`.`ticket` (`id`, `projectId`, `points`, `priority`, `state`, `type`, `summary`, `description`) VALUES 
 (1, 1, 5, 1, 'to-do', 'story', 'Do something', ''),

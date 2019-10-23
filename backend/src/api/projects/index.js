@@ -17,15 +17,15 @@ router.get('/:id', async ctx => {
 
 router.post('/', async ctx => {
     const { name, description } = ctx.request.body
-    const project = await Project.create({ name, description })
+    const project = await Project.create({ archived: 0, name, description })
     ctx.status = HttpStatus.CREATED
     ctx.body = project.id
 })
 
 router.put('/:id', async ctx => {
     const { id } = ctx.params
-    const { name, description } = ctx.request.body
-    await Project.update({ name, description }, { where: { id } })
+    const { archived, name, description } = ctx.request.body
+    await Project.update({ archived, name, description }, { where: { id } })
     ctx.status = HttpStatus.NO_CONTENT
 })
 

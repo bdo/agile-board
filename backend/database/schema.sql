@@ -27,6 +27,7 @@ CREATE TABLE `ticket` (
 DROP TABLE IF EXISTS `project`;
 CREATE TABLE `project` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `archived` tinyint(1) unsigned NOT NULL,
   `name` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   `description` text COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)

@@ -18,6 +18,10 @@ const ProjectForm = ({ project, onSave, isOpen, onClose }) => {
         [project, name, description, onSave]
     )
 
+    const onArchive = useCallback(() => {
+        onSave({ ...project, archived: true, name, description })
+    }, [project, name, description, onSave])
+
     return (
         <Dialog isOpen={isOpen} canOutsideClickClose onClose={onClose}>
             <div className={Classes.DIALOG_BODY}>
@@ -41,6 +45,11 @@ const ProjectForm = ({ project, onSave, isOpen, onClose }) => {
                         <Button type="submit" loading={loading} intent={Intent.PRIMARY}>
                             Save
                         </Button>
+                        {project.id && (
+                            <Button loading={loading} intent={Intent.DANGER} onClick={onArchive}>
+                                Archive
+                            </Button>
+                        )}
                     </FormGroup>
                 </form>
             </div>
