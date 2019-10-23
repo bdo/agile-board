@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
 import Avatar from '../avatar/Avatar'
-import TicketAssigneeSelect from '../ticket-assignee-select/TicketAssigneeSelect'
+import TicketAssigneesSelect from '../ticket-assignees-select/TicketAssigneesSelect'
 
 const TicketAssignees = ({ editing, assignees, onChange }) => {
     if (!editing)
@@ -15,7 +15,7 @@ const TicketAssignees = ({ editing, assignees, onChange }) => {
                 ))}
             </div>
         )
-    return <TicketAssigneeSelect assignees={assignees} onChange={onChange} />
+    return <TicketAssigneesSelect assignees={assignees} onChange={onChange} />
 }
 
 TicketAssignees.propTypes = {

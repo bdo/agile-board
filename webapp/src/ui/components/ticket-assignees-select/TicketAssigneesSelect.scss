@@ -1,0 +1,16 @@
+.ticket-assignees-select {
+    flex: 1;
+
+    .ticket-assignees-select-input {
+        background-color: transparent;
+    }
+
+    .ticket-assignees-select-avatar {
+        display: flex;
+        align-items: center;
+
+        .avatar {
+            margin-right: 0.4rem;
+        }
+    }
+}
