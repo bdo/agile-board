@@ -66,6 +66,8 @@ const Board = () => {
         [project]
     )
 
+    if (!project.id) return null
+
     return (
         <div id="board">
             <Navbar>
@@ -75,7 +77,7 @@ const Board = () => {
                     </Select>
                 </Navbar.Group>
             </Navbar>
-            {tickets.length && <TicketsTable tickets={tickets} onMoveTicket={moveTicket} onSaveTicket={saveTicket} onDeleteTicket={deleteTicket} />}
+            <TicketsTable projectId={project.id} tickets={tickets} onMoveTicket={moveTicket} onSaveTicket={saveTicket} onDeleteTicket={deleteTicket} />
         </div>
     )
 }
