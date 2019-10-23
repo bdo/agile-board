@@ -1,11 +1,12 @@
 import './TicketDescription.css'
 
+import { TextArea } from '@blueprintjs/core'
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
 const TicketDescription = ({ editing, description, onChange }) => {
     if (!editing) return null
-    return <textarea className="description-editor" value={description} onChange={onChange} />
+    return <TextArea className="ticket-description-editor" value={description} onChange={onChange} placeholder="Description" rows={5} fill growVertically={false} />
 }
 
 TicketDescription.propTypes = {

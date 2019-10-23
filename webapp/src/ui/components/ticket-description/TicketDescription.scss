@@ -1,17 +1,4 @@
-@import '../../styles/colors';
-
-.description-editor {
-    border: none;
-    border-left: 3px solid $black_alpha_10;
+.ticket-description-editor {
     resize: none;
-    background: none;
-    padding: 0.3rem 0.6rem;
-    margin: 0.6rem;
-    font-size: 2rem;
-    flex: 1;
-
-    &:focus {
-        box-shadow: inset 0 2px 0 0 $black_alpha_10, inset 0 -2px 0 0 $black_alpha_10, inset -2px 0 0 0 $black_alpha_10;
-        outline: none;
-    }
+    background-color: transparent;
 }
