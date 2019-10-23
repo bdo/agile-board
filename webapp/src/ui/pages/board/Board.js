@@ -1,6 +1,7 @@
 import './Board.css'
 
 import { Alignment, Button, MenuItem, Navbar } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 import { Select } from '@blueprintjs/select'
 import React, { useCallback, useEffect, useState } from 'react'
 
@@ -8,8 +9,8 @@ import ProjectService from '../../../services/ProjectService'
 import TicketService from '../../../services/TicketService'
 import TicketsTable from '../../components/tickets-table/TicketsTable'
 
-const itemRenderer = (project, { handleClick, modifiers }) => {
-    return <MenuItem key={project.id} onClick={handleClick} active={modifiers.active} disabled={modifiers.disabled} text={project.name} />
+const _itemRenderer = (_project, { handleClick }, project) => {
+    return <MenuItem key={_project.id} onClick={handleClick} icon={project.id === _project.id ? IconNames.TICK : IconNames.BLANK} text={_project.name} />
 }
 
 const itemPredicate = (query, { name = '', description = '' }, _index, exactMatch) => {
@@ -65,6 +66,8 @@ const Board = () => {
         },
         [project]
     )
+
+    const itemRenderer = useCallback((_project, props) => _itemRenderer(_project, props, project), [project])
 
     if (!project.id) return null
 
