@@ -1,33 +1,10 @@
 @import '../../styles/colors';
 
-.add-assignee {
-    position: relative;
+.ticket-assignees-select-avatar {
+    display: flex;
+    align-items: center;
 
-    .add-assignee-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: $black_alpha_10;
-        height: 3rem;
-        width: 3rem;
-        border-radius: 1.5rem;
-        cursor: pointer;
-        color: $white;
-
-        &.open {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-    }
-
-    .add-assignee-tooltip {
-        position: absolute;
-        background-color: $black_alpha_10;
-        border-radius: 0 0 1.5rem 1.5rem;
-
-        img {
-            display: block;
-            cursor: block;
-        }
+    .avatar {
+        margin-right: 0.4rem;
     }
 }

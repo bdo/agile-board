@@ -74,15 +74,11 @@ class Ticket extends React.Component {
         this.setState({ description: e.target.value })
     }
 
-    addAssignee(id) {
+    changeAssignees(user) {
         const { assignees } = this.state
-        this.setState({ assignees: [...assignees, { id }] })
-    }
-
-    deleteAssignee(id) {
-        const { assignees } = this.state
-        const index = assignees.findIndex(assigneeId => assigneeId === id)
-        assignees.splice(index, 1)
+        const index = assignees.findIndex(assignee => assignee.id === user.id)
+        if (index === -1) assignees.push(user)
+        else assignees.splice(index, 1)
         this.setState({ assignees })
     }
 
@@ -94,7 +90,7 @@ class Ticket extends React.Component {
                 <div className={classnames('ticket-backdrop', { editing })} onClick={this.cancelEditing.bind(this)}>
                     <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)} title={description}>
                         <div className="ticket-top">
-                            <TicketAssignees assignees={assignees} editing={editing} onAdd={this.addAssignee.bind(this)} onDelete={this.deleteAssignee.bind(this)} />
+                            <TicketAssignees assignees={assignees} editing={editing} onChange={this.changeAssignees.bind(this)} />
                             <TicketType type={type} editing={editing} onChange={this.changeType.bind(this)} />
                             <TicketPoints points={points} editing={editing} onChange={this.changePoints.bind(this)} />
                         </div>

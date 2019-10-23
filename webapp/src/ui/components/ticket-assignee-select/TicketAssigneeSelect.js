@@ -1,58 +1,54 @@
 import './TicketAssigneeSelect.css'
 
-import classnames from 'classnames'
+import { MenuItem } from '@blueprintjs/core'
+import { MultiSelect } from '@blueprintjs/select'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import UserService from '../../../services/UserService'
 import Avatar from '../avatar/Avatar'
 
-class TicketAssigneeSelect extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = { open: false, users: [] }
-    }
+const tagRenderer = user => <Avatar key={user.id} user={user} />
 
-    setOpen(open) {
-        this.setState({ open })
-    }
+const _itemRenderer = (user, { handleClick, modifiers }, assignees) => (
+    <MenuItem
+        key={user.id}
+        onClick={handleClick}
+        active={modifiers.active}
+        disabled={modifiers.disabled}
+        icon={assignees.findIndex(assignee => assignee.id === user.id) > -1 ? 'tick' : 'blank'}
+        text={user.name}
+        labelElement={tagRenderer(user)}
+    />
+)
 
-    addAssignee(id) {
-        const { onAdd } = this.props
-        onAdd(id)
-        this.setOpen(false)
-    }
+const TicketAssigneeSelect = ({ assignees, onChange }) => {
+    const [users, setUsers] = useState([])
 
-    async componentDidMount() {
-        const users = await UserService.list()
-        this.setState({ users })
-    }
+    useEffect(() => {
+        UserService.list().then(setUsers)
+    }, [])
 
-    render() {
-        const { assignees } = this.props
-        const { open, users } = this.state
-        const _users = users.filter(user => !assignees.some(assignee => assignee.id === user.id))
-        if (!_users.length) return null
-        return (
-            <div className="add-assignee">
-                <div className={classnames('add-assignee-button', { open })} onClick={this.setOpen.bind(this, !open)}>
-                    +
-                </div>
-                {open && (
-                    <div className="add-assignee-tooltip">
-                        {_users.map(user => (
-                            <Avatar key={user.id} user={user} size={48} onClick={this.addAssignee.bind(this, user.id)} />
-                        ))}
-                    </div>
-                )}
-            </div>
-        )
-    }
+    const itemRenderer = useCallback((user, props) => _itemRenderer(user, props, assignees), [assignees])
+
+    if (!users.length) return null
+
+    return (
+        <MultiSelect
+            items={users}
+            selectedItems={assignees}
+            itemRenderer={(user, props) => itemRenderer(user, props, assignees)}
+            tagRenderer={tagRenderer}
+            filterable={false}
+            onItemSelect={onChange}
+            tagInputProps={{ onRemove: ({ props }) => onChange(props.user) }}
+        />
+    )
 }
 
 TicketAssigneeSelect.propTypes = {
     assignees: PropTypes.array.isRequired,
-    onAdd: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired
 }
 
 export default TicketAssigneeSelect
