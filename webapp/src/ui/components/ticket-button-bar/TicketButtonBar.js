@@ -1,5 +1,7 @@
 import './TicketButtonBar.css'
 
+import { Button, Intent } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -7,12 +9,12 @@ const TicketButtonBar = ({ editing, onDelete }) => {
     if (!editing) return null
     return (
         <div className="button-bar">
-            <button type="submit" className="save">
-                <div className="icon-checkmark" />
-            </button>
-            <button type="button" className="delete" onClick={onDelete}>
-                <div className="icon-cross" />
-            </button>
+            <Button type="submit" icon={IconNames.TICK} intent={Intent.SUCCESS}>
+                Save
+            </Button>
+            <Button icon={IconNames.TRASH} intent={Intent.DANGER} onClick={onDelete}>
+                Delete
+            </Button>
         </div>
     )
 }
