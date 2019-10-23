@@ -58,12 +58,12 @@ class Ticket extends React.Component {
         this.setState({ editing: false })
     }
 
-    changePoints(e) {
-        this.setState({ points: +e.target.value })
+    changePoints(points) {
+        this.setState({ points })
     }
 
-    changeType(e) {
-        this.setState({ type: e.target.value })
+    changeType(type) {
+        this.setState({ type: type.value })
     }
 
     changeSummary(e) {
