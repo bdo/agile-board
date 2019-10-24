@@ -6,7 +6,17 @@ import React, { memo } from 'react'
 
 const TicketDescription = ({ editing, description, onChange }) => {
     if (!editing) return null
-    return <TextArea className="ticket-description-editor" value={description} onChange={onChange} placeholder="Description" rows={5} fill growVertically={false} />
+    return (
+        <TextArea
+            className="ticket-description-editor"
+            value={description}
+            onChange={e => onChange(e.target.value)}
+            placeholder="Description"
+            rows={5}
+            fill
+            growVertically={false}
+        />
+    )
 }
 
 TicketDescription.propTypes = {

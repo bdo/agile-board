@@ -6,24 +6,9 @@ import { Select } from '@blueprintjs/select'
 import PropTypes from 'prop-types'
 import React, { memo, useCallback } from 'react'
 
-const _itemRenderer = (_type, { handleClick }, type) => (
-    <MenuItem key={_type.value} onClick={handleClick} icon={_type.value === type ? IconNames.TICK : IconNames.BLANK} text={_type.label} />
-)
+const _itemRenderer = (_type, { handleClick }, type) => <MenuItem key={_type} onClick={handleClick} icon={_type === type ? IconNames.TICK : IconNames.BLANK} text={_type} />
 
-const TYPES = [
-    {
-        label: 'User Story',
-        value: 'story'
-    },
-    {
-        label: 'Task',
-        value: 'task'
-    },
-    {
-        label: 'Bug',
-        value: 'bug'
-    }
-]
+const TYPES = ['story', 'task', 'bug']
 
 const TicketType = ({ editing, type, onChange }) => {
     const itemRenderer = useCallback((_type, props) => _itemRenderer(_type, props, type), [type])

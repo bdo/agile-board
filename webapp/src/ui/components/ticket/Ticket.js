@@ -63,22 +63,18 @@ class Ticket extends React.Component {
     }
 
     changeType(type) {
-        this.setState({ type: type.value })
+        this.setState({ type })
     }
 
-    changeSummary(e) {
-        this.setState({ summary: e.target.value })
+    changeSummary(summary) {
+        this.setState({ summary })
     }
 
-    changeDescription(e) {
-        this.setState({ description: e.target.value })
+    changeDescription(description) {
+        this.setState({ description })
     }
 
-    changeAssignees(user) {
-        const { assignees } = this.state
-        const index = assignees.findIndex(assignee => assignee.id === user.id)
-        if (index === -1) assignees.push(user)
-        else assignees.splice(index, 1)
+    changeAssignees(assignees) {
         this.setState({ assignees })
     }
 
@@ -86,7 +82,7 @@ class Ticket extends React.Component {
         const { ticket } = this.props
         const { editing, type, assignees, points, summary, description } = this.state
         return (
-            <TicketPlaceholder ticket={ticket} editing={editing}>
+            <TicketPlaceholder ticket={ticket}>
                 <div className={classnames('ticket-backdrop', { editing })} onClick={this.cancelEditing.bind(this)}>
                     <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)} title={description}>
                         <div className="ticket-top">
@@ -98,7 +94,7 @@ class Ticket extends React.Component {
                             <TicketSummary summary={summary} editing={editing} onChange={this.changeSummary.bind(this)} />
                             <TicketDescription description={description} editing={editing} onChange={this.changeDescription.bind(this)} />
                         </div>
-                        <TicketButtonBar editing={editing} onDelete={this.delete.bind(this)} />
+                        {editing && <TicketButtonBar onDelete={this.delete.bind(this)} />}
                     </div>
                 </div>
             </TicketPlaceholder>

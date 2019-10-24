@@ -5,8 +5,7 @@ import { IconNames } from '@blueprintjs/icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const TicketButtonBar = ({ editing, onDelete }) => {
-    if (!editing) return null
+const TicketButtonBar = ({ onDelete }) => {
     return (
         <div className="button-bar">
             <Button type="submit" icon={IconNames.TICK} intent={Intent.SUCCESS}>
@@ -20,7 +19,6 @@ const TicketButtonBar = ({ editing, onDelete }) => {
 }
 
 TicketButtonBar.propTypes = {
-    editing: PropTypes.bool.isRequired,
     onDelete: PropTypes.func.isRequired
 }
 

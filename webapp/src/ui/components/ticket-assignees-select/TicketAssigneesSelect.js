@@ -30,6 +30,15 @@ const TicketAssigneesSelect = ({ assignees, onChange }) => {
 
     const itemRenderer = useCallback((user, props) => _itemRenderer(user, props, assignees), [assignees])
 
+    const itemSelect = useCallback(
+        user => {
+            const index = assignees.findIndex(assignee => assignee.id === user.id)
+            if (index === -1) onChange([...assignees, user])
+            else onChange(assignees.filter((_, i) => i !== index))
+        },
+        [assignees, onChange]
+    )
+
     if (!users.length) return null
 
     return (
@@ -40,8 +49,8 @@ const TicketAssigneesSelect = ({ assignees, onChange }) => {
                 itemRenderer={(user, props) => itemRenderer(user, props, assignees)}
                 tagRenderer={tagRenderer}
                 filterable={false}
-                onItemSelect={onChange}
-                tagInputProps={{ className: 'ticket-assignees-select-input', onRemove: ({ props }) => onChange(props.user) }}
+                onItemSelect={itemSelect}
+                tagInputProps={{ className: 'ticket-assignees-select-input', onRemove: ({ props }) => itemSelect(props.user) }}
             />
         </div>
     )

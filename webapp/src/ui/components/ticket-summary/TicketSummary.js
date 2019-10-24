@@ -6,7 +6,7 @@ import React, { memo } from 'react'
 
 const TicketSummary = ({ editing, summary, onChange }) => {
     if (!editing) return <div className="summary">{summary}</div>
-    return <InputGroup className="ticket-summary-editor" value={summary} onChange={onChange} placeholder="Summary" />
+    return <InputGroup className="ticket-summary-editor" value={summary} onChange={e => onChange(e.target.value)} placeholder="Summary" />
 }
 
 TicketSummary.propTypes = {
