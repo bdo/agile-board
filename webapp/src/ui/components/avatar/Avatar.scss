@@ -8,10 +8,16 @@
 .avatar-fallback {
     width: 1.5rem;
     height: 1.5rem;
-    line-height: 1.5rem;
     border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: $white;
+    position: relative;
+
+    .avatar {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
 }

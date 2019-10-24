@@ -46,7 +46,7 @@ const TicketEditor = ({ ticket: { assignees, points, type, summary, description,
 
     return (
         <Overlay isOpen onClose={onEndEditing} className={classnames('ticket-overlay', Classes.OVERLAY_SCROLL_CONTAINER)}>
-            <div className={classnames('ticket-container', ticket.type)}>
+            <div className={classnames('ticket-editor', ticket.type)}>
                 <form onSubmit={onSubmit}>
                     <div className="ticket-top">
                         <TicketAssignees assignees={ticket.assignees} onChange={onChange} />

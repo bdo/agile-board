@@ -2,7 +2,7 @@ import './Avatar.css'
 
 import { Colors } from '@blueprintjs/core'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const COLORS = [
     Colors.BLUE1,
@@ -23,18 +23,39 @@ const COLORS = [
 
 const Avatar = ({ user, onClick }) => {
     const [error, setError] = useState(false)
+    const [loaded, setLoaded] = useState(false)
 
-    if (error) {
-        const userInitial = (user.name || {})[0]
-        const backgroundColor = COLORS[userInitial.charCodeAt(0) % COLORS.length]
-        return (
-            <span className="avatar-fallback" style={{ backgroundColor }}>
-                {userInitial}
-            </span>
-        )
-    }
+    const imgRef = React.createRef()
 
-    return <img className="avatar" src={`/images/avatar/${user.id}.png`} onError={setError.bind(this, true)} alt="" title={user.name} onClick={onClick} />
+    useEffect(() => {
+        const img = imgRef.current
+        if (img && img.complete) setLoaded(true)
+    }, [imgRef])
+
+    const userInitial = (user.name || {})[0]
+    const backgroundColor = COLORS[userInitial.charCodeAt(0) % COLORS.length]
+
+    const img = (
+        <img
+            ref={imgRef}
+            className="avatar"
+            src={`/images/avatar/${user.id}.png`}
+            onError={setError.bind(this, true)}
+            onLoad={setLoaded.bind(this, true)}
+            alt=""
+            title={user.name}
+            onClick={onClick}
+        />
+    )
+
+    if (loaded && !error) return img
+
+    return (
+        <div className="avatar-fallback" style={{ backgroundColor }}>
+            {!loaded && img}
+            {userInitial}
+        </div>
+    )
 }
 
 Avatar.propTypes = {

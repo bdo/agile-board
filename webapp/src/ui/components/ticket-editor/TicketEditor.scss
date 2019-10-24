@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
 
-    .ticket-container {
+    .ticket-editor {
         width: 70%;
         height: 70%;
         font-size: 2rem;
@@ -78,7 +78,7 @@
                 flex-wrap: wrap;
                 padding: 0.3rem 0.6rem;
 
-                .avatar {
+                img.avatar {
                     display: block;
                 }
             }

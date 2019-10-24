@@ -70,7 +70,8 @@
             display: flex;
             flex: 1;
 
-            > img {
+            .avatar,
+            .avatar-fallback {
                 margin-right: 0.25rem;
             }
         }
