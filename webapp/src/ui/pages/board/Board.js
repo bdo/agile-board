@@ -1,9 +1,10 @@
 import './Board.css'
 
-import { Alignment, Button, MenuItem, Navbar } from '@blueprintjs/core'
+import { Alignment, Button, MenuItem, Navbar, NonIdealState } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 import { Select } from '@blueprintjs/select'
 import React, { useCallback, useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 import ProjectService from '../../../services/ProjectService'
 import TicketsTable from '../../components/tickets-table/TicketsTable'
@@ -18,7 +19,7 @@ const itemPredicate = (query, { name = '', description = '' }, _index, exactMatc
 
 const Board = () => {
     const [projects, setProjects] = useState([])
-    const [project, setProject] = useState({})
+    const [project, setProject] = useState(null)
 
     useEffect(() => {
         ProjectService.list({ archived: false })
@@ -36,7 +37,15 @@ const Board = () => {
         [project]
     )
 
-    if (!project.id) return null
+    if (!project)
+        return (
+            <NonIdealState
+                icon={IconNames.SEARCH}
+                title="No project found"
+                description="You can create projects in the home page"
+                action={<NavLink to="/">Go to home page</NavLink>}
+            />
+        )
 
     return (
         <div id="board">

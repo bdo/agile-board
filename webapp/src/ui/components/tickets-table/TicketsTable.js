@@ -63,7 +63,7 @@ const TicketsTable = ({ projectId }) => {
         return (
             <NonIdealState
                 icon={IconNames.SEARCH}
-                title="Not tickets found"
+                title="No tickets found"
                 description="You can create tickets in the backlog of the project"
                 action={<NavLink to={`/projects/${projectId}`}>Go to project page</NavLink>}
             />
