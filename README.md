@@ -18,7 +18,9 @@ _Note: This project is a sandbox for me to test features of Node.js and React.js
 
 This application needs a database to work. Only mysql is compatible for now.
 
-Use **schema.sql** and **test-data.sql** located in the backend folder to fill your database.
+Use **schema.sql** and **test-data.sql** located in the database folder to fill your database.
+
+You can use **fill-db.sh** (Linux) of **fill-db.cmd** (Windows) to create and fill the database.
 
 You can configure the database connection by editing **config/index.js** file in backend/api folder.
 
