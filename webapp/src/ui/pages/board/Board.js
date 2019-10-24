@@ -6,12 +6,7 @@ import { Select } from '@blueprintjs/select'
 import React, { useCallback, useEffect, useState } from 'react'
 
 import ProjectService from '../../../services/ProjectService'
-import TicketService from '../../../services/TicketService'
 import TicketsTable from '../../components/tickets-table/TicketsTable'
-
-const _itemRenderer = (_project, { handleClick }, project) => {
-    return <MenuItem key={_project.id} onClick={handleClick} icon={project.id === _project.id ? IconNames.TICK : IconNames.BLANK} text={_project.name} />
-}
 
 const itemPredicate = (query, { name = '', description = '' }, _index, exactMatch) => {
     const normalizedQuery = query.toLowerCase()
@@ -24,7 +19,6 @@ const itemPredicate = (query, { name = '', description = '' }, _index, exactMatc
 const Board = () => {
     const [projects, setProjects] = useState([])
     const [project, setProject] = useState({})
-    const [tickets, setTickets] = useState([])
 
     useEffect(() => {
         ProjectService.list({ archived: false })
@@ -35,39 +29,12 @@ const Board = () => {
             .then(setProjects)
     }, [])
 
-    useEffect(() => {
-        if (!project.id) return
-        TicketService.list({ projectId: project.id }).then(setTickets)
-    }, [project])
-
-    const moveTicket = useCallback(
-        (ticket, priority, state) => {
-            TicketService.save({ ...ticket, priority, state, projectId: project.id })
-                .then(TicketService.list.bind(this, { projectId: project.id }))
-                .then(setTickets)
-        },
+    const itemRenderer = useCallback(
+        (_project, { handleClick }) => (
+            <MenuItem key={_project.id} onClick={handleClick} icon={project.id === _project.id ? IconNames.TICK : IconNames.BLANK} text={_project.name} />
+        ),
         [project]
     )
-
-    const saveTicket = useCallback(
-        ticket => {
-            TicketService.save({ ...ticket, projectId: project.id })
-                .then(TicketService.list.bind(this, { projectId: project.id }))
-                .then(setTickets)
-        },
-        [project]
-    )
-
-    const deleteTicket = useCallback(
-        id => {
-            TicketService.delete(id)
-                .then(TicketService.list.bind(this, { projectId: project.id }))
-                .then(setTickets)
-        },
-        [project]
-    )
-
-    const itemRenderer = useCallback((_project, props) => _itemRenderer(_project, props, project), [project])
 
     if (!project.id) return null
 
@@ -80,7 +47,7 @@ const Board = () => {
                     </Select>
                 </Navbar.Group>
             </Navbar>
-            <TicketsTable projectId={project.id} tickets={tickets} onMoveTicket={moveTicket} onSaveTicket={saveTicket} onDeleteTicket={deleteTicket} />
+            <TicketsTable projectId={project.id} />
         </div>
     )
 }

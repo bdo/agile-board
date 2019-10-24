@@ -4,12 +4,13 @@ import { HTMLTable, NonIdealState } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { DndProvider, useDrop } from 'react-dnd'
 import MultiBackend from 'react-dnd-multi-backend'
 import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch'
 import { NavLink } from 'react-router-dom'
 
+import TicketService from '../../../services/TicketService'
 import Ticket from '../../components/ticket/Ticket'
 
 const COLUMNS = [
@@ -20,13 +21,13 @@ const COLUMNS = [
     { id: 'done', label: 'Done' }
 ]
 
-const TicketsTableCell = ({ priority, state, onMoveTicket, onSaveTicket, onDeleteTicket, ticket }) => {
+const TicketsTableCell = ({ priority, state, onMoveTicket, onRefreshTickets, ticket }) => {
     const dropProps = { accept: 'ticket', drop: item => onMoveTicket(item.ticket, priority, state), collect: monitor => ({ isOver: !!monitor.isOver() }) }
     const [{ isOver }, drop] = useDrop(dropProps)
 
     return (
         <td ref={drop} className={classnames('drop', { dropping: isOver })}>
-            {ticket.state === state && <Ticket ticket={ticket} onSave={onSaveTicket} onDelete={onDeleteTicket} />}
+            {ticket.state === state && <Ticket ticket={ticket} onRefreshTickets={onRefreshTickets} />}
         </td>
     )
 }
@@ -36,11 +37,28 @@ TicketsTableCell.propTypes = {
     state: PropTypes.string.isRequired,
     ticket: PropTypes.object.isRequired,
     onMoveTicket: PropTypes.func.isRequired,
-    onSaveTicket: PropTypes.func.isRequired,
-    onDeleteTicket: PropTypes.func.isRequired
+    onRefreshTickets: PropTypes.func.isRequired
 }
 
-const TicketsTable = ({ projectId, tickets, onMoveTicket, onSaveTicket, onDeleteTicket }) => {
+const TicketsTable = ({ projectId }) => {
+    const [tickets, setTickets] = useState([])
+
+    useEffect(() => {
+        if (!projectId) return
+        TicketService.list({ projectId }).then(setTickets)
+    }, [projectId])
+
+    const moveTicket = useCallback(
+        (ticket, priority, state) => {
+            TicketService.save({ ...ticket, priority, state, projectId })
+                .then(TicketService.list.bind(this, { projectId }))
+                .then(setTickets)
+        },
+        [projectId]
+    )
+
+    const refreshTickets = useCallback(() => TicketService.list({ projectId }).then(setTickets), [projectId])
+
     if (!tickets.length)
         return (
             <NonIdealState
@@ -70,9 +88,8 @@ const TicketsTable = ({ projectId, tickets, onMoveTicket, onSaveTicket, onDelete
                                     priority={ticket.priority}
                                     state={col.id}
                                     ticket={ticket}
-                                    onMoveTicket={onMoveTicket}
-                                    onSaveTicket={onSaveTicket}
-                                    onDeleteTicket={onDeleteTicket}
+                                    onMoveTicket={moveTicket}
+                                    onRefreshTickets={refreshTickets}
                                 />
                             ))}
                         </tr>
@@ -84,11 +101,7 @@ const TicketsTable = ({ projectId, tickets, onMoveTicket, onSaveTicket, onDelete
 }
 
 TicketsTable.propTypes = {
-    projectId: PropTypes.number.isRequired,
-    tickets: PropTypes.array.isRequired,
-    onMoveTicket: PropTypes.func.isRequired,
-    onSaveTicket: PropTypes.func.isRequired,
-    onDeleteTicket: PropTypes.func.isRequired
+    projectId: PropTypes.number.isRequired
 }
 
 export default TicketsTable

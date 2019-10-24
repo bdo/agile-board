@@ -1,95 +1,86 @@
-@import '../../styles/colors';
-@import '../../styles/mixin';
+@import '../../../../node_modules/@blueprintjs/core/lib/scss/variables.scss';
 
-.ticket-backdrop {
-    background-color: $black_alpha_25;
+.ticket {
+    display: flex;
+    flex-direction: column;
     height: 100%;
+    cursor: pointer;
+    min-width: 10rem;
+    max-width: 12rem;
+    height: 10rem;
+    margin: 0.8rem auto;
 
-    &.editing {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
+    &.dragging {
+        opacity: 0.5;
+    }
+
+    &.story {
+        &,
+        ::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-corner {
+            background-color: $gold5;
+        }
+
+        .ticket-top,
+        ::-webkit-scrollbar-thumb {
+            background-color: $gold4;
+        }
+    }
+
+    &.task {
+        &,
+        ::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-corner {
+            background-color: $blue5;
+        }
+
+        .ticket-top,
+        ::-webkit-scrollbar-thumb {
+            background-color: $blue4;
+        }
+    }
+
+    &.bug {
+        &,
+        ::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-corner {
+            background-color: $red5;
+        }
+
+        .ticket-top,
+        ::-webkit-scrollbar-thumb {
+            background-color: $red4;
+        }
+    }
+
+    ::-webkit-scrollbar {
+        height: 0.6rem;
+        width: 0.6rem;
+    }
+
+    .ticket-top {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        height: unset;
-        z-index: 20;
+        flex-wrap: wrap;
+        padding: 0.3rem 0.6rem;
+        font-weight: bold;
 
-        .ticket {
-            width: calc(100% - 5rem);
-            height: 70%;
-            font-size: 2rem;
-            cursor: auto;
-            position: relative;
+        .assignees {
+            display: flex;
+            flex: 1;
 
-            @include medium() {
-                width: 37.5rem;
-                height: 25rem;
-            }
-
-            @include large() {
-                width: 50rem;
-                height: 37.5rem;
+            > img {
+                margin-right: 0.25rem;
             }
         }
     }
 
-    .ticket {
+    .ticket-bottom {
+        overflow: auto;
+        flex: 1;
+        padding: 0.3rem 0.6rem;
         display: flex;
         flex-direction: column;
-        height: 100%;
-        cursor: pointer;
-
-        &.story {
-            background-color: $ticket_yellow;
-        }
-
-        &.task {
-            background-color: $ticket_blue;
-        }
-
-        &.bug {
-            background-color: $ticket_red;
-        }
-
-        &.dragging {
-            opacity: 0.5;
-        }
-
-        .ticket-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            padding: 0.3rem 0.6rem;
-            background-color: $black_alpha_15;
-            font-weight: bold;
-        }
-
-        .ticket-bottom {
-            overflow: auto;
-            flex: 1;
-            padding: 0.3rem 0.6rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        ::-webkit-scrollbar {
-            width: 0.6rem;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: $black_alpha_15;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: $black_alpha_15;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: $black_alpha_25;
-        }
     }
 }

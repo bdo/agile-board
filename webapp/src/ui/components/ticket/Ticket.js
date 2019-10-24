@@ -2,119 +2,46 @@ import './Ticket.css'
 
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState } from 'react'
+import { useDrag } from 'react-dnd'
 
-import TicketAssignees from '../ticket-assignees/TicketAssignees'
-import TicketButtonBar from '../ticket-button-bar/TicketButtonBar'
-import TicketDescription from '../ticket-description/TicketDescription'
-import TicketPlaceholder from '../ticket-placeholder/TicketPlaceholder'
-import TicketPoints from '../ticket-points/TicketPoints'
-import TicketSummary from '../ticket-summary/TicketSummary'
-import TicketType from '../ticket-type/TicketType'
+import Avatar from '../avatar/Avatar'
+import TicketEditor from '../ticket-editor/TicketEditor'
 
-class Ticket extends React.Component {
-    constructor(props) {
-        super(props)
-        const { id, state = 'to-do', type = 'story', points = 0, assignees = [], summary = '', description = '' } = this.props.ticket
-        this.state = { editing: id === null, id, state, type, points, assignees, summary, description }
-    }
+const Ticket = ({ ticket, onRefreshTickets }) => {
+    const [editing, setEditing] = useState(false)
 
-    resetState() {
-        const { id, state, type, points, assignees, summary, description } = this.props.ticket
-        this.setState({ id, state, type, points, assignees, summary, description })
-    }
+    const [{ dragging }, drag] = useDrag({
+        item: { type: 'ticket', ticket },
+        collect: monitor => ({
+            isDragging: !!monitor.isDragging()
+        })
+    })
 
-    save(e) {
-        e.preventDefault()
-        const { onSave, onStopEdition } = this.props
-        const { id, state, type, points, assignees, summary, description } = this.state
-        onSave({ id, state, type, points, assignees, summary, description })
-        onStopEdition && onStopEdition()
-        this.endEditing()
-    }
-
-    delete() {
-        const { onDelete } = this.props
-        const { id } = this.state
-        onDelete(id)
-        this.endEditing()
-    }
-
-    startEditing(e) {
-        e.stopPropagation()
-        if (this.state.editing) return
-        this.setState({ editing: true })
-    }
-
-    cancelEditing() {
-        const { onStopEdition } = this.props
-        onStopEdition && onStopEdition()
-        this.resetState()
-        this.endEditing()
-    }
-
-    endEditing() {
-        if (!this.state.editing) return
-        this.setState({ editing: false })
-    }
-
-    changePoints(points) {
-        this.setState({ points })
-    }
-
-    changeType(type) {
-        this.setState({ type })
-    }
-
-    changeSummary(summary) {
-        this.setState({ summary })
-    }
-
-    changeDescription(description) {
-        this.setState({ description })
-    }
-
-    changeAssignees(assignees) {
-        this.setState({ assignees })
-    }
-
-    renderTicketContent() {
-        const { ticket } = this.props
-        const { editing, type, assignees, points, summary, description } = this.state
-        return (
-            <TicketPlaceholder ticket={ticket}>
-                <div className={classnames('ticket-backdrop', { editing })} onClick={this.cancelEditing.bind(this)}>
-                    <div className={classnames('ticket', type)} onClick={this.startEditing.bind(this)} title={description}>
-                        <div className="ticket-top">
-                            <TicketAssignees assignees={assignees} editing={editing} onChange={this.changeAssignees.bind(this)} />
-                            <TicketType type={type} editing={editing} onChange={this.changeType.bind(this)} />
-                            <TicketPoints points={points} editing={editing} onChange={this.changePoints.bind(this)} />
-                        </div>
-                        <div className="ticket-bottom">
-                            <TicketSummary summary={summary} editing={editing} onChange={this.changeSummary.bind(this)} />
-                            <TicketDescription description={description} editing={editing} onChange={this.changeDescription.bind(this)} />
-                        </div>
-                        {editing && <TicketButtonBar onDelete={this.delete.bind(this)} />}
+    return (
+        <React.Fragment>
+            <div ref={drag} className={classnames('ticket', ticket.type, { dragging })} title={ticket.description} onClick={setEditing.bind(this, true)}>
+                <div className="ticket-top">
+                    <div className="assignees">
+                        {ticket.assignees.map(assignee => (
+                            <Avatar key={assignee.id} user={assignee} />
+                        ))}
                     </div>
+                    <div className="points">{ticket.points}</div>
                 </div>
-            </TicketPlaceholder>
-        )
-    }
-
-    renderForm() {
-        return <form onSubmit={this.save.bind(this)}>{this.renderTicketContent()}</form>
-    }
-
-    render() {
-        const { editing } = this.state
-        return editing ? this.renderForm() : this.renderTicketContent()
-    }
+                <div className="ticket-bottom">
+                    <div className="summary">{ticket.summary}</div>
+                    {ticket.description}
+                </div>
+            </div>
+            {editing && <TicketEditor ticket={ticket} onEndEditing={setEditing.bind(this, false)} onRefreshTickets={onRefreshTickets} />}
+        </React.Fragment>
+    )
 }
 
 Ticket.propTypes = {
     ticket: PropTypes.object.isRequired,
-    onDelete: PropTypes.func,
-    onSave: PropTypes.func.isRequired
+    onRefreshTickets: PropTypes.func.isRequired
 }
 
 export default Ticket
