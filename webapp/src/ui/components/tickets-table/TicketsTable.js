@@ -11,7 +11,6 @@ import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch'
 import { NavLink } from 'react-router-dom'
 
 import Ticket from '../../components/ticket/Ticket'
-import TicketPlaceholder from '../ticket-placeholder/TicketPlaceholder'
 
 const COLUMNS = [
     { id: 'to-do', label: 'To do' },
@@ -27,7 +26,7 @@ const TicketsTableCell = ({ priority, state, onMoveTicket, onSaveTicket, onDelet
 
     return (
         <td ref={drop} className={classnames('drop', { dropping: isOver })}>
-            {ticket.state === state ? <Ticket ticket={ticket} onSave={onSaveTicket} onDelete={onDeleteTicket} /> : <TicketPlaceholder hidden />}
+            {ticket.state === state && <Ticket ticket={ticket} onSave={onSaveTicket} onDelete={onDeleteTicket} />}
         </td>
     )
 }
