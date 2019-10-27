@@ -25,34 +25,22 @@ const Avatar = ({ user, onClick }) => {
     const [error, setError] = useState(false)
     const [loaded, setLoaded] = useState(false)
 
-    const imgRef = React.createRef()
+    const src = `/images/avatar/${user.id}.png`
 
     useEffect(() => {
-        const img = imgRef.current
-        if (img && img.complete) setLoaded(true)
-    }, [imgRef])
+        const img = new Image()
+        img.onload = setLoaded.bind(this, true)
+        img.onerror = setError.bind(this, true)
+        img.src = src
+    }, [src])
 
     const userInitial = (user.name || {})[0]
     const backgroundColor = COLORS[userInitial.charCodeAt(0) % COLORS.length]
 
-    const img = (
-        <img
-            ref={imgRef}
-            className="avatar"
-            src={`/images/avatar/${user.id}.png`}
-            onError={setError.bind(this, true)}
-            onLoad={setLoaded.bind(this, true)}
-            alt=""
-            title={user.name}
-            onClick={onClick}
-        />
-    )
-
-    if (loaded && !error) return img
+    if (loaded && !error) return <img className="avatar" src={src} alt="" title={user.name} onClick={onClick} />
 
     return (
         <div className="avatar-fallback" style={{ backgroundColor }}>
-            {!loaded && img}
             {userInitial}
         </div>
     )
