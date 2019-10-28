@@ -3,7 +3,7 @@ import './Ticket.css'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { useDrag } from 'react-dnd'
+import { useDrag } from 'react-dnd-cjs'
 
 import Avatar from '../avatar/Avatar'
 import TicketEditor from '../ticket-editor/TicketEditor'

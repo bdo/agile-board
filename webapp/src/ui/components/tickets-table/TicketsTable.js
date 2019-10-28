@@ -1,13 +1,13 @@
 import './TicketsTable.css'
 
-import { HTMLTable, NonIdealState } from '@blueprintjs/core'
+import { HTMLTable, NonIdealState, Spinner } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useCallback, useEffect, useState } from 'react'
-import { DndProvider, useDrop } from 'react-dnd'
+import { DndProvider, useDrop } from 'react-dnd-cjs'
 import MultiBackend from 'react-dnd-multi-backend'
-import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch'
+import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch'
 import { NavLink } from 'react-router-dom'
 
 import TicketService from '../../../services/TicketService'
@@ -42,10 +42,14 @@ TicketsTableCell.propTypes = {
 
 const TicketsTable = ({ projectId }) => {
     const [tickets, setTickets] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         if (!projectId) return
-        TicketService.list({ projectId }).then(setTickets)
+        setLoading(true)
+        TicketService.list({ projectId })
+            .then(setTickets)
+            .then(setLoading.bind(this, false))
     }, [projectId])
 
     const moveTicket = useCallback(
@@ -59,9 +63,12 @@ const TicketsTable = ({ projectId }) => {
 
     const refreshTickets = useCallback(() => TicketService.list({ projectId }).then(setTickets), [projectId])
 
+    if (loading) return <Spinner className="tickets-table-spinner" />
+
     if (!tickets.length)
         return (
             <NonIdealState
+                className="tickets-table-no-results"
                 icon={IconNames.SEARCH}
                 title="No tickets found"
                 description="You can create tickets in the backlog of the project"

@@ -1386,9 +1386,9 @@
     "@types/react" "*"
 
 "@types/react@*":
-  version "16.9.9"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.9.tgz#a62c6f40f04bc7681be5e20975503a64fe783c3a"
-  integrity sha512-L+AudFJkDukk+ukInYvpoAPyJK5q1GanFOINOJnM0w6tUgITuWvJ4jyoBPFL7z4/L8hGLd+K/6xR5uUjXu0vVg==
+  version "16.9.11"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.11.tgz#70e0b7ad79058a7842f25ccf2999807076ada120"
+  integrity sha512-UBT4GZ3PokTXSWmdgC/GeCGEJXE5ofWyibCcecRLUVN2ZBpXQGVgQGtG2foS7CrTKFKlQVVswLvf7Js6XA/CVQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -3451,10 +3451,10 @@ dir-glob@2.0.0:
     arrify "^1.0.1"
     path-type "^3.0.0"
 
-dnd-core@^9.4.0:
+dnd-core-cjs@^9.4.0:
   version "9.4.0"
-  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-9.4.0.tgz#ccf605d36887f18cdde8fd5576ca3145d2e69fa8"
-  integrity sha512-Kg+8VwU8s7TgdR/BUYGUHrvFiS+5ePMZ0Q0XD7p+cFVJvgKqykBaeQDuaziuauFMPm8QxtnUy8Pncey9flXW3Q==
+  resolved "https://registry.yarnpkg.com/dnd-core-cjs/-/dnd-core-cjs-9.4.0.tgz#e69841c28f297ef3ca7f2c4a1d6bb1e72d9a1eab"
+  integrity sha512-9r2OUdVvyPYBu2pZDbaapQWsX/yq4UG8R8IsXkCtiF33xKKEtL9ShdlHXgwKSWSiDmGC14I1P+BHt9bEiA/Czw==
   dependencies:
     "@types/asap" "^2.0.0"
     "@types/invariant" "^2.2.30"
@@ -3462,10 +3462,10 @@ dnd-core@^9.4.0:
     invariant "^2.2.4"
     redux "^4.0.4"
 
-dnd-multi-backend@^5.0.0-rc01:
-  version "5.0.0-rc01"
-  resolved "https://registry.yarnpkg.com/dnd-multi-backend/-/dnd-multi-backend-5.0.0-rc01.tgz#8fac5f1d05c7c59e93edbf0b2d6c517bc61c6753"
-  integrity sha512-G/FjIzk08O31cnGOz47lrGCOGs55tZTYXvIO+1RUleVtQhbMgUSv7DVL8o2WjUPj+yHQaVUan2QbLIgolgFk/g==
+dnd-multi-backend@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/dnd-multi-backend/-/dnd-multi-backend-4.0.0.tgz#6ac99cb5df0d9ad274318964f0ff5e313a39f862"
+  integrity sha512-u/wlDXZBs1hBLw01yN7XBg6z4jKnQ8e9IEpF2KZubgWWlwC12M3hzPVNrQdLZ1h828Zv57aFKLZUI+FKDD+wvg==
 
 dns-equal@^1.0.0:
   version "1.0.0"
@@ -5586,11 +5586,6 @@ jest-docblock@^24.3.0:
   integrity sha512-F1DjdpDMJMA1cN6He0FNYNZlo3yYmOtRUnktrT9Q37njYzC5WEaDdmbynIgy0L/IvXvvgsG8OsqhLPXTpfmZAA==
   dependencies:
     detect-newline "^2.1.0"
-
-jest-dom@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/jest-dom/-/jest-dom-4.0.0.tgz#94eba3cbc6576e7bd6821867c92d176de28920eb"
-  integrity sha512-gBxYZlZB1Jgvf2gP2pRfjjUWF8woGBHj/g5rAQgFPB/0K2atGuhVcPO+BItyjWeKg9zM+dokgcMOH01vrWVMFA==
 
 jest-each@^24.9.0:
   version "24.9.0"
@@ -8367,48 +8362,48 @@ react-dev-utils@^9.1.0:
     strip-ansi "5.2.0"
     text-table "0.2.0"
 
-react-dnd-html5-backend@^9.4.0:
+react-dnd-cjs@^9.4.0:
   version "9.4.0"
-  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-9.4.0.tgz#5b1d192f57d103298657cde1fe0eabdbf2726311"
-  integrity sha512-gehPwLp505F6RoFkQiDX7Q4mbpbyfyT0TbIoZop/m4vkBw6yUE/QLrnxBQdNpDPSwL/9XkZxxd/PrbeMCQ+WrQ==
-  dependencies:
-    dnd-core "^9.4.0"
-
-react-dnd-multi-backend@5.0.0-rc01:
-  version "5.0.0-rc01"
-  resolved "https://registry.yarnpkg.com/react-dnd-multi-backend/-/react-dnd-multi-backend-5.0.0-rc01.tgz#8d171b6bfd43ce83e449c1e3885cf2591d068dc5"
-  integrity sha512-LBAIhI9wZZB2NtTHwbAq4BPR6oVoEeDlT0RrlYJBDbj0UJROZbR0ubBkM2l4cNoIv0JbxveM1r83hUEZBFNIDA==
-  dependencies:
-    dnd-multi-backend "^5.0.0-rc01"
-    prop-types "^15.7.2"
-    react-dnd-preview "^5.0.0-rc01"
-
-react-dnd-preview@^5.0.0-rc01:
-  version "5.0.0-rc01"
-  resolved "https://registry.yarnpkg.com/react-dnd-preview/-/react-dnd-preview-5.0.0-rc01.tgz#76ec1f765e6164e2601213ff60936da12a60f1e3"
-  integrity sha512-+bGBkIjjSMVHJts6zSeFbxI4LGk4P9Ue7ZtuxdQGktpsPhlsFoBCbQHuDGZr3HffrZJpWas07+P6VCzSHVp5jg==
-  dependencies:
-    prop-types "^15.7.2"
-
-react-dnd-touch-backend@^9.4.0:
-  version "9.4.0"
-  resolved "https://registry.yarnpkg.com/react-dnd-touch-backend/-/react-dnd-touch-backend-9.4.0.tgz#6784e71fad0904723e33e6710caafe36c62192a4"
-  integrity sha512-yJjFhgslriSTIEXQ/Q5MrLnETJaoyRct+AsJ//e96WOH2pUNMGSxkl8RIb/IMhNysVnMc8frLIyT8dQxXAcmGA==
-  dependencies:
-    "@types/invariant" "^2.2.30"
-    dnd-core "^9.4.0"
-    invariant "^2.2.4"
-
-react-dnd@^9.4.0:
-  version "9.4.0"
-  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-9.4.0.tgz#eec87035c6360fb33a44932326b3369af011a41c"
-  integrity sha512-jnLF8qKowCKTqSddfCiLx5+sb+HxO1qgdiAgbBeL8yuo5tRYNtKxZYn7+wVwNoyZuWEuM1Gw/Wsdhr+yb2RELQ==
+  resolved "https://registry.yarnpkg.com/react-dnd-cjs/-/react-dnd-cjs-9.4.0.tgz#559b1d4efb7890eddbd419556ebd3efe28df4fbe"
+  integrity sha512-1dJHzj0oFnbVBVUoFAG6il/H4T51nhD/BhHjSc7q6dMdE1xx5pF5h+hOObegULMuwZlXW3UzRTL0nNJvgQa9nA==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.1"
     "@types/shallowequal" "^1.1.1"
-    dnd-core "^9.4.0"
+    dnd-core-cjs "^9.4.0"
     hoist-non-react-statics "^3.3.0"
     shallowequal "^1.1.0"
+
+react-dnd-html5-backend-cjs@^9.4.0:
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend-cjs/-/react-dnd-html5-backend-cjs-9.4.0.tgz#2b4a98305d8710220a00906d7186a14a5cbfb34a"
+  integrity sha512-lFahQ5gUz/TR02Id4uGmDisrvUz6hk57ncyCDp6trXPjcCGRuNOVeOrYOCeTJWLRvw5Nd/LIgYNFZSYgMUsQmg==
+  dependencies:
+    dnd-core-cjs "^9.4.0"
+
+react-dnd-multi-backend@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-dnd-multi-backend/-/react-dnd-multi-backend-4.0.0.tgz#d0b2c4913891ff922762e68d0718fd2ec9c6d1fd"
+  integrity sha512-lLWpstwG43rpU/qDPFQ5H0i2+/XufegdFSpJWeI9FwRPP7tdv/Pu2rMyi9/d8fs5mKtIYNElw1RDC50Cl7OrEA==
+  dependencies:
+    dnd-multi-backend "^4.0.0"
+    prop-types "^15.6.2"
+    react-dnd-preview "^4.0.0"
+
+react-dnd-preview@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-dnd-preview/-/react-dnd-preview-4.0.0.tgz#861ef2640426fb8b3acd6630fdbf31c06a7bceaf"
+  integrity sha512-jqipbenEfwwZEFb15tjMN+5XWIU298QwYTxvt1inDlzN3PuieMvlJ0MHcnN2YFBh1uPXIGe1s4OX/jVsBrKYjQ==
+  dependencies:
+    prop-types "^15.6.2"
+
+react-dnd-touch-backend-cjs@^9.4.0:
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/react-dnd-touch-backend-cjs/-/react-dnd-touch-backend-cjs-9.4.0.tgz#7bcbac231196ed88f927e259d28caf6d4d0d9543"
+  integrity sha512-ry4Xozl1HdcEkxAWz8mB3SHmTM6QQClIsYktHqxP/W6HJQLCFQCW3rLA1k+IiPMYu6sJKW127MCdh1cJ184ZVg==
+  dependencies:
+    "@types/invariant" "^2.2.30"
+    dnd-core-cjs "^9.4.0"
+    invariant "^2.2.4"
 
 react-dom@^16.10.1:
   version "16.10.1"
