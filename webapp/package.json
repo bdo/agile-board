@@ -5,7 +5,8 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test",
+        "test": "CI=true react-scripts test",
+        "test:watch": "react-scripts test",
         "eject": "react-scripts eject",
         "watch": "sass --watch src:src",
         "build-css": "sass --style=compressed --no-source-map src:src",
@@ -44,6 +45,10 @@
         ]
     },
     "devDependencies": {
-        "eslint-plugin-react-hooks": "^2.1.2"
+        "@testing-library/dom": "^6.8.1",
+        "@testing-library/jest-dom": "^4.2.0",
+        "@testing-library/react": "^9.3.0",
+        "eslint-plugin-react-hooks": "^2.1.2",
+        "jest-dom": "^4.0.0"
     }
 }

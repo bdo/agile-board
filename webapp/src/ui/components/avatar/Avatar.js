@@ -21,7 +21,7 @@ const COLORS = [
     Colors.SEPIA1
 ]
 
-const Avatar = ({ user, onClick }) => {
+const Avatar = ({ user }) => {
     const [error, setError] = useState(false)
     const [loaded, setLoaded] = useState(false)
 
@@ -37,7 +37,7 @@ const Avatar = ({ user, onClick }) => {
     const userInitial = (user.name || {})[0]
     const backgroundColor = COLORS[userInitial.charCodeAt(0) % COLORS.length]
 
-    if (loaded && !error) return <img className="avatar" src={src} alt="" title={user.name} onClick={onClick} />
+    if (loaded && !error) return <img className="avatar" src={src} alt="" title={user.name} />
 
     return (
         <div className="avatar-fallback" style={{ backgroundColor }}>
@@ -47,8 +47,7 @@ const Avatar = ({ user, onClick }) => {
 }
 
 Avatar.propTypes = {
-    user: PropTypes.object.isRequired,
-    onClick: PropTypes.func
+    user: PropTypes.object.isRequired
 }
 
 export default Avatar
