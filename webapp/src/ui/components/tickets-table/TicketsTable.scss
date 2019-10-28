@@ -9,6 +9,7 @@
         border: 1px solid transparent;
         border-left-color: $light-gray2;
         width: 20%;
+        min-width: 11.5rem;
 
         &:first-child {
             border-left-color: transparent;

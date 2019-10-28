@@ -19,24 +19,35 @@ describe('Avatar', () => {
         })
     })
 
-    it('Should show the fallback', () => {
+    it('Should show the fallback', function() {
         const { container } = render(<Avatar user={{ name: 'toto', id: 1 }} />)
-        expect(container.firstChild.tagName).toBe('DIV')
-        expect(container.firstChild).toHaveClass('avatar-fallback')
+
+        const fallback = container.querySelector('.avatar-fallback')
+        const image = container.querySelector('.avatar')
+
+        expect(fallback).toHaveTextContent('t')
+        expect(image).toBeNull()
     })
 
-    it('Should show the image', () => {
+    it('Should show the image when loaded', () => {
         const { container } = render(<Avatar user={{ name: 'toto', id: 1 }} />)
         act(onloadStub)
-        expect(container.firstChild.tagName).toBe('IMG')
-        expect(container.firstChild).toHaveClass('avatar')
-        expect(container.firstChild).toHaveAttribute('src', '/images/avatar/1.png')
+
+        const fallback = container.querySelector('.avatar-fallback')
+        const image = container.querySelector('.avatar')
+
+        expect(fallback).toBeNull()
+        expect(image).toHaveAttribute('src', '/images/avatar/1.png')
     })
 
     it('Should show the fallback when error', () => {
         const { container } = render(<Avatar user={{ name: 'toto', id: 1 }} />)
         act(onerrorStub)
-        expect(container.firstChild.tagName).toBe('DIV')
-        expect(container.firstChild).toHaveClass('avatar-fallback')
+
+        const fallback = container.querySelector('.avatar-fallback')
+        const image = container.querySelector('.avatar')
+
+        expect(fallback).toHaveTextContent('t')
+        expect(image).toBeNull()
     })
 })
