@@ -21,7 +21,7 @@ const COLUMNS = [
     { id: 'done', label: 'Done' }
 ]
 
-const TicketsTableCell = ({ priority, state, onMoveTicket, onRefreshTickets, ticket }) => {
+export const TicketsTableCell = ({ priority, state, onMoveTicket, onRefreshTickets, ticket }) => {
     const dropProps = { accept: 'ticket', drop: item => onMoveTicket(item.ticket, priority, state), collect: monitor => ({ isOver: !!monitor.isOver() }) }
     const [{ isOver }, drop] = useDrop(dropProps)
 

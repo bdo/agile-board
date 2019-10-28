@@ -25,7 +25,7 @@ describe('Avatar', () => {
         const fallback = container.querySelector('.avatar-fallback')
         const image = container.querySelector('.avatar')
 
-        expect(fallback).toHaveTextContent('t')
+        expect(fallback.textContent).toBe('t')
         expect(image).toBeNull()
     })
 
@@ -37,7 +37,7 @@ describe('Avatar', () => {
         const image = container.querySelector('.avatar')
 
         expect(fallback).toBeNull()
-        expect(image).toHaveAttribute('src', '/images/avatar/1.png')
+        expect(image.src).toBe('http://localhost/images/avatar/1.png')
     })
 
     it('Should show the fallback when error', () => {
@@ -47,7 +47,7 @@ describe('Avatar', () => {
         const fallback = container.querySelector('.avatar-fallback')
         const image = container.querySelector('.avatar')
 
-        expect(fallback).toHaveTextContent('t')
+        expect(fallback.textContent).toBe('t')
         expect(image).toBeNull()
     })
 })
