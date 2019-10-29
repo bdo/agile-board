@@ -11,6 +11,7 @@ describe('TicketsType', () => {
         const input = container.querySelector('.ticket-type-editor input')
 
         expect(input).not.toBeNull()
+        expect(input.value).toBe('story')
     })
 
     it('Should call onChange callback when changing value', async () => {
