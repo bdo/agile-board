@@ -11,14 +11,16 @@ const COLORS = { story: Colors.GOLD5, task: Colors.BLUE5, bug: Colors.RED5 }
 
 const TicketType = ({ type, onChange }) => {
     const itemRenderer = useCallback(
-        (_type, { handleClick }) => (
-            <MenuItem key={_type} style={{ backgroundColor: COLORS[_type] }} onClick={handleClick} icon={_type === type ? IconNames.TICK : IconNames.BLANK} text={_type} />
-        ),
+        (_type, { handleClick }) => {
+            const style = { backgroundColor: COLORS[_type] }
+            const icon = _type === type ? IconNames.TICK : IconNames.BLANK
+            return <MenuItem key={_type} className={`option-${_type}`} style={style} onClick={handleClick} icon={icon} text={_type} />
+        },
         [type]
     )
 
     return (
-        <Select filterable={false} itemRenderer={itemRenderer} onItemSelect={type => onChange('type', type)} items={TYPES}>
+        <Select filterable={false} itemRenderer={itemRenderer} onItemSelect={type => onChange('type', type)} items={TYPES} popoverProps={{ usePortal: false }}>
             <InputGroup className="ticket-type-editor" value={type} readOnly size="5" />
         </Select>
     )

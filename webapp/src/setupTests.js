@@ -15,3 +15,12 @@ global.renderInRouterAndDnd = (component, options) =>
         </Router>,
         options
     )
+
+global.document.createRange = () => ({
+    setStart: () => {},
+    setEnd: () => {},
+    commonAncestorContainer: {
+        nodeName: 'BODY',
+        ownerDocument: document
+    }
+})
