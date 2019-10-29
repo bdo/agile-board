@@ -8,12 +8,15 @@ import React, { memo, useCallback } from 'react'
 
 const TicketPoints = ({ points, onChange }) => {
     const itemRenderer = useCallback(
-        (_points, { handleClick }) => <MenuItem key={_points} onClick={handleClick} icon={points === _points ? IconNames.TICK : IconNames.BLANK} text={_points} />,
+        (_points, { handleClick }) => {
+            const icon = points === _points ? IconNames.TICK : IconNames.BLANK
+            return <MenuItem key={_points} className={`option-${_points}`} onClick={handleClick} icon={icon} text={_points} />
+        },
         [points]
     )
 
     return (
-        <Select filterable={false} itemRenderer={itemRenderer} onItemSelect={points => onChange('points', points)} items={[1, 2, 3, 5, 8, 13]}>
+        <Select filterable={false} itemRenderer={itemRenderer} onItemSelect={points => onChange('points', points)} items={[1, 2, 3, 5, 8, 13]} popoverProps={{ usePortal: false }}>
             <InputGroup className="ticket-points-editor" value={points} readOnly size="1" />
         </Select>
     )

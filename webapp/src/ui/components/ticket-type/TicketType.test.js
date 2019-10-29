@@ -4,7 +4,7 @@ import { Simulate, act } from 'react-dom/test-utils'
 
 import TicketType from './TicketType'
 
-describe('TicketsType', () => {
+describe('TicketType', () => {
     it('Should show the select', async () => {
         const { container } = render(<TicketType type="story" onChange={jest.fn()} />)
 
