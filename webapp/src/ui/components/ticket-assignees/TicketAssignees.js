@@ -19,15 +19,10 @@ const TicketAssignees = ({ assignees, onChange }) => {
     }, [])
 
     const itemRenderer = useCallback(
-        (user, { handleClick }) => (
-            <MenuItem
-                key={user.id}
-                onClick={handleClick}
-                icon={assignees.findIndex(assignee => assignee.id === user.id) > -1 ? IconNames.TICK : IconNames.BLANK}
-                text={user.name}
-                labelElement={tagRenderer(user)}
-            />
-        ),
+        (_user, { handleClick }) => {
+            const icon = assignees.findIndex(assignee => assignee.id === _user.id) > -1 ? IconNames.TICK : IconNames.BLANK
+            return <MenuItem key={_user.id} className={`option-${_user.id}`} onClick={handleClick} icon={icon} text={_user.name} labelElement={tagRenderer(_user)} />
+        },
         [assignees]
     )
 
@@ -43,7 +38,7 @@ const TicketAssignees = ({ assignees, onChange }) => {
     if (!users.length) return null
 
     return (
-        <div className="ticket-assignees">
+        <div className="ticket-assignees-editor">
             <MultiSelect
                 items={users}
                 selectedItems={assignees}
@@ -52,6 +47,7 @@ const TicketAssignees = ({ assignees, onChange }) => {
                 filterable={false}
                 onItemSelect={itemSelect}
                 tagInputProps={{ className: 'ticket-assignees-input', onRemove: ({ props }) => itemSelect(props.user) }}
+                popoverProps={{ usePortal: false }}
             />
         </div>
     )
