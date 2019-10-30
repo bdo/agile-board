@@ -1,6 +1,5 @@
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
-import { Simulate, act } from 'react-dom/test-utils'
 
 import TicketSummary from './TicketSummary'
 
@@ -20,7 +19,7 @@ describe('TicketSummary', () => {
 
         const input = container.querySelector('.ticket-summary-editor input')
 
-        act(() => Simulate.change(input, { target: { value: 'Hello people' } }))
+        fireEvent.change(input, { target: { value: 'Hello people' } })
 
         expect(onChange).toHaveBeenCalledWith('summary', 'Hello people')
     })

@@ -1,6 +1,5 @@
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
-import { Simulate, act } from 'react-dom/test-utils'
 
 import TicketPoints from './TicketPoints'
 
@@ -20,11 +19,11 @@ describe('TicketPoints', () => {
 
         const input = container.querySelector('.ticket-points-editor input')
 
-        act(() => Simulate.click(input))
+        fireEvent.click(input)
 
         const option = container.querySelector('.option-2')
 
-        act(() => Simulate.click(option))
+        fireEvent.click(option)
 
         expect(onChange).toHaveBeenCalledWith('points', 2)
     })
