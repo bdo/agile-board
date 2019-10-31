@@ -31,7 +31,6 @@ const Ticket = ({ ticket, onRefreshTickets }) => {
                 </div>
                 <div className="ticket-bottom">
                     <div className="summary">{ticket.summary}</div>
-                    {ticket.description}
                 </div>
             </div>
             {editing && <TicketEditor ticket={ticket} onEndEditing={setEditing.bind(this, false)} onRefreshTickets={onRefreshTickets} />}
