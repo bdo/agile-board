@@ -21,10 +21,8 @@ describe('Avatar', () => {
 
     it('Should show the fallback', function() {
         const { container } = render(<Avatar user={{ name: 'toto', id: 1 }} />)
-
         const fallback = container.querySelector('.avatar-fallback')
         const image = container.querySelector('.avatar')
-
         expect(fallback.textContent).toBe('t')
         expect(image).toBeNull()
     })
@@ -32,10 +30,8 @@ describe('Avatar', () => {
     it('Should show the image when loaded', () => {
         const { container } = render(<Avatar user={{ name: 'toto', id: 1 }} />)
         act(onloadStub)
-
         const fallback = container.querySelector('.avatar-fallback')
         const image = container.querySelector('.avatar')
-
         expect(fallback).toBeNull()
         expect(image.src).toBe('http://localhost/images/avatar/1.png')
     })
@@ -43,10 +39,8 @@ describe('Avatar', () => {
     it('Should show the fallback when error', () => {
         const { container } = render(<Avatar user={{ name: 'toto', id: 1 }} />)
         act(onerrorStub)
-
         const fallback = container.querySelector('.avatar-fallback')
         const image = container.querySelector('.avatar')
-
         expect(fallback.textContent).toBe('t')
         expect(image).toBeNull()
     })

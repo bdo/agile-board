@@ -23,13 +23,10 @@ describe('TicketAssignees', () => {
 
     it('Should show the select', async () => {
         const { container } = render(<TicketAssignees assignees={_assignees} onChange={jest.fn()} />)
-
         await act(async () => {
             resolve(_users)
         })
-
         const select = container.querySelector('.ticket-assignees-editor')
-
         expect(select).not.toBeNull()
         expect(select.querySelectorAll('.avatar-fallback')).toHaveLength(1)
     })
@@ -38,19 +35,13 @@ describe('TicketAssignees', () => {
         global.requestAnimationFrame = a => a()
         const onChange = jest.fn()
         const { container } = render(<TicketAssignees assignees={_assignees} onChange={onChange} />)
-
         await act(async () => {
             resolve(_users)
         })
-
         const select = container.querySelector('.ticket-assignees-input')
-
         fireEvent.click(select)
-
         const option = container.querySelector('.option-2')
-
         fireEvent.click(option)
-
         expect(onChange).toHaveBeenCalledWith('assignees', [{ id: 1, name: 'John' }, { id: 2, name: 'Lucy' }])
     })
 })
