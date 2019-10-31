@@ -23,7 +23,7 @@ const ProjectForm = ({ project, onSave, isOpen, onClose }) => {
     }, [project, name, description, onSave])
 
     return (
-        <Dialog isOpen={isOpen} onClose={onClose}>
+        <Dialog isOpen={isOpen} onClose={onClose} backdropProps={{ className: 'project-form-backdrop' }} usePortal={false}>
             <div className={Classes.DIALOG_BODY}>
                 <form className="project-form" onSubmit={onSubmit}>
                     <FormGroup label="Project name" labelFor="project-name">
