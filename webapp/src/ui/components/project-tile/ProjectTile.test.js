@@ -8,10 +8,14 @@ describe('ProjectTile', () => {
         const { container } = renderInRouter(<ProjectTile project={_project} />)
         const tile = container.querySelector('.project-tile')
         expect(tile).not.toBeNull()
-        const h5 = tile.querySelector('h5')
+    })
+
+    it('Should show correct information in the tile', function() {
+        const { container } = renderInRouter(<ProjectTile project={_project} />)
+        const h5 = container.querySelector('.project-tile h5')
+        const p = container.querySelector('.project-tile p')
         expect(h5).not.toBeNull()
         expect(h5.textContent).toBe(_project.name)
-        const p = tile.querySelector('p')
         expect(p).not.toBeNull()
         expect(p.textContent).toBe(_project.description)
     })

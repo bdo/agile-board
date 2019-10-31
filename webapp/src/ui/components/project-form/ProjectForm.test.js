@@ -22,6 +22,14 @@ describe('ProjectForm', () => {
         expect(form).not.toBeNull()
     })
 
+    it('Should correctly init the form', function() {
+        const { container } = render(<ProjectForm {...props} />)
+        const input = container.querySelector('.project-form input')
+        const textarea = container.querySelector('.project-form textarea')
+        expect(input.value).toBe(_project.name)
+        expect(textarea.textContent).toBe(_project.description)
+    })
+
     it('Should not show the form when isOpen is false', function() {
         const { container } = render(<ProjectForm {...props} isOpen={false} />)
         const form = container.querySelector('.project-form')
