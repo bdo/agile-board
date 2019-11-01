@@ -2,7 +2,6 @@ import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 import { act } from 'react-dom/test-utils'
 
-import { _project } from '../../../fixtures/project'
 import { _ticket } from '../../../fixtures/ticket'
 import TicketService from '../../../services/TicketService'
 import TicketEditor from './TicketEditor'

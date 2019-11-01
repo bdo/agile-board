@@ -46,7 +46,7 @@ const TicketAssignees = ({ assignees, onChange }) => {
                 tagRenderer={tagRenderer}
                 filterable={false}
                 onItemSelect={itemSelect}
-                tagInputProps={{ className: 'ticket-assignees-input', onRemove: ({ props }) => itemSelect(props.user) }}
+                tagInputProps={{ className: 'ticket-assignees-input', onRemove: ({ props: { user } }) => itemSelect(user) }}
                 popoverProps={{ usePortal: false }}
             />
         </div>

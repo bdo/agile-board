@@ -2,7 +2,7 @@ import { fireEvent } from '@testing-library/dom'
 import React from 'react'
 import { act } from 'react-dom/test-utils'
 
-import { _archivedProject, _project, _project2 } from '../../../fixtures/project'
+import { _archivedProject, _project } from '../../../fixtures/project'
 import ProjectService from '../../../services/ProjectService'
 import { renderInRouter } from '../../../test-render'
 import Project from './Project'
