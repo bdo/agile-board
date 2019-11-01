@@ -5,9 +5,7 @@ import { _ticket } from '../../../fixtures/ticket'
 import TicketService from '../../../services/TicketService'
 import TicketsTable, { TicketsTableCell } from './TicketsTable'
 
-jest.mock('../../../services/TicketService', () => ({
-    list: jest.fn()
-}))
+jest.mock('../../../services/TicketService')
 
 describe('TicketsTable', () => {
     let resolve

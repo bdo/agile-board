@@ -31,15 +31,17 @@ const Board = () => {
     }, [])
 
     const itemRenderer = useCallback(
-        (_project, { handleClick }) => (
-            <MenuItem key={_project.id} onClick={handleClick} icon={project.id === _project.id ? IconNames.TICK : IconNames.BLANK} text={_project.name} />
-        ),
+        (_project, { handleClick }) => {
+            const icon = project.id === _project.id ? IconNames.TICK : IconNames.BLANK
+            return <MenuItem className={`option-${_project.id}`} key={_project.id} onClick={handleClick} icon={icon} text={_project.name} />
+        },
         [project]
     )
 
     if (!project)
         return (
             <NonIdealState
+                className="board-no-project-found"
                 icon={IconNames.SEARCH}
                 title="No project found"
                 description="You can create projects in the home page"
@@ -51,8 +53,10 @@ const Board = () => {
         <div id="board">
             <Navbar>
                 <Navbar.Group className="board-navbar" align={Alignment.CENTER}>
-                    <Select items={projects} onItemSelect={setProject} itemRenderer={itemRenderer} itemPredicate={itemPredicate}>
-                        <Button rightIcon="double-caret-vertical">{project.name}</Button>
+                    <Select items={projects} onItemSelect={setProject} itemRenderer={itemRenderer} itemPredicate={itemPredicate} popoverProps={{ usePortal: false }}>
+                        <Button className="project-name" rightIcon="double-caret-vertical">
+                            {project.name}
+                        </Button>
                     </Select>
                 </Navbar.Group>
             </Navbar>
