@@ -4,10 +4,15 @@
     "license": "MIT",
     "scripts": {
         "start": "node src/app.js",
-        "dev": "nodemon --inspect=9999 src/app.js"
+        "dev": "nodemon --inspect=9999 src/app.js",
+        "lint": "eslint \"src/**/*.js\"",
+        "lint:fix": "eslint --fix \"src/**/*.js\"",
+        "format": "prettier --write \"src/**/{*.js,*.scss}\""
     },
     "devDependencies": {
-        "nodemon": "^1.19.3"
+        "eslint": "^6.6.0",
+        "nodemon": "^1.19.3",
+        "prettier": "^1.18.2"
     },
     "dependencies": {
         "@koa/cors": "^3.0.0",
