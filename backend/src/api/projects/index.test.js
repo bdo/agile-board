@@ -4,15 +4,15 @@ const { _project } = require('../../fixtures/project')
 
 const router = require('./index')
 
+jest.spyOn(Project, 'findAll').mockResolvedValue([_project])
+jest.spyOn(Project, 'findByPk').mockResolvedValue(_project)
+jest.spyOn(Project, 'create').mockResolvedValue(_project)
+jest.spyOn(Project, 'update').mockResolvedValue(_project)
+
 describe('GET projects', () => {
     let ctx
     beforeEach(() => {
         ctx = {}
-
-        jest.spyOn(Project, 'findAll').mockResolvedValue([_project])
-        jest.spyOn(Project, 'findByPk').mockResolvedValue(_project)
-        jest.spyOn(Project, 'create').mockResolvedValue(_project)
-        jest.spyOn(Project, 'update').mockResolvedValue(_project)
     })
 
     it('should get projects', async () => {

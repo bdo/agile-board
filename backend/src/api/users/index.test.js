@@ -4,12 +4,12 @@ const { _user } = require('../../fixtures/user')
 
 const router = require('./index')
 
+jest.spyOn(User, 'findAll').mockResolvedValue([_user])
+
 describe('GET users', () => {
     let ctx
     beforeEach(() => {
         ctx = {}
-
-        jest.spyOn(User, 'findAll').mockResolvedValue([_user])
     })
 
     it('should get users', async () => {
