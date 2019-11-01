@@ -40,7 +40,7 @@ const Home = () => {
                 <NavLink to="/board">My board</NavLink>
             </H1>
             <H1>
-                My projects <Icon icon={IconNames.PLUS} iconSize={36} className="icon" onClick={setDialogOpen.bind(this, true)} />
+                My projects <Icon icon={IconNames.PLUS} iconSize={36} className="icon add-project" onClick={setDialogOpen.bind(this, true)} />
             </H1>
             {openProjects.map(project => (
                 <ProjectTile key={project.id} project={project} />
