@@ -8,8 +8,8 @@
         "test": "CI=true react-scripts test",
         "test:watch": "react-scripts test",
         "eject": "react-scripts eject",
-        "watch": "sass --watch src:src",
-        "build-css": "sass --style=compressed --no-source-map src:src",
+        "css": "sass --style=compressed --no-source-map src:src",
+        "css:watch": "sass --watch src:src",
         "lint": "eslint \"src/**/*.js\"",
         "lint:fix": "eslint --fix \"src/**/*.js\"",
         "format": "prettier --write \"src/**/{*.js,*.scss}\""
