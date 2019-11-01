@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { _project } from '../../../fixtures/project'
+import { _archivedProject, _project } from '../../../fixtures/project'
 import ProjectTile from './ProjectTile'
 
 describe('ProjectTile', () => {
@@ -21,7 +21,7 @@ describe('ProjectTile', () => {
     })
 
     it('Should show the tile when project is archived', function() {
-        const { container } = renderInRouter(<ProjectTile project={{ ..._project, archived: true }} />)
+        const { container } = renderInRouter(<ProjectTile project={_archivedProject} />)
         const tile = container.querySelector('.project-tile.archived')
         expect(tile).not.toBeNull()
     })
