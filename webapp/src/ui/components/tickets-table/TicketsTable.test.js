@@ -6,8 +6,7 @@ import TicketService from '../../../services/TicketService'
 import TicketsTable, { TicketsTableCell } from './TicketsTable'
 
 jest.mock('../../../services/TicketService', () => ({
-    list: jest.fn(),
-    save: jest.fn()
+    list: jest.fn()
 }))
 
 describe('TicketsTable', () => {
