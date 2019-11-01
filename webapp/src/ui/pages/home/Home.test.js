@@ -60,7 +60,7 @@ describe('Home', () => {
         await act(async () => {
             resolve([_project])
         })
-        const addProject = container.querySelector('.add-project')
+        const addProject = container.querySelector('.icon')
         fireEvent.click(addProject)
         const projectForm = container.querySelector('.project-form-mock')
         expect(projectForm).not.toBeNull()
