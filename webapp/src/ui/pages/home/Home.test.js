@@ -9,12 +9,16 @@ import Home from './Home'
 
 jest.mock('../../components/project-tile/ProjectTile', () => ({
     __esModule: true,
-    default: () => <div className="project-tile-mock" />
+    default: function ProjectTileMock() {
+        return <div className="project-tile-mock" />
+    }
 }))
 
 jest.mock('../../components/project-form/ProjectForm', () => ({
     __esModule: true,
-    default: () => <div className="project-form-mock" />
+    default: function ProjectFormMock() {
+        return <div className="project-form-mock" />
+    }
 }))
 
 jest.mock('../../../services/ProjectService')

@@ -7,12 +7,16 @@ import Ticket from './Ticket'
 
 jest.mock('../ticket-editor/TicketEditor', () => ({
     __esModule: true,
-    default: () => <div className="ticket-editor-mock" />
+    default: function TicketEditorMock() {
+        return <div className="ticket-editor-mock" />
+    }
 }))
 
 jest.mock('../avatar/Avatar', () => ({
     __esModule: true,
-    default: () => <div className="avatar-mock" />
+    default: function AvatarMock() {
+        return <div className="avatar-mock" />
+    }
 }))
 
 describe('Ticket', () => {

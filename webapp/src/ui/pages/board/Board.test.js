@@ -11,7 +11,9 @@ jest.mock('../../../services/ProjectService')
 
 jest.mock('../../components/tickets-table/TicketsTable', () => ({
     __esModule: true,
-    default: () => <div className="tickets-table-mock" />
+    default: function TicketsTableMock() {
+        return <div className="tickets-table-mock" />
+    }
 }))
 
 describe('Board', () => {

@@ -8,27 +8,37 @@ import TicketEditor from './TicketEditor'
 
 jest.mock('../ticket-assignees/TicketAssignees', () => ({
     __esModule: true,
-    default: () => <div className="ticket-assignees-mock" />
+    default: function TicketAssigneesMock() {
+        return <div className="ticket-assignees-mock" />
+    }
 }))
 
 jest.mock('../ticket-description/TicketDescription', () => ({
     __esModule: true,
-    default: () => <div className="ticket-description-mock" />
+    default: function TicketDescriptionMock() {
+        return <div className="ticket-description-mock" />
+    }
 }))
 
 jest.mock('../ticket-points/TicketPoints', () => ({
     __esModule: true,
-    default: () => <div className="ticket-points-mock" />
+    default: function TicketPointsMock() {
+        return <div className="ticket-points-mock" />
+    }
 }))
 
 jest.mock('../ticket-summary/TicketSummary', () => ({
     __esModule: true,
-    default: () => <div className="ticket-summary-mock" />
+    default: function TicketSummaryMock() {
+        return <div className="ticket-summary-mock" />
+    }
 }))
 
 jest.mock('../ticket-type/TicketType', () => ({
     __esModule: true,
-    default: () => <div className="ticket-type-mock" />
+    default: function TicketTypeMock() {
+        return <div className="ticket-type-mock" />
+    }
 }))
 
 jest.mock('../../../services/TicketService')

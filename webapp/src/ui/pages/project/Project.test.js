@@ -9,7 +9,9 @@ import Project from './Project'
 
 jest.mock('../../components/project-form/ProjectForm', () => ({
     __esModule: true,
-    default: () => <div className="project-form-mock" />
+    default: function ProjectFormMock() {
+        return <div className="project-form-mock" />
+    }
 }))
 
 jest.mock('../../../services/ProjectService')
