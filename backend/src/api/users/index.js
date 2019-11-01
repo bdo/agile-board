@@ -4,7 +4,7 @@ const HttpStatus = require('http-status')
 
 const { User } = require('../db')
 
-router.get('/', async ctx => {
+router.get('getUsers', '/', async ctx => {
     ctx.status = HttpStatus.OK
     ctx.body = await User.findAll()
 })

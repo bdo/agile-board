@@ -5,12 +5,17 @@
     "scripts": {
         "start": "node src/app.js",
         "dev": "nodemon --inspect=9999 src/app.js",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:debug": "node --inspect-brk=9998 ./node_modules/jest/bin/jest.js --runInBand",
         "lint": "eslint \"src/**/*.js\"",
         "lint:fix": "eslint --fix \"src/**/*.js\"",
         "format": "prettier --write \"src/**/{*.js,*.scss}\""
     },
     "devDependencies": {
+        "@types/jest": "^24.0.21",
         "eslint": "^6.6.0",
+        "jest": "^24.9.0",
         "nodemon": "^1.19.3",
         "prettier": "^1.18.2"
     },

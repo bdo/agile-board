@@ -7,19 +7,19 @@ const { Op } = Sequelize
 
 const { Ticket, User } = require('../db')
 
-router.get('/', async ctx => {
+router.get('getTickets', '/', async ctx => {
     const { projectId } = ctx.query
     ctx.status = HttpStatus.OK
     ctx.body = await Ticket.findAll({ where: { projectId }, include: [{ model: User, as: 'assignees' }], order: [['priority', 'ASC']] })
 })
 
-router.get('/:id', async ctx => {
+router.get('getTicket', '/:id', async ctx => {
     const { id } = ctx.params
     ctx.status = HttpStatus.OK
     ctx.body = await Ticket.findByPk(id, { include: [{ model: User, as: 'assignees' }] })
 })
 
-router.post('/', async ctx => {
+router.post('postTicket', '/', async ctx => {
     const { points, type, state, summary, description, assignees, projectId } = ctx.request.body
     const tickets = await Ticket.findAll()
     const ticket = await Ticket.create({ points, priority: tickets.length + 1, type, state, summary, description, projectId })
@@ -29,7 +29,7 @@ router.post('/', async ctx => {
     ctx.body = ticket.id
 })
 
-router.put('/:id', async ctx => {
+router.put('putTicket', '/:id', async ctx => {
     const { id } = ctx.params
     const { points, priority, type, state, summary, description, assignees } = ctx.request.body
     const ticket = await Ticket.findByPk(id)
@@ -45,7 +45,7 @@ router.put('/:id', async ctx => {
     ctx.status = HttpStatus.NO_CONTENT
 })
 
-router.delete('/:id', async ctx => {
+router.delete('deleteTicket', '/:id', async ctx => {
     const { id } = ctx.params
     await Ticket.destroy({ where: { id } })
     ctx.status = HttpStatus.NO_CONTENT
