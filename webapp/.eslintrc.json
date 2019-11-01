@@ -2,30 +2,26 @@
     "env": {
         "browser": true,
         "es6": true,
-        "mocha": true,
+        "jest": true,
         "node": true
     },
     "extends": ["eslint:recommended", "plugin:react/recommended"],
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true,
-            "modules": true
+            "jsx": true
         },
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "rules": {
         "indent": ["error", 4, { "SwitchCase": 1 }],
-        "no-console": "off",
+        "linebreak-style": ["error", "unix"],
         "quotes": ["error", "single"],
-        "react/prop-types": [0],
-        "semi": ["error", "never"],
-        "space-before-function-paren": ["error", { "anonymous": "never", "asyncArrow": "always", "named": "never" }],
-        "linebreak-style": ["error", "unix"]
+        "semi": ["error", "never"]
     },
     "settings": {
         "react": {
-            "version": "16"
+            "version": "detect"
         }
     }
 }
