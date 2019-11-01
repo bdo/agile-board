@@ -60,7 +60,6 @@ const TicketAssignee = connection.define(
 )
 
 Ticket.belongsTo(Project, { foreignKey: 'projectId' })
-Project.hasMany(Ticket, { foreignKey: 'projectId' })
 
 User.belongsToMany(Ticket, { as: 'tickets', through: TicketAssignee, foreignKey: 'userId' })
 Ticket.belongsToMany(User, { as: 'assignees', through: TicketAssignee, foreignKey: 'ticketId' })

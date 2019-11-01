@@ -45,29 +45,31 @@ const TicketEditor = ({ ticket: { assignees, points, type, summary, description,
     }, [ticket.id, onEndEditing, onRefreshTickets])
 
     return (
-        <Overlay isOpen onClose={onEndEditing} className={classnames('ticket-overlay', Classes.OVERLAY_SCROLL_CONTAINER)} usePortal={false}>
-            <div className={classnames('ticket-editor', ticket.type)}>
-                <form onSubmit={onSubmit}>
-                    <div className="ticket-top">
-                        <TicketAssigneesEditor assignees={ticket.assignees} onChange={onChange} />
-                        <TicketTypeEditor type={ticket.type} onChange={onChange} />
-                        <TicketPointsEditor points={ticket.points} onChange={onChange} />
-                    </div>
-                    <div className="ticket-bottom">
-                        <TicketSummaryEditor summary={ticket.summary} onChange={onChange} />
-                        <TicketDescriptionEditor description={ticket.description} onChange={onChange} />
-                    </div>
-                    <div className="button-bar">
-                        <Button type="submit" icon={IconNames.TICK} intent={Intent.SUCCESS} loading={loading}>
-                            Save
-                        </Button>
-                        <Button icon={IconNames.TRASH} intent={Intent.DANGER} onClick={onDelete} loading={loading}>
-                            Delete
-                        </Button>
-                    </div>
-                </form>
-            </div>
-        </Overlay>
+        <div id="ticket-overlay-container">
+            <Overlay isOpen onClose={onEndEditing} className={classnames('ticket-overlay', Classes.OVERLAY_SCROLL_CONTAINER)} usePortal={false}>
+                <div className={classnames('ticket-editor', ticket.type)}>
+                    <form onSubmit={onSubmit}>
+                        <div className="ticket-top">
+                            <TicketAssigneesEditor assignees={ticket.assignees} onChange={onChange} />
+                            <TicketTypeEditor type={ticket.type} onChange={onChange} />
+                            <TicketPointsEditor points={ticket.points} onChange={onChange} />
+                        </div>
+                        <div className="ticket-bottom">
+                            <TicketSummaryEditor summary={ticket.summary} onChange={onChange} />
+                            <TicketDescriptionEditor description={ticket.description} onChange={onChange} />
+                        </div>
+                        <div className="button-bar">
+                            <Button type="submit" icon={IconNames.TICK} intent={Intent.SUCCESS} loading={loading}>
+                                Save
+                            </Button>
+                            <Button icon={IconNames.TRASH} intent={Intent.DANGER} onClick={onDelete} loading={loading}>
+                                Delete
+                            </Button>
+                        </div>
+                    </form>
+                </div>
+            </Overlay>
+        </div>
     )
 }
 

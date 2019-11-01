@@ -1,8 +1,21 @@
 @import '../../../../node_modules/@blueprintjs/core/lib/scss/variables.scss';
 @import '../../styles/mixin';
 
+.ticket-tile-drag-drop {
+    cursor: pointer;
+    border-left: 0.5rem solid transparent;
+
+    &.dragging {
+        opacity: 0.5;
+    }
+
+    &.dropping {
+        border-color: $blue5;
+    }
+}
+
 .ticket-tile {
-    margin: 2rem 0;
+    padding: 0.75rem;
 
     @include medium() {
         display: flex;

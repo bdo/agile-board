@@ -1,100 +1,102 @@
 @import '../../../../node_modules/@blueprintjs/core/lib/scss/variables.scss';
 @import '../../styles/mixin';
 
-.ticket-overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#ticket-overlay-container {
+    .ticket-overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-    .ticket-editor {
-        width: 70%;
-        height: 70%;
-        background-color: white;
+        .ticket-editor {
+            width: 70%;
+            height: 70%;
+            background-color: white;
 
-        @include medium() {
-            width: 37.5rem;
-            height: 25rem;
-        }
-
-        @include large() {
-            width: 50rem;
-            height: 37.5rem;
-        }
-
-        &.story {
-            &,
-            ::-webkit-scrollbar-track,
-            ::-webkit-scrollbar-corner {
-                background-color: $gold5;
+            @include medium() {
+                width: 37.5rem;
+                height: 25rem;
             }
 
-            .ticket-top,
-            ::-webkit-scrollbar-thumb {
-                background-color: $gold4;
-            }
-        }
-
-        &.task {
-            &,
-            ::-webkit-scrollbar-track,
-            ::-webkit-scrollbar-corner {
-                background-color: $blue5;
+            @include large() {
+                width: 50rem;
+                height: 37.5rem;
             }
 
-            .ticket-top,
-            ::-webkit-scrollbar-thumb {
-                background-color: $blue4;
-            }
-        }
+            &.story {
+                &,
+                ::-webkit-scrollbar-track,
+                ::-webkit-scrollbar-corner {
+                    background-color: $gold5;
+                }
 
-        &.bug {
-            &,
-            ::-webkit-scrollbar-track,
-            ::-webkit-scrollbar-corner {
-                background-color: $red5;
-            }
-
-            .ticket-top,
-            ::-webkit-scrollbar-thumb {
-                background-color: $red4;
-            }
-        }
-
-        ::-webkit-scrollbar {
-            height: 0.6rem;
-            width: 0.6rem;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-
-            .ticket-top {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-wrap: wrap;
-                padding: 0.3rem 0.6rem;
-
-                img.avatar {
-                    display: block;
+                .ticket-top,
+                ::-webkit-scrollbar-thumb {
+                    background-color: $gold4;
                 }
             }
 
-            .ticket-bottom {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                padding: 0.3rem 0.6rem;
+            &.task {
+                &,
+                ::-webkit-scrollbar-track,
+                ::-webkit-scrollbar-corner {
+                    background-color: $blue5;
+                }
+
+                .ticket-top,
+                ::-webkit-scrollbar-thumb {
+                    background-color: $blue4;
+                }
             }
 
-            .button-bar {
-                text-align: right;
-                padding: 0.3rem 0.6rem;
+            &.bug {
+                &,
+                ::-webkit-scrollbar-track,
+                ::-webkit-scrollbar-corner {
+                    background-color: $red5;
+                }
 
-                button {
-                    margin-left: 0.3rem;
+                .ticket-top,
+                ::-webkit-scrollbar-thumb {
+                    background-color: $red4;
+                }
+            }
+
+            ::-webkit-scrollbar {
+                height: 0.6rem;
+                width: 0.6rem;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+
+                .ticket-top {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    padding: 0.3rem 0.6rem;
+
+                    img.avatar {
+                        display: block;
+                    }
+                }
+
+                .ticket-bottom {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0.3rem 0.6rem;
+                }
+
+                .button-bar {
+                    text-align: right;
+                    padding: 0.3rem 0.6rem;
+
+                    button {
+                        margin-left: 0.3rem;
+                    }
                 }
             }
         }

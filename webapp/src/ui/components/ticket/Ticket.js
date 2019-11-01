@@ -11,7 +11,7 @@ import TicketEditor from '../ticket-editor/TicketEditor'
 const Ticket = ({ ticket, onRefreshTickets }) => {
     const [editing, setEditing] = useState(false)
 
-    const [{ dragging }, drag] = useDrag({
+    const [{ isDragging }, drag] = useDrag({
         item: { type: 'ticket', ticket },
         collect: monitor => ({
             isDragging: !!monitor.isDragging()
@@ -20,7 +20,7 @@ const Ticket = ({ ticket, onRefreshTickets }) => {
 
     return (
         <React.Fragment>
-            <div ref={drag} className={classnames('ticket', ticket.type, { dragging })} title={ticket.description} onClick={setEditing.bind(this, true)}>
+            <div ref={drag} className={classnames('ticket', ticket.type, { dragging: isDragging })} title={ticket.description} onClick={setEditing.bind(this, true)}>
                 <div className="ticket-top">
                     <TicketAssignees assignees={ticket.assignees} />
                     <div className="points">{ticket.points}</div>

@@ -2,7 +2,7 @@ const Router = require('koa-router')
 const router = new Router()
 const HttpStatus = require('http-status')
 
-const { Project, Ticket, User } = require('../db')
+const { Project } = require('../db')
 
 router.get('getProjects', '/', async ctx => {
     ctx.status = HttpStatus.OK
@@ -11,9 +11,8 @@ router.get('getProjects', '/', async ctx => {
 
 router.get('getProject', '/:id', async ctx => {
     const { id } = ctx.params
-    const { withTickets } = ctx.query
     ctx.status = HttpStatus.OK
-    ctx.body = await Project.findByPk(id, { include: withTickets ? [{ model: Ticket, include: [{ model: User, as: 'assignees' }] }] : [] })
+    ctx.body = await Project.findByPk(id)
 })
 
 router.post('postProject', '/', async ctx => {
