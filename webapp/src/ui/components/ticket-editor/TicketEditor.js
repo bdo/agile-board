@@ -45,7 +45,7 @@ const TicketEditor = ({ ticket: { assignees, points, type, summary, description,
     }, [ticket.id, onEndEditing, onRefreshTickets])
 
     return (
-        <Overlay isOpen onClose={onEndEditing} className={classnames('ticket-overlay', Classes.OVERLAY_SCROLL_CONTAINER)}>
+        <Overlay isOpen onClose={onEndEditing} className={classnames('ticket-overlay', Classes.OVERLAY_SCROLL_CONTAINER)} usePortal={false}>
             <div className={classnames('ticket-editor', ticket.type)}>
                 <form onSubmit={onSubmit}>
                     <div className="ticket-top">
