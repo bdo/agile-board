@@ -1,4 +1,4 @@
-import './TicketType.css'
+import './TicketTypeEditor.css'
 
 import { Colors, InputGroup, MenuItem } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
@@ -9,7 +9,7 @@ import React, { memo, useCallback } from 'react'
 const TYPES = ['story', 'task', 'bug']
 const COLORS = { story: Colors.GOLD5, task: Colors.BLUE5, bug: Colors.RED5 }
 
-const TicketType = ({ type, onChange }) => {
+const TicketTypeEditor = ({ type, onChange }) => {
     const itemRenderer = useCallback(
         (_type, { handleClick }) => {
             const style = { backgroundColor: COLORS[_type] }
@@ -26,9 +26,9 @@ const TicketType = ({ type, onChange }) => {
     )
 }
 
-TicketType.propTypes = {
+TicketTypeEditor.propTypes = {
     type: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired
 }
 
-export default memo(TicketType)
+export default memo(TicketTypeEditor)

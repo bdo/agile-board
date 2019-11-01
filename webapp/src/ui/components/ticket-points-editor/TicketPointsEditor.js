@@ -1,4 +1,4 @@
-import './TicketPoints.css'
+import './TicketPointsEditor.css'
 
 import { InputGroup, MenuItem } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
@@ -6,7 +6,7 @@ import { Select } from '@blueprintjs/select'
 import PropTypes from 'prop-types'
 import React, { memo, useCallback } from 'react'
 
-const TicketPoints = ({ points, onChange }) => {
+const TicketPointsEditor = ({ points, onChange }) => {
     const itemRenderer = useCallback(
         (_points, { handleClick }) => {
             const icon = points === _points ? IconNames.TICK : IconNames.BLANK
@@ -22,9 +22,9 @@ const TicketPoints = ({ points, onChange }) => {
     )
 }
 
-TicketPoints.propTypes = {
+TicketPointsEditor.propTypes = {
     points: PropTypes.number.isRequired,
     onChange: PropTypes.func.isRequired
 }
 
-export default memo(TicketPoints)
+export default memo(TicketPointsEditor)

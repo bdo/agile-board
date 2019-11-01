@@ -1,16 +1,16 @@
-import './TicketSummary.css'
+import './TicketSummaryEditor.css'
 
 import { InputGroup } from '@blueprintjs/core'
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
-const TicketSummary = ({ summary, onChange }) => (
+const TicketSummaryEditor = ({ summary, onChange }) => (
     <InputGroup className="ticket-summary-editor" value={summary} onChange={e => onChange('summary', e.target.value)} placeholder="Summary" />
 )
 
-TicketSummary.propTypes = {
+TicketSummaryEditor.propTypes = {
     summary: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired
 }
 
-export default memo(TicketSummary)
+export default memo(TicketSummaryEditor)

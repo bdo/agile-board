@@ -1,4 +1,4 @@
-import './TicketAssignees.css'
+import './TicketAssigneesEditor.css'
 
 import { MenuItem } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
@@ -11,7 +11,7 @@ import Avatar from '../avatar/Avatar'
 
 const tagRenderer = user => <Avatar key={user.id} user={user} />
 
-const TicketAssignees = ({ assignees, onChange }) => {
+const TicketAssigneesEditor = ({ assignees, onChange }) => {
     const [users, setUsers] = useState([])
 
     useEffect(() => {
@@ -53,9 +53,9 @@ const TicketAssignees = ({ assignees, onChange }) => {
     )
 }
 
-TicketAssignees.propTypes = {
+TicketAssigneesEditor.propTypes = {
     assignees: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired
 }
 
-export default TicketAssignees
+export default TicketAssigneesEditor

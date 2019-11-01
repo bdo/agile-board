@@ -7,11 +7,11 @@ import PropTypes from 'prop-types'
 import React, { useCallback, useState } from 'react'
 
 import TicketService from '../../../services/TicketService'
-import TicketAssignees from '../ticket-assignees/TicketAssignees'
-import TicketDescription from '../ticket-description/TicketDescription'
-import TicketPoints from '../ticket-points/TicketPoints'
-import TicketSummary from '../ticket-summary/TicketSummary'
-import TicketType from '../ticket-type/TicketType'
+import TicketAssigneesEditor from '../ticket-assignees-editor/TicketAssigneesEditor'
+import TicketDescriptionEditor from '../ticket-description-editor/TicketDescriptionEditor'
+import TicketPointsEditor from '../ticket-points-editor/TicketPointsEditor'
+import TicketSummaryEditor from '../ticket-summary-editor/TicketSummaryEditor'
+import TicketTypeEditor from '../ticket-type-editor/TicketTypeEditor'
 
 const TicketEditor = ({ ticket: { assignees, points, type, summary, description, ..._ticket }, onEndEditing, onRefreshTickets }) => {
     const [ticket, setTicket] = useState({ assignees, points, type, summary, description, ..._ticket })
@@ -49,13 +49,13 @@ const TicketEditor = ({ ticket: { assignees, points, type, summary, description,
             <div className={classnames('ticket-editor', ticket.type)}>
                 <form onSubmit={onSubmit}>
                     <div className="ticket-top">
-                        <TicketAssignees assignees={ticket.assignees} onChange={onChange} />
-                        <TicketType type={ticket.type} onChange={onChange} />
-                        <TicketPoints points={ticket.points} onChange={onChange} />
+                        <TicketAssigneesEditor assignees={ticket.assignees} onChange={onChange} />
+                        <TicketTypeEditor type={ticket.type} onChange={onChange} />
+                        <TicketPointsEditor points={ticket.points} onChange={onChange} />
                     </div>
                     <div className="ticket-bottom">
-                        <TicketSummary summary={ticket.summary} onChange={onChange} />
-                        <TicketDescription description={ticket.description} onChange={onChange} />
+                        <TicketSummaryEditor summary={ticket.summary} onChange={onChange} />
+                        <TicketDescriptionEditor description={ticket.description} onChange={onChange} />
                     </div>
                     <div className="button-bar">
                         <Button type="submit" icon={IconNames.TICK} intent={Intent.SUCCESS} loading={loading}>

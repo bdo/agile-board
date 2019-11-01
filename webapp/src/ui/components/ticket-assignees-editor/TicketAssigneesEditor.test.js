@@ -4,14 +4,14 @@ import { act } from 'react-dom/test-utils'
 
 import { _assignees, _users } from '../../../fixtures/user'
 import UserService from '../../../services/UserService'
-import TicketAssignees from './TicketAssignees'
+import TicketAssigneesEditor from './TicketAssigneesEditor'
 
 jest.mock('../../../services/UserService', () => ({
     list: jest.fn(),
     save: jest.fn()
 }))
 
-describe('TicketAssignees', () => {
+describe('TicketAssigneesEditor', () => {
     let resolve
     beforeEach(() => {
         UserService.list.mockReturnValue(
@@ -22,7 +22,7 @@ describe('TicketAssignees', () => {
     })
 
     it('Should show the select', async () => {
-        const { container } = render(<TicketAssignees assignees={_assignees} onChange={jest.fn()} />)
+        const { container } = render(<TicketAssigneesEditor assignees={_assignees} onChange={jest.fn()} />)
         await act(async () => {
             resolve(_users)
         })
@@ -34,7 +34,7 @@ describe('TicketAssignees', () => {
     it('Should call onChange callback when changing value', async () => {
         global.requestAnimationFrame = a => a()
         const onChange = jest.fn()
-        const { container } = render(<TicketAssignees assignees={_assignees} onChange={onChange} />)
+        const { container } = render(<TicketAssigneesEditor assignees={_assignees} onChange={onChange} />)
         await act(async () => {
             resolve(_users)
         })

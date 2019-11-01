@@ -1,10 +1,10 @@
-import './TicketDescription.css'
+import './TicketDescriptionEditor.css'
 
 import { TextArea } from '@blueprintjs/core'
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
-const TicketDescription = ({ description, onChange }) => (
+const TicketDescriptionEditor = ({ description, onChange }) => (
     <TextArea
         className="ticket-description-editor"
         value={description}
@@ -16,13 +16,13 @@ const TicketDescription = ({ description, onChange }) => (
     />
 )
 
-TicketDescription.propTypes = {
+TicketDescriptionEditor.propTypes = {
     description: PropTypes.string,
     onChange: PropTypes.func.isRequired
 }
 
-TicketDescription.defaultProps = {
+TicketDescriptionEditor.defaultProps = {
     description: ''
 }
 
-export default memo(TicketDescription)
+export default memo(TicketDescriptionEditor)
