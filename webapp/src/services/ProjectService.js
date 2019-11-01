@@ -14,10 +14,10 @@ class ProjectService {
         return response.data
     }
 
-    static async get(id) {
+    static async get(id, params) {
         let response
         try {
-            response = await axios.get(`${Configuration.API_URL}/projects/${id}`)
+            response = await axios.get(`${Configuration.API_URL}/projects/${id}`, { params })
         } catch (error) {
             console.error(error)
             response = { data: null }

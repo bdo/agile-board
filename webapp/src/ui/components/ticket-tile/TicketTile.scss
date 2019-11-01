@@ -1,0 +1,40 @@
+@import '../../../../node_modules/@blueprintjs/core/lib/scss/variables.scss';
+@import '../../styles/mixin';
+
+.ticket-tile {
+    margin: 2rem 0;
+
+    @include medium() {
+        display: flex;
+    }
+
+    .ticket-tile-left {
+        height: 0.75rem;
+
+        @include medium() {
+            min-width: 0.75rem;
+            height: unset;
+        }
+    }
+
+    .ticket-tile-center {
+        flex: 1;
+        margin: 0.5rem 0;
+        overflow: hidden;
+
+        @include medium() {
+            margin: 0 0.5rem;
+        }
+
+        h5,
+        p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    .ticket-tile-right {
+        text-align: right;
+    }
+}

@@ -7,6 +7,7 @@ import { useParams } from 'react-router'
 
 import ProjectService from '../../../services/ProjectService'
 import ProjectForm from '../../components/project-form/ProjectForm'
+import TicketTile from '../../components/ticket-tile/TicketTile'
 
 const Project = () => {
     const [project, setProject] = useState(null)
@@ -15,7 +16,7 @@ const Project = () => {
     const { id } = useParams()
 
     useEffect(() => {
-        ProjectService.get(id).then(setProject)
+        ProjectService.get(id, { withTickets: true }).then(setProject)
     }, [id])
 
     const onSave = useCallback(
@@ -33,11 +34,16 @@ const Project = () => {
     return (
         <div id="project">
             <H1>
-                {project.name}
+                <span className="title">{project.name}</span>
                 {!project.archived && <Icon icon={IconNames.EDIT} iconSize={36} onClick={setEditing.bind(this, true)} className="icon" />}
             </H1>
             <p>{project.description}</p>
             {isEditing && <ProjectForm project={project} onSave={onSave} onClose={setEditing.bind(this, false)} />}
+            <div className="backlog">
+                {project.tickets.map(ticket => (
+                    <TicketTile key={ticket.id} ticket={ticket} />
+                ))}
+            </div>
         </div>
     )
 }
