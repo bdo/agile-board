@@ -6,38 +6,38 @@ import { _ticket } from '../../../fixtures/ticket'
 import TicketService from '../../../services/TicketService'
 import TicketEditor from './TicketEditor'
 
-jest.mock('../ticket-assignees/TicketAssignees', () => ({
+jest.mock('../ticket-assignees-editor/TicketAssigneesEditor', () => ({
     __esModule: true,
-    default: function TicketAssigneesMock() {
-        return <div className="ticket-assignees-mock" />
+    default: function TicketAssigneesEditorMock() {
+        return <div className="ticket-assignees-editor-editor-mock" />
     }
 }))
 
-jest.mock('../ticket-description/TicketDescription', () => ({
+jest.mock('../ticket-description-editor/TicketDescriptionEditor', () => ({
     __esModule: true,
-    default: function TicketDescriptionMock() {
-        return <div className="ticket-description-mock" />
+    default: function TicketDescriptionEditorMock() {
+        return <div className="ticket-description-editor-mock" />
     }
 }))
 
-jest.mock('../ticket-points/TicketPoints', () => ({
+jest.mock('../ticket-points-editor/TicketPointsEditor', () => ({
     __esModule: true,
-    default: function TicketPointsMock() {
-        return <div className="ticket-points-mock" />
+    default: function TicketPointsEditorMock() {
+        return <div className="ticket-points-editor-mock" />
     }
 }))
 
-jest.mock('../ticket-summary/TicketSummary', () => ({
+jest.mock('../ticket-summary-editor/TicketSummaryEditor', () => ({
     __esModule: true,
-    default: function TicketSummaryMock() {
-        return <div className="ticket-summary-mock" />
+    default: function TicketSummaryEditorMock() {
+        return <div className="ticket-summary-editor-mock" />
     }
 }))
 
-jest.mock('../ticket-type/TicketType', () => ({
+jest.mock('../ticket-type-editor/TicketTypeEditor', () => ({
     __esModule: true,
-    default: function TicketTypeMock() {
-        return <div className="ticket-type-mock" />
+    default: function TicketTypeEditorMock() {
+        return <div className="ticket-type-editor-mock" />
     }
 }))
 
