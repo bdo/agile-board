@@ -11,7 +11,6 @@ describe('ProjectForm', () => {
         props = {
             project: _project,
             onSave: jest.fn(),
-            isOpen: true,
             onClose: jest.fn()
         }
     })
@@ -28,12 +27,6 @@ describe('ProjectForm', () => {
         const textarea = container.querySelector('.project-form textarea')
         expect(input.value).toBe(_project.name)
         expect(textarea.textContent).toBe(_project.description)
-    })
-
-    it('Should not show the form when isOpen is false', function() {
-        const { container } = render(<ProjectForm {...props} isOpen={false} />)
-        const form = container.querySelector('.project-form')
-        expect(form).toBeNull()
     })
 
     it('Should show the delete button for existing project', () => {

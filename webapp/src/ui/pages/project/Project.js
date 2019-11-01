@@ -37,7 +37,7 @@ const Project = () => {
                 {!project.archived && <Icon icon={IconNames.EDIT} iconSize={36} onClick={setEditing.bind(this, true)} className="icon" />}
             </H1>
             <p>{project.description}</p>
-            <ProjectForm project={project} onSave={onSave} isOpen={isEditing} onClose={setEditing.bind(this, false)} />
+            {isEditing && <ProjectForm project={project} onSave={onSave} onClose={setEditing.bind(this, false)} />}
         </div>
     )
 }

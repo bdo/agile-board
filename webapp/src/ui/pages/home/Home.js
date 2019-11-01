@@ -49,7 +49,7 @@ const Home = () => {
             {archivedProjects.map(project => (
                 <ProjectTile key={project.id} project={project} />
             ))}
-            <ProjectForm isOpen={isDialogOpen} onClose={setDialogOpen.bind(this, false)} onSave={onSave} project={EMPTY_PROJECT} />
+            {isDialogOpen && <ProjectForm onClose={setDialogOpen.bind(this, false)} onSave={onSave} project={EMPTY_PROJECT} />}
         </div>
     )
 }

@@ -4,7 +4,7 @@ import { Button, Classes, Dialog, FormGroup, InputGroup, Intent, TextArea } from
 import PropTypes from 'prop-types'
 import React, { useCallback, useState } from 'react'
 
-const ProjectForm = ({ project, onSave, isOpen, onClose }) => {
+const ProjectForm = ({ project, onSave, onClose }) => {
     const [name, setName] = useState(project.name)
     const [description, setDescription] = useState(project.description)
     const [loading, setLoading] = useState(false)
@@ -23,7 +23,7 @@ const ProjectForm = ({ project, onSave, isOpen, onClose }) => {
     }, [project, name, description, onSave])
 
     return (
-        <Dialog isOpen={isOpen} onClose={onClose} backdropProps={{ className: 'project-form-backdrop' }} usePortal={false}>
+        <Dialog isOpen onClose={onClose} backdropProps={{ className: 'project-form-backdrop' }} usePortal={false}>
             <div className={Classes.DIALOG_BODY}>
                 <form className="project-form" onSubmit={onSubmit}>
                     <FormGroup label="Project name" labelFor="project-name">
@@ -60,7 +60,6 @@ const ProjectForm = ({ project, onSave, isOpen, onClose }) => {
 ProjectForm.propTypes = {
     project: PropTypes.object.isRequired,
     onSave: PropTypes.func.isRequired,
-    isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired
 }
 
