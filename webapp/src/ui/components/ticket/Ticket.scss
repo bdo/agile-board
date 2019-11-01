@@ -67,13 +67,7 @@
         font-weight: bold;
 
         .assignees {
-            display: flex;
             flex: 1;
-
-            .avatar,
-            .avatar-fallback {
-                margin-right: 0.25rem;
-            }
         }
     }
 

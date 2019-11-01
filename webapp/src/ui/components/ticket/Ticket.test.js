@@ -12,10 +12,10 @@ jest.mock('../ticket-editor/TicketEditor', () => ({
     }
 }))
 
-jest.mock('../avatar/Avatar', () => ({
+jest.mock('../ticket-assignees/TicketAssignees', () => ({
     __esModule: true,
     default: function AvatarMock() {
-        return <div className="avatar-mock" />
+        return <div className="ticket-assignees-mock" />
     }
 }))
 
@@ -28,10 +28,10 @@ describe('Ticket', () => {
 
     it('Should correctly init the ticket', function() {
         const { container } = renderInDnd(<Ticket ticket={_ticket} onRefreshTickets={jest.fn()} />)
-        const assignees = container.querySelector('.ticket .assignees')
+        const assignees = container.querySelector('.ticket .ticket-assignees-mock')
         const points = container.querySelector('.ticket .points')
         const summary = container.querySelector('.ticket .summary')
-        expect(assignees.querySelectorAll('.avatar-mock')).toHaveLength(1)
+        expect(assignees).not.toBeNull()
         expect(points.textContent).toBe(`${_ticket.points}`)
         expect(summary.textContent).toBe(_ticket.summary)
     })

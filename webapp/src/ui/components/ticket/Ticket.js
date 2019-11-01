@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useDrag } from 'react-dnd-cjs'
 
-import Avatar from '../avatar/Avatar'
+import TicketAssignees from '../ticket-assignees/TicketAssignees'
 import TicketEditor from '../ticket-editor/TicketEditor'
 
 const Ticket = ({ ticket, onRefreshTickets }) => {
@@ -22,11 +22,7 @@ const Ticket = ({ ticket, onRefreshTickets }) => {
         <React.Fragment>
             <div ref={drag} className={classnames('ticket', ticket.type, { dragging })} title={ticket.description} onClick={setEditing.bind(this, true)}>
                 <div className="ticket-top">
-                    <div className="assignees">
-                        {ticket.assignees.map(assignee => (
-                            <Avatar key={assignee.id} user={assignee} />
-                        ))}
-                    </div>
+                    <TicketAssignees assignees={ticket.assignees} />
                     <div className="points">{ticket.points}</div>
                 </div>
                 <div className="ticket-bottom">
