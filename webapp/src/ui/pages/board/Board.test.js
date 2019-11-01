@@ -4,6 +4,7 @@ import { act } from 'react-dom/test-utils'
 
 import { _project, _project2 } from '../../../fixtures/project'
 import ProjectService from '../../../services/ProjectService'
+import { renderInRouter } from '../../../test-render'
 import Board from './Board'
 
 jest.mock('../../../services/ProjectService')

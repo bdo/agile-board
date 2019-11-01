@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { _archivedProject, _project } from '../../../fixtures/project'
+import { renderInRouter } from '../../../test-render'
 import ProjectTile from './ProjectTile'
 
 describe('ProjectTile', () => {

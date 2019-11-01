@@ -3,6 +3,7 @@ import { act } from 'react-dom/test-utils'
 
 import { _ticket } from '../../../fixtures/ticket'
 import TicketService from '../../../services/TicketService'
+import { renderInDnd, renderInRouterAndDnd } from '../../../test-render'
 import TicketsTable, { TicketsTableCell } from './TicketsTable'
 
 jest.mock('../../../services/TicketService')

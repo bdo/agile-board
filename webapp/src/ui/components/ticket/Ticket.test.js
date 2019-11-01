@@ -3,6 +3,7 @@ import React from 'react'
 
 import { _project } from '../../../fixtures/project'
 import { _ticket } from '../../../fixtures/ticket'
+import { renderInDnd } from '../../../test-render'
 import Ticket from './Ticket'
 
 jest.mock('../ticket-editor/TicketEditor', () => ({
