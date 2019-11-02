@@ -28,11 +28,13 @@ You can configure the database connection by editing **config/index.js** file in
 
 Next US to be developed are:
 
+-   I can have a default sprint (backlog) when creating a new project
+-   I can create a sprint
+-   I can change a sprint's state
+-   I can see a sprint's burndown
 -   I can connect to the application
 -   I can have adapted rights when using the application
 -   I can disconnect from the application
--   I can change a sprint's state
--   I can see a sprint's burndown
 -   I can configure my application by environment
 
 ## See a demo
