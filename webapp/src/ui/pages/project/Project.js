@@ -52,9 +52,9 @@ const Project = () => {
     if (!project) return null
 
     return (
-        <div id="project">
+        <section id="project">
             <H1>
-                <span className="title">{project.name}</span>
+                {project.name}
                 {!project.archived && <Icon icon={IconNames.EDIT} iconSize={36} onClick={setEditing.bind(this, true)} className="icon" />}
             </H1>
             <p>{project.description}</p>
@@ -66,7 +66,7 @@ const Project = () => {
                     ))}
                 </DndProvider>
             </div>
-        </div>
+        </section>
     )
 }
 

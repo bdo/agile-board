@@ -1,12 +1,10 @@
 #home {
-    width: 50%;
-    margin: 2rem auto;
-
     h1 {
-        margin: 2rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
         .icon {
-            float: right;
             cursor: pointer;
         }
     }

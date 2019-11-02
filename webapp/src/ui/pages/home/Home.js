@@ -35,7 +35,7 @@ const Home = () => {
     )
 
     return (
-        <div id="home">
+        <section id="home">
             <H1>
                 <NavLink to="/board">My board</NavLink>
             </H1>
@@ -50,7 +50,7 @@ const Home = () => {
                 <ProjectTile key={project.id} project={project} />
             ))}
             {isDialogOpen && <ProjectForm onClose={setDialogOpen.bind(this, false)} onSave={onSave} project={EMPTY_PROJECT} />}
-        </div>
+        </section>
     )
 }
 
