@@ -3,14 +3,13 @@
 
 .ticket-tile-drag-drop {
     cursor: pointer;
-    border-left: 0.5rem solid transparent;
 
     &.dragging {
         opacity: 0.5;
     }
 
-    &.dropping {
-        border-color: $blue5;
+    &.dropping .ticket-tile {
+        background-color: $light-gray4;
     }
 }
 
