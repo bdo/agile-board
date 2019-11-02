@@ -40,28 +40,29 @@ TicketsTableCell.propTypes = {
     onRefreshTickets: PropTypes.func.isRequired
 }
 
-const TicketsTable = ({ projectId }) => {
+const TicketsTable = ({ projectId, sprintId }) => {
     const [tickets, setTickets] = useState([])
     const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        if (!projectId) return
+    const fetchTickets = useCallback(() => {
         setLoading(true)
-        TicketService.list({ projectId })
+        TicketService.list({ sprintId })
             .then(setTickets)
             .then(setLoading.bind(this, false))
-    }, [projectId])
+    }, [sprintId])
+
+    useEffect(() => {
+        fetchTickets()
+    }, [fetchTickets])
 
     const moveTicket = useCallback(
         (ticket, priority, state) => {
-            TicketService.save({ ...ticket, priority, state, projectId })
-                .then(TicketService.list.bind(this, { projectId }))
+            TicketService.save({ ...ticket, priority, state, sprintId })
+                .then(fetchTickets)
                 .then(setTickets)
         },
-        [projectId]
+        [sprintId, fetchTickets]
     )
-
-    const refreshTickets = useCallback(() => TicketService.list({ projectId }).then(setTickets), [projectId])
 
     if (loading) return <Spinner className="tickets-table-spinner" />
 
@@ -96,7 +97,7 @@ const TicketsTable = ({ projectId }) => {
                                     state={col.id}
                                     ticket={ticket}
                                     onMoveTicket={moveTicket}
-                                    onRefreshTickets={refreshTickets}
+                                    onRefreshTickets={fetchTickets}
                                 />
                             ))}
                         </tr>
@@ -108,7 +109,8 @@ const TicketsTable = ({ projectId }) => {
 }
 
 TicketsTable.propTypes = {
-    projectId: PropTypes.number.isRequired
+    projectId: PropTypes.number.isRequired,
+    sprintId: PropTypes.number.isRequired
 }
 
 export default TicketsTable

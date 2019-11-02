@@ -5,8 +5,9 @@ const HttpStatus = require('http-status')
 const { Sprint, Ticket } = require('../db')
 
 router.get('getSprints', '/', async ctx => {
+    const { projectId, state } = ctx.query
     ctx.status = HttpStatus.OK
-    ctx.body = await Sprint.findAll({ include: [Ticket], order: [['id', 'ASC'], [Ticket, 'priority', 'ASC']] })
+    ctx.body = await Sprint.findAll({ where: { ...(projectId && { projectId }), ...(state && { state }) }, include: [Ticket], order: [['id', 'ASC'], [Ticket, 'priority', 'ASC']] })
 })
 
 module.exports = router

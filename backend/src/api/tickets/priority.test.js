@@ -14,7 +14,7 @@ describe('GET tickets', () => {
         const oldTicket = { ..._ticket, id: 1, sprintId: 1, priority: 1 }
         const newTicket = { ..._ticket, id: 1, sprintId: 1, priority: 2 }
         await priority.update(oldTicket, newTicket)
-        expect(Ticket.update).toHaveBeenNthCalledWith(1, { priority: Sequelize.literal('priority + -1') }, { where: { sprintId: 1, priority: { [Sequelize.Op.between]: [1, 2] } } })
+        expect(Ticket.update).toHaveBeenNthCalledWith(1, { priority: Sequelize.literal('priority - 1') }, { where: { sprintId: 1, priority: { [Sequelize.Op.between]: [1, 2] } } })
         expect(Ticket.update).toHaveBeenNthCalledWith(2, { priority: 2 }, { where: { id: 1 } })
     })
 })

@@ -19,7 +19,7 @@ describe('TicketsTable', () => {
     })
 
     it('Should show the spinner', async () => {
-        const { container } = renderInRouterAndDnd(<TicketsTable projectId={1} />)
+        const { container } = renderInRouterAndDnd(<TicketsTable sprintId={1} projectId={1} />)
         const spinner = container.querySelector('.tickets-table-spinner')
         const noResult = container.querySelector('.tickets-table-no-results')
         const table = container.querySelector('.tickets-table')
@@ -29,7 +29,7 @@ describe('TicketsTable', () => {
     })
 
     it('Should show the no result message', async () => {
-        const { container } = renderInRouterAndDnd(<TicketsTable projectId={1} />)
+        const { container } = renderInRouterAndDnd(<TicketsTable sprintId={1} projectId={1} />)
         await act(async () => {
             resolve([])
         })
@@ -42,7 +42,7 @@ describe('TicketsTable', () => {
     })
 
     it('Should show the table', async () => {
-        const { container } = renderInRouterAndDnd(<TicketsTable projectId={1} />)
+        const { container } = renderInRouterAndDnd(<TicketsTable sprintId={1} projectId={1} />)
         await act(async () => {
             resolve([_ticket])
         })
