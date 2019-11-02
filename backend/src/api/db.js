@@ -42,6 +42,16 @@ const Project = connection.define(
     { tableName: 'project' }
 )
 
+const Sprint = connection.define(
+    'sprint',
+    {
+        id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+        state: { type: Sequelize.STRING },
+        description: { type: Sequelize.STRING }
+    },
+    { tableName: 'sprint' }
+)
+
 const TicketAssignee = connection.define(
     'ticket_assignee',
     {
@@ -59,9 +69,9 @@ const TicketAssignee = connection.define(
     }
 )
 
-Ticket.belongsTo(Project, { foreignKey: 'projectId' })
+Sprint.hasMany(Ticket, { foreignKey: 'sprintId' })
 
 User.belongsToMany(Ticket, { as: 'tickets', through: TicketAssignee, foreignKey: 'userId' })
 Ticket.belongsToMany(User, { as: 'assignees', through: TicketAssignee, foreignKey: 'ticketId' })
 
-module.exports = { User, Ticket, Project }
+module.exports = { User, Ticket, Project, Sprint }

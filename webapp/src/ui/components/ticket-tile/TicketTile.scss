@@ -1,26 +1,32 @@
 @import '../../styles/colors';
 @import '../../styles/mixin';
 
-.ticket-tile-drag-drop {
-    cursor: pointer;
+.ticket-tile-drop {
+    min-height: 3rem;
 
-    &.dragging {
-        opacity: 0.5;
-    }
-
-    &.dropping .ticket-tile {
+    &.dropping {
         background-color: $light-gray4;
     }
 }
 
+.ticket-tile-drag {
+    &.dragging {
+        opacity: 0.5;
+    }
+}
+
 .ticket-tile {
-    padding: 0.75rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    background-color: transparent;
+    box-shadow: none;
+    border-bottom: 1px solid $light-gray4;
 
     @include medium() {
         display: flex;
     }
 
-    .ticket-tile-left {
+    .left {
         height: 0.75rem;
 
         @include medium() {
@@ -29,7 +35,7 @@
         }
     }
 
-    .ticket-tile-center {
+    .center {
         flex: 1;
         margin: 0.5rem 0;
         overflow: hidden;
@@ -46,7 +52,7 @@
         }
     }
 
-    .ticket-tile-right {
+    .right {
         text-align: right;
     }
 }

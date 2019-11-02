@@ -7,10 +7,16 @@ const { Op } = Sequelize
 
 const { Ticket, User } = require('../db')
 
+const priority = require('./priority')
+
 router.get('getTickets', '/', async ctx => {
-    const { projectId } = ctx.query
+    const { sprintId = null } = ctx.query
     ctx.status = HttpStatus.OK
-    ctx.body = await Ticket.findAll({ where: { projectId }, include: [{ model: User, as: 'assignees' }], order: [['priority', 'ASC']] })
+    ctx.body = await Ticket.findAll({
+        where: { sprintId },
+        include: [{ model: User, as: 'assignees' }],
+        order: [['priority', 'ASC'], ['sprintId', 'ASC']]
+    })
 })
 
 router.get('getTicket', '/:id', async ctx => {
@@ -31,17 +37,13 @@ router.post('postTicket', '/', async ctx => {
 
 router.put('putTicket', '/:id', async ctx => {
     const { id } = ctx.params
-    const { points, priority, type, state, summary, description, assignees } = ctx.request.body
-    const ticket = await Ticket.findByPk(id)
-    if (priority && ticket.priority !== priority) {
-        const translate = ticket.priority < priority ? -1 : 1
-        const minPriority = Math.min(ticket.priority, priority)
-        const maxPriority = Math.max(ticket.priority, priority)
-        await Ticket.update({ priority: Sequelize.literal(`priority + ${translate}`) }, { where: { priority: { [Op.between]: [minPriority, maxPriority] } } })
+    const { assignees, ...newTicket } = ctx.request.body
+    const oldTicket = await Ticket.findByPk(id)
+    const ticket = await priority.update(oldTicket, newTicket)
+    if (assignees) {
+        const _assignees = await User.findAll({ where: { id: { [Op.in]: assignees.map(({ id }) => id) } } })
+        await ticket.setAssignees(_assignees)
     }
-    await ticket.update({ points, priority, type, state, summary, description })
-    const _assignees = await User.findAll({ where: { id: { [Op.in]: assignees.map(({ id }) => id) } } })
-    await ticket.setAssignees(_assignees)
     ctx.status = HttpStatus.NO_CONTENT
 })
 

@@ -9,14 +9,14 @@ import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch'
 import { useParams } from 'react-router'
 
 import ProjectService from '../../../services/ProjectService'
-import TicketService from '../../../services/TicketService'
+import SprintService from '../../../services/SprintService'
 import ProjectForm from '../../components/project-form/ProjectForm'
-import TicketTile from '../../components/ticket-tile/TicketTile'
+import SprintPanel from '../../components/sprint-panel/SprintPanel'
 
 const Project = () => {
     const [project, setProject] = useState(null)
     const [editing, setEditing] = useState(false)
-    const [tickets, setTickets] = useState([])
+    const [sprints, setSprints] = useState([])
 
     const { id } = useParams()
 
@@ -24,14 +24,14 @@ const Project = () => {
         ProjectService.get(id).then(setProject)
     }, [id])
 
-    const fetchTickets = useCallback(() => {
-        TicketService.list({ projectId: id }).then(setTickets)
+    const fetchSprints = useCallback(() => {
+        SprintService.list({ projectId: id }).then(setSprints)
     }, [id])
 
     useEffect(() => {
         fetchProject()
-        fetchTickets()
-    }, [fetchProject, fetchTickets])
+        fetchSprints()
+    }, [fetchProject, fetchSprints])
 
     const onSave = useCallback(
         project => {
@@ -40,13 +40,6 @@ const Project = () => {
                 .then(setEditing.bind(this, false))
         },
         [fetchProject]
-    )
-
-    const moveTicket = useCallback(
-        (ticket, priority, state) => {
-            TicketService.save({ ...ticket, priority, state }).then(fetchTickets)
-        },
-        [fetchTickets]
     )
 
     if (!project) return null
@@ -61,8 +54,8 @@ const Project = () => {
             {editing && <ProjectForm project={project} onSave={onSave} onClose={setEditing.bind(this, false)} />}
             <div className="backlog">
                 <DndProvider backend={MultiBackend} options={HTML5toTouch}>
-                    {tickets.map(ticket => (
-                        <TicketTile key={ticket.id} ticket={ticket} onMoveTicket={moveTicket} onRefreshTickets={fetchTickets} />
+                    {sprints.map(sprint => (
+                        <SprintPanel key={sprint.id} sprint={sprint} onRefreshSprints={fetchSprints} />
                     ))}
                 </DndProvider>
             </div>

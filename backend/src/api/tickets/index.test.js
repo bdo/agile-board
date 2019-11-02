@@ -1,5 +1,3 @@
-const Sequelize = require('sequelize')
-
 const { Ticket, User } = require('../db')
 
 const { _ticket } = require('../../fixtures/ticket')
@@ -7,13 +5,16 @@ const { _user } = require('../../fixtures/user')
 
 const router = require('./index')
 
+const priority = require('./priority')
+
 jest.spyOn(User, 'findAll').mockResolvedValue([_user])
 
 jest.spyOn(Ticket, 'findAll').mockResolvedValue([_ticket])
 jest.spyOn(Ticket, 'findByPk').mockResolvedValue(_ticket)
 jest.spyOn(Ticket, 'create').mockResolvedValue(_ticket)
-jest.spyOn(Ticket, 'update').mockResolvedValue(_ticket)
 jest.spyOn(Ticket, 'destroy').mockResolvedValue(null)
+
+jest.spyOn(priority, 'update').mockResolvedValue(_ticket)
 
 describe('GET tickets', () => {
     let ctx
@@ -48,23 +49,30 @@ describe('GET tickets', () => {
         expect(ctx.body).toEqual(1)
     })
 
+    it('should set assignees on ticket creation', async () => {
+        ctx.params = { id: 1 }
+        ctx.request = { body: { summary: 'Ticket summary', assignees: [] } }
+        const route = router.route('postTicket')
+        await route.stack[0](ctx)
+        expect(_ticket.setAssignees).toHaveBeenCalled()
+    })
+
     it('should put ticket', async () => {
         ctx.params = { id: 1 }
         ctx.request = { body: { summary: 'Ticket summary', assignees: [] } }
         const route = router.route('putTicket')
         await route.stack[0](ctx)
-        expect(_ticket.update).toHaveBeenCalled()
+        expect(priority.update).toHaveBeenCalled()
         expect(ctx.status).toEqual(204)
         expect(ctx.body).toBeUndefined()
     })
 
-    it('should update tickets priority when ticket priority changes', async () => {
+    it('should set assignees on ticket modification', async () => {
         ctx.params = { id: 1 }
-        ctx.request = { body: { priority: 2, summary: 'Ticket summary', assignees: [] } }
-
+        ctx.request = { body: { summary: 'Ticket summary', assignees: [] } }
         const route = router.route('putTicket')
         await route.stack[0](ctx)
-        expect(Ticket.update).toHaveBeenCalledWith({ priority: Sequelize.literal('priority + -1') }, { where: { priority: { [Sequelize.Op.between]: [1, 2] } } })
+        expect(_ticket.setAssignees).toHaveBeenCalled()
     })
 
     it('should delete ticket', async () => {

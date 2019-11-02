@@ -21,7 +21,8 @@
         "semi": ["error", "never"],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
-        "import/order": "error"
+        "import/order": "error",
+        "react/prop-types": [2, { "ignore": ["children"] }]
     },
     "settings": {
         "react": {

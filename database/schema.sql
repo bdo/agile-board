@@ -13,7 +13,7 @@ CREATE TABLE `user` (
 DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE `ticket` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `projectId` int(11) unsigned NOT NULL,
+  `sprintId` int(11) unsigned DEFAULT NULL,
   `points` tinyint(1) unsigned NOT NULL,
   `priority` tinyint(1) unsigned NOT NULL,
   `type` varchar(10) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE `ticket` (
   `summary` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `description` text COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_ticket_project_id` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_ticket_sprint_id` FOREIGN KEY (`sprintId`) REFERENCES `sprint` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 DROP TABLE IF EXISTS `project`;
@@ -31,6 +31,16 @@ CREATE TABLE `project` (
   `name` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   `description` text COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `sprint`;
+CREATE TABLE `sprint` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `projectId` int(11) unsigned NOT NULL,
+  `state` varchar(10) COLLATE utf8_bin NOT NULL,
+  `description` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sprint_project_id` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 DROP TABLE IF EXISTS `ticket_assignee`;
