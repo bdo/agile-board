@@ -31,7 +31,6 @@ Next US to be developed are:
 -   I can connect to the application
 -   I can have adapted rights when using the application
 -   I can disconnect from the application
--   I can assign tickets to a sprint
 -   I can change a sprint's state
 -   I can see a sprint's burndown
 -   I can configure my application by environment
