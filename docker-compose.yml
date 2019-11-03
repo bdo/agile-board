@@ -1,0 +1,29 @@
+version: '3'
+services:
+    backend:
+        image: node:lts-alpine
+        container_name: agile-board.backend
+        working_dir: /app
+        entrypoint: /app/entrypoint.sh
+        ports:
+            - 3001:3001
+        volumes:
+            - ./backend:/app
+        environment:
+            ENVIRONMENT: production
+            CORS: agile-board.picusviridis.com
+
+    webapp:
+        image: node:lts-alpine
+        container_name: agile-board.webapp
+        working_dir: /app
+        entrypoint: /app/entrypoint.sh
+        ports:
+            - 3000:80
+        volumes:
+            - ./webapp:/app
+        depends_on:
+            - backend
+        environment:
+            ENVIRONMENT: production
+            REACT_APP_API_URL: agile-board.picusviridis.com
