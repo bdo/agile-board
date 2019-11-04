@@ -10,4 +10,11 @@ router.get('getSprints', '/', async ctx => {
     ctx.body = await Sprint.findAll({ where: { ...(projectId && { projectId }), ...(state && { state }) }, include: [Ticket], order: [['id', 'ASC'], [Ticket, 'priority', 'ASC']] })
 })
 
+router.put('putSprint', '/:id', async ctx => {
+    const { id } = ctx.params
+    const { state, name } = ctx.request.body
+    await Sprint.update({ state, name }, { where: { id } })
+    ctx.status = HttpStatus.NO_CONTENT
+})
+
 module.exports = router

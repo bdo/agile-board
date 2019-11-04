@@ -5,7 +5,7 @@ INSERT INTO `agile-board`.`project` (`id`, `archived`, `name`, `description`) VA
 (1, 0, 'My Awesome Project', 'This project is absolutely awesome!'),
 (2, 0, 'My Amazing Project', 'This project is absolutely amazing!');
 
-INSERT INTO `agile-board`.`sprint` (`id`, `projectId`, `state`, `description`) VALUES
+INSERT INTO `agile-board`.`sprint` (`id`, `projectId`, `state`, `name`) VALUES
 (1, 1, 'open', 'Backlog'),
 (2, 1, 'open', 'Sprint 1');
 

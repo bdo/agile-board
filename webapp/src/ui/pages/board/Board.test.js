@@ -101,7 +101,7 @@ describe('Board', () => {
         })
         const navbarSprintName = container.querySelector('.board-navbar .sprint-name span:first-child')
         expect(navbarSprintName).not.toBeNull()
-        expect(navbarSprintName.textContent).toBe(_sprint.description)
+        expect(navbarSprintName.textContent).toBe(_sprint.name)
     })
 
     it('Should change the active sprint when changing navbar selection', async () => {
@@ -111,10 +111,10 @@ describe('Board', () => {
             resolveProjects([_project, _project2])
         })
         const navbarSprintName = container.querySelector('.board-navbar .sprint-name span:first-child')
-        expect(navbarSprintName.textContent).toBe(_sprint.description)
+        expect(navbarSprintName.textContent).toBe(_sprint.name)
         fireEvent.click(navbarSprintName)
         const option = container.querySelector('.board-navbar .sprint-select .option-2')
         fireEvent.click(option)
-        expect(navbarSprintName.textContent).toBe(_sprint2.description)
+        expect(navbarSprintName.textContent).toBe(_sprint2.name)
     })
 })

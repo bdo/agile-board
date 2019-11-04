@@ -57,7 +57,7 @@ const Board = () => {
     const sprintItemRenderer = useCallback(
         (_sprint, { handleClick }) => {
             const icon = sprint.id === _sprint.id ? IconNames.TICK : IconNames.BLANK
-            return <MenuItem className={`option-${_sprint.id}`} key={_sprint.id} onClick={handleClick} icon={icon} text={_sprint.description} />
+            return <MenuItem className={`option-${_sprint.id}`} key={_sprint.id} onClick={handleClick} icon={icon} text={_sprint.name} />
         },
         [sprint]
     )
@@ -99,7 +99,7 @@ const Board = () => {
                             popoverProps={{ usePortal: false }}
                         >
                             <Button className="sprint-name" rightIcon="double-caret-vertical">
-                                {sprint.description}
+                                {sprint.name}
                             </Button>
                         </Select>
                     )}

@@ -13,6 +13,14 @@ class SprintService {
         }
         return response.data
     }
+
+    static async save({ id, ...sprint }) {
+        try {
+            await axios.put(`${Configuration.API_URL}/sprints/${id}`, sprint)
+        } catch (error) {
+            console.error(error)
+        }
+    }
 }
 
 export default SprintService

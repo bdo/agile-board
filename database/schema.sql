@@ -38,7 +38,7 @@ CREATE TABLE `sprint` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `projectId` int(11) unsigned NOT NULL,
   `state` varchar(10) COLLATE utf8_bin NOT NULL,
-  `description` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `name` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_sprint_project_id` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
