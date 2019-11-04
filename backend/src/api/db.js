@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 const config = require('../config')
 
 const connection = new Sequelize(config.DATABASE.NAME, config.DATABASE.USER, config.DATABASE.PASS, {
-    logging: console.log,
+    logging: config.ENVIRONMENT === 'development' && console.log,
     host: config.DATABASE.HOST,
     dialect: 'mysql',
     define: {

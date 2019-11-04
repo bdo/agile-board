@@ -1,4 +1,5 @@
 module.exports = {
+    ENVIRONMENT: process.env.ENVIRONMENT,
     PORT: process.env.PORT,
     CORS: process.env.CORS,
     DATABASE: {
