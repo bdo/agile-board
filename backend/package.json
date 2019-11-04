@@ -4,7 +4,7 @@
     "license": "MIT",
     "scripts": {
         "start": "node src/app.js",
-        "dev": "nodemon --inspect=9999 src/app.js",
+        "dev": "nodemon -r dotenv/config --inspect=9999 src/app.js",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:debug": "node --inspect-brk=9998 ./node_modules/jest/bin/jest.js --runInBand",
@@ -14,6 +14,7 @@
     },
     "devDependencies": {
         "@types/jest": "^24.0.21",
+        "dotenv": "^8.2.0",
         "eslint": "^6.6.0",
         "jest": "^24.9.0",
         "nodemon": "^1.19.3",

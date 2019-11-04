@@ -9,9 +9,8 @@ services:
             - 3001:3001
         volumes:
             - ./backend:/app
-        environment:
-            ENVIRONMENT: production
-            CORS: agile-board.picusviridis.com
+        env_file:
+            - /services/agile-board.backend.env
 
     webapp:
         image: node:lts-alpine
@@ -24,6 +23,5 @@ services:
             - ./webapp:/app
         depends_on:
             - backend
-        environment:
-            ENVIRONMENT: production
-            REACT_APP_API_URL: agile-board.picusviridis.com
+        env_file:
+            - /services/agile-board.webapp.env
